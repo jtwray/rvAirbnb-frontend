@@ -15,6 +15,7 @@ export default function SignupForm() {
 
   return (
     <form
+      style={{ fontSize: "4rem" }}
       onSubmit={handleSubmit((formData) => {
         console.log("formData", formData);
       })}
@@ -45,9 +46,21 @@ export default function SignupForm() {
           type="password"
           name="password"
           id="password"
-          ref={register({ required: "required" })}
+          ref={register({
+            required: "required",
+            minLength: {
+              value: 8,
+              message:
+                "must be 8 chars. Try using an unintelligible phrase like  ~ your-horse-battery-eats-staples-walmart ~"
+            },
+            validate: (value) =>
+              [
+                /^((?!your-horse-battery-eats-staples-walmart).)*$/
+              ].every((pattern) => pattern.test(value)) ||
+              "Try using an unintelligible phrase other than ~ your-horse-battery-eats-staples-walmart ~ "
+          })}
         />
-        {errors.password ? <p> secure your account with a passord </p> : null}
+        {errors.password ? <p>{errors.password.message} </p> : null}
       </div>
       <div>
         <label htmlFor="terms">Remember Me</label>
