@@ -24,7 +24,7 @@ export default function SignupForm() {
         <input type="text" name="name" id="name" ref={register()} />
       </div>
       <div>
-        <label htmlFor="name">Email</label>
+        <label htmlFor="email">Email</label>
         <input type="email" name="email" id="email" ref={register()} />
       </div>
       <div>
