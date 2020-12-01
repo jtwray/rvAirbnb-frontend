@@ -21,15 +21,30 @@ export default function SignupForm() {
     >
       <div>
         <label htmlFor="name">Name</label>
-        <input type="text" name="name" id="name" ref={register()} />
+        <input
+          type="text"
+          name="name"
+          id="name"
+          ref={register({ required: "required" })}
+        />
       </div>
       <div>
         <label htmlFor="email">Email</label>
-        <input type="email" name="email" id="email" ref={register()} />
+        <input
+          type="email"
+          name="email"
+          id="email"
+          ref={register({ required: "required" })}
+        />
       </div>
       <div>
         <label htmlFor="pasword">Password</label>
-        <input type="password" name="password" id="password" ref={register()} />
+        <input
+          type="password"
+          name="password"
+          id="password"
+          ref={register({ required: "required" })}
+        />
       </div>
       <div>
         <label htmlFor="terms">Remember Me</label>
