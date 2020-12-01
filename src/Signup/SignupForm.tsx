@@ -12,12 +12,15 @@ interface FormData {
 
 export default function SignupForm() {
   const { register, handleSubmit, errors } = useForm<FormData>();
+  const [submitting, setSubmitting] = useState<boolean>(false);
 
   return (
     <form
       style={{ fontSize: "4rem" }}
       onSubmit={handleSubmit((formData) => {
+        setSubmitting(true);
         console.log("formData", formData);
+        setSubmitting(false);
       })}
     >
       <div>
@@ -67,7 +70,9 @@ export default function SignupForm() {
         <input type="checkbox" name="terms" id="terms" ref={register()} />
       </div>
       <div>
-        <button type="submit">Signup</button>
+        <button type="submit" disabled={submitting}>
+          Signup
+        </button>
       </div>
     </form>
   );
