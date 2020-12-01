@@ -9,14 +9,14 @@ label {
   position: absolute;
   background: white;
   transform: translate3d(5px, 10px, 0px);
-  transition: all 0.6s ease-in-out;
+  transition: all 0.2s ease-in-out;
   font-size: 1.5rem;
 }
 
 div.input:focus-within label {
   position: absolute;
   transform: translateX(25px);
-  transition: all 0.6s ease-in-out;
+  transition: all 0.2s ease-in-out;
   font-size: 1rem;
   background: white;
   color: indigo;
