@@ -11,7 +11,7 @@ interface FormData {
 }
 
 export default function SignupForm() {
-  const { register, handleSubmit } = useForm<FormData>();
+  const { register, handleSubmit, errors } = useForm<FormData>();
 
   return (
     <form
@@ -27,6 +27,7 @@ export default function SignupForm() {
           id="name"
           ref={register({ required: "required" })}
         />
+        {errors.name ? <p> what's your username? </p> : null}
       </div>
       <div>
         <label htmlFor="email">Email</label>
@@ -36,6 +37,7 @@ export default function SignupForm() {
           id="email"
           ref={register({ required: "required" })}
         />
+        {errors.email ? <p> provide an email </p> : null}
       </div>
       <div>
         <label htmlFor="pasword">Password</label>
@@ -45,6 +47,7 @@ export default function SignupForm() {
           id="password"
           ref={register({ required: "required" })}
         />
+        {errors.password ? <p> secure your account with a passord </p> : null}
       </div>
       <div>
         <label htmlFor="terms">Remember Me</label>
