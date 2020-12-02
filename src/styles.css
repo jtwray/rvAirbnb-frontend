@@ -16,7 +16,7 @@ label {
   position: absolute;
   background: white;
   transform: translate3d(15px, 10px, 0px);
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
   font-size: 1.5rem;
 }
 input {
@@ -30,13 +30,16 @@ div.input {
 div.input:focus-within label {
   position: absolute;
   transform: translate3d(25px, -3px, 0px);
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
   font-size: 1.2rem;
   font-weight: 900;
   background: white;
   color: indigo;
 }
-
+div.input:focus-within {
+  border: 0.1rem solid indigo;
+  border-radius: 4px;
+}
 input[type="checkbox"] + label {
   border: none;
   background: initial;
