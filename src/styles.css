@@ -4,6 +4,7 @@
   /* width: 100%; */
   margin: 0 auto;
 }
+/* form & form children/labels */
 form {
   width: 100%;
   height: 50%;
@@ -40,13 +41,31 @@ div.input:focus-within {
   border: 0.1rem solid indigo;
   border-radius: 4px;
 }
+form:last-child {
+  text-align: left;
+}
+
+/* form checkbox(terms) & label */
+div.termsContainer {
+  width: 90%;
+}
+
+input#terms {
+  width: auto;
+  width: 20px;
+  height: auto;
+  vertical-align: middle;
+  height: 20px;
+}
+
 input[type="checkbox"] + label {
   border: none;
   background: initial;
   margin: 1rem;
-  position: initial;
+  position: relative;
+  vertical-align: middle;
 }
-
+/* form button */
 div.button {
   width: 90%;
   border: 1px solid red;

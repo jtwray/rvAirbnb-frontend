@@ -39,6 +39,7 @@ export default function SignupForm() {
         <div className="input">
           <label htmlFor="email">Email</label>
           <input
+            autoComplete="off"
             type="email"
             name="email"
             id="email"
@@ -49,6 +50,7 @@ export default function SignupForm() {
         <div className="input">
           <label htmlFor="pasword">Password</label>
           <input
+            autoComplete="off"
             type="password"
             name="password"
             id="password"
@@ -68,7 +70,7 @@ export default function SignupForm() {
           />
           {errors.password ? <p>{errors.password.message} </p> : null}
         </div>
-        <div>
+        <div className="termsContainer">
           <input type="checkbox" name="terms" id="terms" ref={register()} />
           <label htmlFor="terms">Remember Me</label>
         </div>
