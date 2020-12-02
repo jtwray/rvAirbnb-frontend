@@ -4,14 +4,19 @@ import SignupForm from "./Signup/SignupForm";
 const left = {
   display: "flex",
   width: "50%",
-  border: "solid pink 1rem",
-  height: "100%"
+  height: "100%",
+  backgroundImage: "url(https://source.unsplash.com/random)",
+  backgroundSize: "cover",
+  backgroundPosition: "center"
 };
 const right = {
   display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-evenly",
+  alignItems: "center",
   width: "50%",
-  border: "solid pink 1rem",
-  height: "100%"
+  height: "100%",
+  boxShadow: "-1px 0px 5px .2px black"
 };
 
 export default function Signup() {

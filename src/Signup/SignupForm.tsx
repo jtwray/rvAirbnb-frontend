@@ -3,7 +3,9 @@ import { useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useForm } from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
-
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { Avatar } from "@material-ui/core";
+import { useStyles } from "../utils/useStyles";
 interface FormData {
   username: string;
   email: string;
@@ -12,8 +14,6 @@ interface FormData {
 }
 
 export default function SignupForm() {
-  const history = useHistory();
-
   const { register, handleSubmit, errors, formState } = useForm<FormData>({
     defaultValues: {
       username: "",
@@ -22,12 +22,17 @@ export default function SignupForm() {
       terms: false
     }
   });
+
+  const history = useHistory();
+  const classes = useStyles();
   const [submitting, setSubmitting] = useState<boolean>(false);
   const { isDirty, dirtyFields } = formState;
-  const [error, setError] = useState<string>("");
+
   return (
     <>
-      {/* <span style={{position:"relative",top:".15%",left:"35%",background:"white",height:"10px"}}>Name:</span> */}
+      <Avatar className={classes.avatar}>
+        <LockOutlinedIcon />
+      </Avatar>
       <form
         style={{ fontSize: "4rem" }}
         onSubmit={handleSubmit(async (formData) => {
