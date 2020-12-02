@@ -28,15 +28,11 @@ export default function SignupForm() {
         style={{ fontSize: "4rem" }}
         onSubmit={handleSubmit(async (formData) => {
           setSubmitting(true);
-          console.log("formData", formData);
-          setSubmitting(false);
           const response = await axiosWithAuth().get("/auth/rv/signup");
+          setSubmitting(false);
         })}
       >
         <div className="input">
-          {isDirty &&
-            console.log("isDirty", isDirty, "formState->:", formState)}
-
           {dirtyFields.name ? (
             <label className="isDirty" htmlFor="name">
               Name
