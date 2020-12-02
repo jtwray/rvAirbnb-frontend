@@ -36,6 +36,9 @@ export default function SignupForm() {
       <form
         style={{ fontSize: "4rem" }}
         onSubmit={handleSubmit(async (formData) => {
+          if (submitting) {
+            return false;
+          }
           setSubmitting(true);
           console.log("formData", formData);
           try {
