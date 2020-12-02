@@ -1,8 +1,19 @@
 {
   "name": "react",
   "version": "1.0.0",
-  "description": "React example starter project",
-  "keywords": ["react", "starter"],
+  "description": "rventure2020",
+  "keywords": [
+    "react",
+    "jest",
+    "authn",
+    "react-router",
+    "axios",
+    "react-hook-forms",
+    "redux",
+    "material-ui",
+    "jtwray",
+    "typescript"
+  ],
   "main": "src/index.js",
   "dependencies": {
     "@emotion/react": "11.1.1",
@@ -13,6 +24,7 @@
     "@testing-library/jest-dom": "5.11.6",
     "@testing-library/react": "11.2.2",
     "axios": "0.21.0",
+    "mutationobserver-shim": "0.3.7",
     "react": "17.0.0",
     "react-dom": "17.0.0",
     "react-google-recaptcha": "2.1.0",
@@ -22,7 +34,8 @@
     "react-scripts": "3.4.3",
     "redux": "4.0.5",
     "redux-logger": "3.0.6",
-    "redux-thunk": "2.3.0"
+    "redux-thunk": "2.3.0",
+    "ts-node": "9.0.0"
   },
   "devDependencies": {
     "typescript": "3.8.3"

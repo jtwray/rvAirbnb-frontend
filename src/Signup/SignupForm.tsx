@@ -6,6 +6,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Avatar } from "@material-ui/core";
 import { useStyles } from "../utils/useStyles";
+import "mutationobserver-shim";
+
 interface FormData {
   username: string;
   email: string;
@@ -36,17 +38,14 @@ export default function SignupForm() {
       <form
         style={{ fontSize: "4rem" }}
         onSubmit={handleSubmit(async (formData) => {
-          if (submitting) {
-            return false;
-          }
+          // if (submitting) {
+          //   return false;
+          // }
           setSubmitting(true);
           console.log("formData", formData);
           try {
             let { username, password, email } = formData;
             const response = await axiosWithAuth().post("/auth/rv/register", {
-              // username: formData.username,
-              // password: formData.password,
-              // email: formData.email
               username,
               password,
               email
@@ -119,13 +118,13 @@ export default function SignupForm() {
               minLength: {
                 value: 8,
                 message:
-                  "must be 8 chars. Try using an unintelligible phrase like  ~ your-horse-battery-eats-staples-walmart ~"
+                  "must be 8 chars.Try a funky sentence like Yourbatteryhorseeatsstapleswalmart"
               },
               validate: (value) =>
                 [
-                  /^((?!your-horse-battery-eats-staples-walmart).)*$/
+                  /^((?!Yourbatteryhorseeatsstapleswalmart).)*$/
                 ].every((pattern) => pattern.test(value)) ||
-                "Try using an unintelligible phrase other than ~ your-horse-battery-eats-staples-walmart ~ "
+                "Try using a nonsense phrase other than Yourbatteryhorseeatsstapleswalmart"
             })}
           />
           {errors.password ? <p>{errors.password.message} </p> : null}
