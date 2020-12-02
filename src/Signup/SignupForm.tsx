@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useForm } from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -11,6 +12,8 @@ interface FormData {
 }
 
 export default function SignupForm() {
+  const history = useHistory();
+
   const { register, handleSubmit, errors, formState } = useForm<FormData>({
     defaultValues: {
       username: "",
@@ -41,8 +44,17 @@ export default function SignupForm() {
               email
             });
             console.log("resposne;=>", response);
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("currentUserID", response.data.id);
+            localStorage.setItem("currentUserName", response.data.username);
+            history.push("/", {
+              username: response.data.username,
+              terms: response.data.terms
+            });
+            setSubmitting(false);
           } catch (error) {
             console.error(error);
+            alert(error.userMessage || error.message);
             console.log("formData", formData);
           }
           setSubmitting(false);
