@@ -31,10 +31,15 @@ export default function SignupForm() {
           setSubmitting(true);
           console.log("formData", formData);
           try {
-            const response = await axiosWithAuth().post(
-              "/auth/rv/register",
-              formData
-            );
+            let { username, password, email } = formData;
+            const response = await axiosWithAuth().post("/auth/rv/register", {
+              // username: formData.username,
+              // password: formData.password,
+              // email: formData.email
+              username,
+              password,
+              email
+            });
             console.log("resposne;=>", response);
           } catch (error) {
             console.error(error);
