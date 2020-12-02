@@ -72,7 +72,7 @@ export default function SignupForm() {
           <input type="checkbox" name="terms" id="terms" ref={register()} />
           <label htmlFor="terms">Remember Me</label>
         </div>
-        <div>
+        <div className="button">
           <button type="submit" disabled={submitting}>
             Signup
           </button>

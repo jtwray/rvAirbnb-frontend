@@ -46,3 +46,17 @@ input[type="checkbox"] + label {
   margin: 1rem;
   position: initial;
 }
+
+div.button {
+  width: 90%;
+  border: 1px solid red;
+  border-radius: 4px;
+}
+button {
+  width: 100%;
+  background: indigo;
+  color: snow;
+  height: 100%;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+}
