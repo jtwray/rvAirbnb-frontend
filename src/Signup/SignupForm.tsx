@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
 
 interface FormData {
-  name: string;
+  username: string;
   email: string;
   password: string;
   terms: boolean;
@@ -13,7 +13,7 @@ interface FormData {
 export default function SignupForm() {
   const { register, handleSubmit, errors, formState } = useForm<FormData>({
     defaultValues: {
-      name: "",
+      username: "",
       email: "",
       password: "",
       terms: false
@@ -21,6 +21,7 @@ export default function SignupForm() {
   });
   const [submitting, setSubmitting] = useState<boolean>(false);
   const { isDirty, dirtyFields } = formState;
+  const [error, setError] = useState<string>("");
   return (
     <>
       {/* <span style={{position:"relative",top:".15%",left:"35%",background:"white",height:"10px"}}>Name:</span> */}
@@ -28,25 +29,35 @@ export default function SignupForm() {
         style={{ fontSize: "4rem" }}
         onSubmit={handleSubmit(async (formData) => {
           setSubmitting(true);
-          const response = await axiosWithAuth().get("/auth/rv/signup");
+          console.log("formData", formData);
+          try {
+            const response = await axiosWithAuth().post(
+              "/auth/rv/register",
+              formData
+            );
+            console.log("resposne;=>", response);
+          } catch (error) {
+            console.error(error);
+            console.log("formData", formData);
+          }
           setSubmitting(false);
         })}
       >
         <div className="input">
-          {dirtyFields.name ? (
-            <label className="isDirty" htmlFor="name">
-              Name
+          {dirtyFields.username ? (
+            <label className="isDirty" htmlFor="username">
+              Username
             </label>
           ) : (
-            <label htmlFor="name">Name</label>
+            <label htmlFor="username">Username</label>
           )}
           <input
             type="text"
-            name="name"
-            id="name"
+            name="username"
+            id="username"
             ref={register({ required: "required" })}
           />
-          {errors.name ? <p> what's your username? </p> : null}
+          {errors.username ? <p> what's your username? </p> : null}
         </div>
         <div className="input">
           {dirtyFields.email ? (
