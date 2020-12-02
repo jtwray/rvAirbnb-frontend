@@ -11,9 +11,16 @@ interface FormData {
 }
 
 export default function SignupForm() {
-  const { register, handleSubmit, errors } = useForm<FormData>();
+  const { register, handleSubmit, errors, formState } = useForm<FormData>({
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      terms: false
+    }
+  });
   const [submitting, setSubmitting] = useState<boolean>(false);
-
+  const { isDirty, dirtyFields } = formState;
   return (
     <>
       {/* <span style={{position:"relative",top:".15%",left:"35%",background:"white",height:"10px"}}>Name:</span> */}
@@ -27,7 +34,16 @@ export default function SignupForm() {
         })}
       >
         <div className="input">
-          <label htmlFor="name">Name</label>
+          {isDirty &&
+            console.log("isDirty", isDirty, "formState->:", formState)}
+
+          {dirtyFields.name ? (
+            <label className="isDirty" htmlFor="name">
+              Name
+            </label>
+          ) : (
+            <label htmlFor="name">Name</label>
+          )}
           <input
             type="text"
             name="name"
@@ -37,7 +53,13 @@ export default function SignupForm() {
           {errors.name ? <p> what's your username? </p> : null}
         </div>
         <div className="input">
-          <label htmlFor="email">Email</label>
+          {dirtyFields.email ? (
+            <label className="isDirty" htmlFor="email">
+              Email
+            </label>
+          ) : (
+            <label htmlFor="email">Email</label>
+          )}
           <input
             autoComplete="off"
             type="email"
@@ -48,7 +70,13 @@ export default function SignupForm() {
           {errors.email ? <p> provide an email </p> : null}
         </div>
         <div className="input">
-          <label htmlFor="pasword">Password</label>
+          {dirtyFields.password ? (
+            <label className="isDirty" htmlFor="password">
+              Password
+            </label>
+          ) : (
+            <label htmlFor="password">Password</label>
+          )}
           <input
             autoComplete="off"
             type="password"
