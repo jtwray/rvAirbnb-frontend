@@ -2,11 +2,22 @@ import React from "react";
 import { render, fireEvent, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import SignupForm from "./SignupForm";
-import { ChatSharp } from "@material-ui/icons";
 // import config from '../../jest.config'
 // import 'mutationobserver-shim'
+test("it should validate username is present", async () => {
+  const { findByLabelText, findByText, findByRole } = render(<SignupForm />);
+  const input = await findByLabelText("Username");
 
-test("it should validate length", async () => {
+  await act(async () => {
+    fireEvent.input(input, { target: { value: "" } });
+    fireEvent.submit(await findByRole("button"));
+
+    const error = await findByText(/what's your username/);
+    expect(error).toBeInTheDocument();
+  });
+});
+
+test("it should validate Password length", async () => {
   const { findByLabelText, findByText, findByRole } = render(<SignupForm />);
   const input = await findByLabelText("Password");
 
