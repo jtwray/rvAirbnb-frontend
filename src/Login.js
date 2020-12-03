@@ -1,32 +1,86 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { login } from "./redux/actions/index.js";
 import { connect } from "react-redux";
-import SignInSide from "./muiLogin";
+import LoginForm from "./LoginForm";
+import axios from "axios";
+import logo from "./images/logo.png";
+import bgImage from "./images/tallNightSky.png";
+import { useFetchImg } from "./useFetchImg";
+
+const left = {
+  display: "flex",
+  width: "50%",
+  height: "100%",
+  // backgroundImage: `url(${image})`,
+  // backgroundImage:`url(${localStorage.getItem('img2')})`,
+  backgroundSize: "cover",
+  backgroundPosition: "center"
+};
+const right = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-evenly",
+  alignItems: "center",
+  width: "50%",
+  height: "100%",
+  boxShadow: "-1px 0px 5px .2px black"
+};
 
 function Login(props) {
-  const initialCredentials = { username: "", passsword: "" };
+  const [images, setImages] = useState("");
+  const [i] = useFetchImg(images, setImages);
+  console.log({ i });
+  const initialCredentials = { username: "", password: "", email: "" };
   const [credentials, setCredentials] = useState(initialCredentials);
 
+  function getRanNum(n) {
+    return Math.floor(Math.random() * n) + 1;
+  }
+  const [image, setImage] = useState();
+
+  useEffect(() => {
+    i && setImage(i[getRanNum(9)].urls.full);
+  }, [i]);
+
+  console.log("randomimage", { image });
+
   function handleChange(event) {
+    console.log("p.login", props);
     event.preventDefault();
     setCredentials({ ...credentials, [event.target.name]: event.target.value });
     console.log({ credentials }, "changed just now", event.target.value);
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event, credentials, history) {
     event.preventDefault();
-    props.login(credentials);
+    props.login(credentials, history);
     setCredentials(initialCredentials);
   }
 
   return (
-    <>
-      <SignInSide
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
-        credentials={credentials}
-      />
-    </>
+    <div
+      style={{
+        display: "flex",
+        width: "100%",
+        height: "99vh",
+        padding: "0",
+        border: "red solid 1rem",
+        fontSize: "3rem"
+      }}
+    >
+      <div
+        className="half left image"
+        style={{ ...left, backgroundImage: `url(${image})` }}
+      ></div>
+      <div className="half right form" style={right}>
+        <LoginForm
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          credentials={credentials}
+          history={props.history}
+        />
+      </div>
+    </div>
   );
 }
 
