@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import { useForm } from "react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -139,6 +139,29 @@ export default function SignupForm() {
           </button>
         </div>
       </form>
+      <div
+        className="footerLinks--sigunupform"
+        style={{
+          display: "flex",
+          border: "solid black .2rem",
+          width: "90%",
+          justifyContent: "flex-end"
+        }}
+      >
+        <p
+          style={{
+            fontSize: "1rem",
+            margin: "0",
+            paddingRight: "1rem",
+            width: "auto"
+          }}
+        >
+          have an account?{" "}
+          <Link style={{ fontSize: "1.0rem" }} to="/login">
+            login
+          </Link>
+        </p>
+      </div>
     </>
   );
 }
