@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Link } from "react-router-dom";
+import { PrivateRoute } from "./utils/PrivateRoute";
 import "./styles.css";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
@@ -10,9 +11,9 @@ export default function App() {
   return (
     <>
       <div className="App">
-        <Route exact path="/" component={Dashboard} />
+        <PrivateRoute exact path="/" component={Dashboard} />
         <Route exact path="/login" component={Login} />
-        <Route exact path="/logout" component={Logout} />
+        <PrivateRoute exact path="/logout" component={Logout} />
         <Route exact path="/signup" component={Signup} />
       </div>
     </>
