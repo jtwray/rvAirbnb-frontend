@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { login } from "./redux/actions/index.js";
 import { connect } from "react-redux";
 import LoginForm from "./LoginForm";
+import axios from "axios";
+import logo from "./images/logo.png";
+import bgImage from "./images/tallNightSky.png";
+import { useFetchImg } from "./useFetchImg";
 
 const left = {
   display: "flex",
   width: "50%",
   height: "100%",
-  backgroundImage: "url(https://source.unsplash.com/random)",
+  // backgroundImage: `url(${image})`,
+  // backgroundImage:`url(${localStorage.getItem('img2')})`,
   backgroundSize: "cover",
   backgroundPosition: "center"
 };
@@ -22,8 +27,22 @@ const right = {
 };
 
 function Login(props) {
+  const [images, setImages] = useState("");
+  const [i] = useFetchImg(images, setImages);
+  console.log({ i });
   const initialCredentials = { username: "", password: "", email: "" };
   const [credentials, setCredentials] = useState(initialCredentials);
+
+  function getRanNum(n) {
+    return Math.floor(Math.random() * n) + 1;
+  }
+  const [image, setImage] = useState();
+
+  useEffect(() => {
+    i && setImage(i[getRanNum(9)].urls.full);
+  }, [i]);
+
+  console.log("randomimage", { image });
 
   function handleChange(event) {
     console.log("p.login", props);
@@ -49,7 +68,10 @@ function Login(props) {
         fontSize: "3rem"
       }}
     >
-      <div className="half left image" style={left}></div>
+      <div
+        className="half left image"
+        style={{ ...left, backgroundImage: `url(${image})` }}
+      ></div>
       <div className="half right form" style={right}>
         <LoginForm
           handleSubmit={handleSubmit}
