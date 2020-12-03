@@ -1,5 +1,4 @@
-import axiosWithAuth from "../../utils/axiosWithAuth";
-import axios from "axios";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 export const START = "START";
 export const ADD_FRIEND_START = "ADD_FRIEND_START";
@@ -26,12 +25,12 @@ export const addFriend = (friendObj) => (dispatch) => {
     .catch((err) => dispatch({ type: ERROR, payload: err }));
 };
 
-export const login = (credentials, history) => (dispatch) => {
+export const login = ({ username, password, email }, history) => (dispatch) => {
   dispatch({ type: START });
-  console.log("action", credentials);
+  console.log("action", { username, password, email, history });
   axiosWithAuth()
-    .post(`/auth/rv/login`, credentials)
-    .then((res) => {
+    .post(`auth/rv/login`, { username, password, email })
+    .then(() => {
       dispatch({ type: LOGIN_SUCCESS, payload: res.data, history });
     })
     .catch((err) => dispatch({ type: ERROR, payload: err }));

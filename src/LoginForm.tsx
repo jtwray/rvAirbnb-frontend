@@ -118,7 +118,7 @@ export default function LoginForm() {
         </div>
         <div className="button">
           <button type="submit" disabled={submitting}>
-            Signup
+            Login
           </button>
         </div>
       </form>
