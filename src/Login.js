@@ -1,30 +1,32 @@
 import React, { useState } from "react";
 import { login } from "./redux/actions/index.js";
 import { connect } from "react-redux";
-import SignInSide from "./muiLogin";
+import LoginForm from "./LoginForm";
 
 function Login(props) {
-  const initialCredentials = { username: "", passsword: "" };
+  const initialCredentials = { username: "", password: "", email: "" };
   const [credentials, setCredentials] = useState(initialCredentials);
 
   function handleChange(event) {
+    console.log("p.login", props);
     event.preventDefault();
     setCredentials({ ...credentials, [event.target.name]: event.target.value });
     console.log({ credentials }, "changed just now", event.target.value);
   }
 
-  function handleSubmit(event) {
+  function handleSubmit(event, credentials, history) {
     event.preventDefault();
-    props.login(credentials);
+    props.login(credentials, history);
     setCredentials(initialCredentials);
   }
 
   return (
     <>
-      <SignInSide
+      <LoginForm
         handleSubmit={handleSubmit}
         handleChange={handleChange}
         credentials={credentials}
+        history={props.history}
       />
     </>
   );
