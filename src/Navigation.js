@@ -15,10 +15,10 @@ export default function () {
   return (
     <>
       <nav style={navStyles}>
-        <NavLink>home</NavLink>
-        <NavLink>profile</NavLink>
-        <NavLink>trips</NavLink>
-        <NavLink>settings</NavLink>
+        <NavLink to="/">home</NavLink>
+        <NavLink to="/profile">profile</NavLink>
+        <NavLink to="/trips">trips</NavLink>
+        <NavLink to="/settings">settings</NavLink>
       </nav>
     </>
   );
