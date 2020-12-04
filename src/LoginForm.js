@@ -27,6 +27,7 @@ export default function LoginForm(props) {
       <Avatar className={classes.avatar}>
         <LockOutlinedIcon />
       </Avatar>
+      Welcome Back Stranger
       <form
         style={{ fontSize: "4rem" }}
         onSubmit={handleSubmit(async (formData) => {
