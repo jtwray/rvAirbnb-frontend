@@ -3,13 +3,19 @@ import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
-  const currentToken = useSelector((state) => state.token);
+  const currentToken = useSelector((state) => state.currentToken);
+  const localToken = localStorage.getItem("token");
+  if (currentToken === localToken) {
+    console.log("<MATCH!!");
+  } else {
+    console.log("NOTMATCH!");
+  }
   return (
     <Route
       {...rest}
       render={(props) =>
-        localStorage.getItem("token") &&
-        localStorage.getItem("token") === currentToken ? (
+        localToken ? (
+          // && localToken === currentToken
           <Component {...props} />
         ) : (
           <Redirect to="/login" />

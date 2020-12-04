@@ -1,22 +1,12 @@
 import React, { useRef, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import ReCAPTCHA from "react-google-recaptcha";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Avatar } from "@material-ui/core";
 import { useStyles } from "../utils/useStyles";
-import "mutationobserver-shim";
 
-interface FormData {
-  username: string;
-  email: string;
-  password: string;
-  terms: boolean;
-}
-
-export default function SignupForm() {
-  const { register, handleSubmit, errors, formState } = useForm<FormData>({
+export default function SignupForm(props) {
+  const { register, handleSubmit, errors, formState } = useForm({
     defaultValues: {
       username: "",
       email: "",
@@ -24,45 +14,32 @@ export default function SignupForm() {
       terms: false
     }
   });
+  const [submitting, setSubmitting] = useState(false);
+  const { dirtyFields } = formState;
 
   const history = useHistory();
   const classes = useStyles();
-  const [submitting, setSubmitting] = useState<boolean>(false);
-  const { isDirty, dirtyFields } = formState;
 
   return (
     <>
       <Avatar className={classes.avatar}>
         <LockOutlinedIcon />
       </Avatar>
+      Nice To Meet You!
       <form
         style={{ fontSize: "4rem" }}
         onSubmit={handleSubmit(async (formData) => {
-          // if (submitting) {
-          //   return false;
-          // }
+          if (submitting) {
+            return false;
+          }
           setSubmitting(true);
-          console.log("formData", formData);
           try {
             let { username, password, email } = formData;
-            const response = await axiosWithAuth().post("/auth/rv/register", {
-              username,
-              password,
-              email
-            });
-            console.log("resposne;=>", response);
-            localStorage.setItem("token", response.data.token);
-            localStorage.setItem("currentUserID", response.data.id);
-            localStorage.setItem("currentUserName", response.data.username);
-            history.push("/", {
-              username: response.data.username,
-              terms: response.data.terms
-            });
+
+            props.signup(formData, history);
             setSubmitting(false);
           } catch (error) {
-            console.error(error);
             alert(error.userMessage || error.message);
-            console.log("formData", formData);
           }
           setSubmitting(false);
         })}

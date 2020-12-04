@@ -1,11 +1,4 @@
-import {
-  START,
-  ADD_FRIEND_START,
-  ERROR,
-  LOGIN_SUCCESS,
-  ADD_FRIEND_SUCCESS,
-  GET_FRIENDS_SUCCESS
-} from "../actions";
+import { START, ERROR, LOGIN_SUCCESS, SIGNUP_SUCCESS } from "../actions";
 import { initialState } from "../store";
 
 export function rootReducer(state = initialState, action) {
@@ -14,9 +7,20 @@ export function rootReducer(state = initialState, action) {
       return { ...state };
     }
     case LOGIN_SUCCESS: {
-      localStorage.setItem(`token`, action.payload);
-      action.payload.history.push("/dashboard");
-      return { ...state, isLoading: false };
+      return {
+        ...state,
+        isLoading: false,
+        currentToken: action.payload.token,
+        currentUser: action.payload.username
+      };
+    }
+    case SIGNUP_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        currentToken: action.payload.token,
+        currentUser: action.payload.username
+      };
     }
     case ERROR:
       return {

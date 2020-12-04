@@ -3,6 +3,7 @@ import { login } from "./redux/actions/index.js";
 import { connect } from "react-redux";
 import LoginForm from "./LoginForm";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import logo from "./images/logo.png";
 import bgImage from "./images/tallNightSky.png";
 import { useFetchImg } from "./useFetchImg";
@@ -11,7 +12,7 @@ const left = {
   display: "flex",
   width: "50%",
   height: "100%",
-  // backgroundImage: `url(${image})`,
+  // backgroundImage: `url(${image || bgImage})`,
   // backgroundImage:`url(${localStorage.getItem('img2')})`,
   backgroundSize: "cover",
   backgroundPosition: "center"
@@ -29,32 +30,22 @@ const right = {
 function Login(props) {
   const [images, setImages] = useState("");
   const [i] = useFetchImg(images, setImages);
-  console.log({ i });
-  const initialCredentials = { username: "", password: "", email: "" };
-  const [credentials, setCredentials] = useState(initialCredentials);
 
   function getRanNum(n) {
     return Math.floor(Math.random() * n) + 1;
   }
-  const [image, setImage] = useState();
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     i && setImage(i[getRanNum(9)].urls.full);
   }, [i]);
+  const history = useHistory();
 
-  console.log("randomimage", { image });
-
-  function handleChange(event) {
-    console.log("p.login", props);
-    event.preventDefault();
-    setCredentials({ ...credentials, [event.target.name]: event.target.value });
-    console.log({ credentials }, "changed just now", event.target.value);
-  }
-
-  function handleSubmit(event, credentials, history) {
-    event.preventDefault();
-    props.login(credentials, history);
-    setCredentials(initialCredentials);
+  function pushHome(state) {
+    if (state) {
+      history.push("/", { state: state });
+    }
+    history.push("/");
   }
 
   return (
@@ -70,15 +61,13 @@ function Login(props) {
     >
       <div
         className="half left image"
-        style={{ ...left, backgroundImage: `url(${image})` }}
+        style={{
+          ...left,
+          backgroundImage: `url(${image || bgImage})`
+        }}
       ></div>
       <div className="half right form" style={right}>
-        <LoginForm
-          handleSubmit={handleSubmit}
-          handleChange={handleChange}
-          credentials={credentials}
-          history={props.history}
-        />
+        <LoginForm pushHome={pushHome} login={props.login} />
       </div>
     </div>
   );

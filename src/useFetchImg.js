@@ -20,9 +20,8 @@ export function useFetchImg(images, setImages) {
           )
         )
 
-        .catch((e) => console.error(e));
+        .catch((e) => console.error(e, "line23 useIMG-hook"));
     }
-    console.log({ images });
   }, []);
   return [images];
 }
