@@ -8,10 +8,13 @@ const navStyles = {
   width: "100%",
   height: "auto",
   background: "red",
-  boxShadow: "1px 0px 0px 0px black"
+  boxShadow: "1px 0px 0px 0px black",
 };
 
 export default function Navigation() {
+  function handleLogout() {
+    localStorage.removeItem("token");
+  } 
   return (
     <>
       <nav style={navStyles}>
@@ -19,6 +22,9 @@ export default function Navigation() {
         <NavLink to="/profile">profile</NavLink>
         <NavLink to="/trips">trips</NavLink>
         <NavLink to="/settings">settings</NavLink>
+        <NavLink onClick={handleLogout} to="/login">
+          logout
+        </NavLink>
       </nav>
     </>
   );
