@@ -11,7 +11,7 @@ const navStyles = {
   boxShadow: "1px 0px 0px 0px black"
 };
 
-export default function () {
+export default function Navigation() {
   return (
     <>
       <nav style={navStyles}>
