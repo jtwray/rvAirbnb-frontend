@@ -1,63 +1,45 @@
 import React, { useRef, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
-import { axiosWithAuth } from "./utils/axiosWithAuth";
+import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import ReCAPTCHA from "react-google-recaptcha";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Avatar } from "@material-ui/core";
-import { useStyles } from "./utils/useStyles";
-import "mutationobserver-shim";
+import { useStyles } from "../utils/useStyles";
 
-interface FormData {
-  username: string;
-  email: string;
-  password: string;
-  terms: boolean;
-}
-
-export default function LoginForm() {
-  const { register, handleSubmit, errors, formState } = useForm<FormData>({
-    defaultValues: { username: "", email: "", password: "", terms: false }
+export default function SignupForm(props) {
+  const { register, handleSubmit, errors, formState } = useForm({
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+      terms: false
+    }
   });
+  const [submitting, setSubmitting] = useState(false);
+  const { dirtyFields } = formState;
 
   const history = useHistory();
   const classes = useStyles();
-  const [submitting, setSubmitting] = useState<boolean>(false);
-  const { dirtyFields } = formState;
 
   return (
     <>
       <Avatar className={classes.avatar}>
         <LockOutlinedIcon />
       </Avatar>
+      Nice To Meet You!
       <form
         style={{ fontSize: "4rem" }}
         onSubmit={handleSubmit(async (formData) => {
-          // if (submitting) {
-          //   return false;
-          // }
+          if (submitting) {
+            return false;
+          }
           setSubmitting(true);
-          console.log("formData", formData);
           try {
             let { username, password, email } = formData;
-            const response = await axiosWithAuth().post("auth/rv/login", {
-              username,
-              password,
-              email
-            });
-            console.log("resposne;=>", response);
-            localStorage.setItem("token", response.data.token);
-            localStorage.setItem("currentUserID", response.data.id);
-            localStorage.setItem("currentUserName", response.data.username);
-            history.push("/", {
-              username: response.data.username,
-              terms: response.data.terms
-            });
+
+            props.signup(formData, history);
             setSubmitting(false);
           } catch (error) {
-            console.error(error);
             alert(error.userMessage || error.message);
-            console.log("formData", formData);
           }
           setSubmitting(false);
         })}
@@ -108,9 +90,21 @@ export default function LoginForm() {
             type="password"
             name="password"
             id="password"
-            ref={register({ required: "required" })}
+            ref={register({
+              required: "required",
+              minLength: {
+                value: 8,
+                message:
+                  "must be 8 chars.Try a funky sentence like Yourbatteryhorseeatsstapleswalmart"
+              },
+              validate: (value) =>
+                [
+                  /^((?!Yourbatteryhorseeatsstapleswalmart).)*$/
+                ].every((pattern) => pattern.test(value)) ||
+                "Try using a nonsense phrase other than Yourbatteryhorseeatsstapleswalmart"
+            })}
           />
-          {errors.password ? <p>password required</p> : null}
+          {errors.password ? <p>{errors.password.message} </p> : null}
         </div>
         <div className="termsContainer">
           <input type="checkbox" name="terms" id="terms" ref={register()} />
@@ -118,7 +112,7 @@ export default function LoginForm() {
         </div>
         <div className="button">
           <button type="submit" disabled={submitting}>
-            Login
+            Signup
           </button>
         </div>
       </form>
@@ -139,9 +133,9 @@ export default function LoginForm() {
             width: "auto"
           }}
         >
-          don't have an account?
-          <Link style={{ fontSize: "1.0rem" }} to="/signup">
-            signup
+          have an account?{" "}
+          <Link style={{ fontSize: "1.0rem" }} to="/login">
+            login
           </Link>
         </p>
       </div>

@@ -1,5 +1,8 @@
 import React from "react";
-import SignupForm from "./Signup/SignupForm";
+import SignupForm from "./SignupForm";
+import { useHistory } from "react-router-dom";
+import { connect } from "react-redux";
+import { signup } from "../redux/actions";
 
 const left = {
   display: "flex",
@@ -19,7 +22,16 @@ const right = {
   boxShadow: "-1px 0px 5px .2px black"
 };
 
-export default function Signup() {
+function Signup(props) {
+  const history = useHistory();
+
+  function pushHome(state) {
+    if (state) {
+      history.push("/", { state: state });
+    }
+    history.push("/");
+  }
+
   return (
     <div
       style={{
@@ -33,8 +45,13 @@ export default function Signup() {
     >
       <div className="half left image" style={left}></div>
       <div className="half right form" style={right}>
-        <SignupForm />
+        <SignupForm
+          pushHome={pushHome}
+          history={history}
+          signup={props.signup}
+        />
       </div>
     </div>
   );
 }
+export default connect(null, { signup })(Signup);

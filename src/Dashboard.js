@@ -1,12 +1,19 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { connect } from "react-redux";
+import Navigation from "./Navigation";
 
-export default function Dashboard(props) {
-  const location = useLocation();
+function Dashboard(props) {
   return (
-    <>
-      <h1>welcome {location?.state?.username}!</h1>
-      dashboard will flesh out here
-    </>
+    <div style={{ fontSize: "3rem" }}>
+      <Navigation />
+      <h1 style={{ fontSize: "5rem" }}>welcome {props.currentUser} !</h1>
+      <p style={{ fontSize: "2rem" }}>dashboard will flesh out here</p>
+    </div>
   );
 }
+
+function mapState(state) {
+  return { currentUser: state.currentUser };
+}
+
+export default connect(mapState, {})(Dashboard);

@@ -1,34 +1,26 @@
 import React, { useRef, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
-import { axiosWithAuth } from "../utils/axiosWithAuth";
+import { Link } from "react-router-dom";
+import { axiosWithAuth } from "./utils/axiosWithAuth";
 import { useForm } from "react-hook-form";
-import ReCAPTCHA from "react-google-recaptcha";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Avatar } from "@material-ui/core";
-import { useStyles } from "../utils/useStyles";
-import "mutationobserver-shim";
+import { useStyles } from "./utils/useStyles";
 
-interface FormData {
-  username: string;
-  email: string;
-  password: string;
-  terms: boolean;
-}
+// interface FormData {
+//   username: string;
+//   email: string;
+//   password: string;
+//   terms: boolean;
+// }
 
-export default function SignupForm() {
-  const { register, handleSubmit, errors, formState } = useForm<FormData>({
-    defaultValues: {
-      username: "",
-      email: "",
-      password: "",
-      terms: false
-    }
+export default function LoginForm(props) {
+  const { register, handleSubmit, errors, formState } = useForm({
+    defaultValues: { username: "", email: "", password: "", terms: false }
   });
 
-  const history = useHistory();
   const classes = useStyles();
-  const [submitting, setSubmitting] = useState<boolean>(false);
-  const { isDirty, dirtyFields } = formState;
+  const [submitting, setSubmitting] = useState(false);
+  const { dirtyFields } = formState;
 
   return (
     <>
@@ -42,27 +34,16 @@ export default function SignupForm() {
           //   return false;
           // }
           setSubmitting(true);
-          console.log("formData", formData);
           try {
             let { username, password, email } = formData;
-            const response = await axiosWithAuth().post("/auth/rv/register", {
-              username,
-              password,
-              email
-            });
-            console.log("resposne;=>", response);
-            localStorage.setItem("token", response.data.token);
-            localStorage.setItem("currentUserID", response.data.id);
-            localStorage.setItem("currentUserName", response.data.username);
-            history.push("/", {
-              username: response.data.username,
-              terms: response.data.terms
-            });
+            props.login(formData);
+            props.pushHome(username);
+            // history.push("/", {
+            //   username: username
+            // });
             setSubmitting(false);
           } catch (error) {
             console.error(error);
-            alert(error.userMessage || error.message);
-            console.log("formData", formData);
           }
           setSubmitting(false);
         })}
@@ -113,21 +94,9 @@ export default function SignupForm() {
             type="password"
             name="password"
             id="password"
-            ref={register({
-              required: "required",
-              minLength: {
-                value: 8,
-                message:
-                  "must be 8 chars.Try a funky sentence like Yourbatteryhorseeatsstapleswalmart"
-              },
-              validate: (value) =>
-                [
-                  /^((?!Yourbatteryhorseeatsstapleswalmart).)*$/
-                ].every((pattern) => pattern.test(value)) ||
-                "Try using a nonsense phrase other than Yourbatteryhorseeatsstapleswalmart"
-            })}
+            ref={register({ required: "required" })}
           />
-          {errors.password ? <p>{errors.password.message} </p> : null}
+          {errors.password ? <p>password required</p> : null}
         </div>
         <div className="termsContainer">
           <input type="checkbox" name="terms" id="terms" ref={register()} />
@@ -135,7 +104,7 @@ export default function SignupForm() {
         </div>
         <div className="button">
           <button type="submit" disabled={submitting}>
-            Signup
+            Login
           </button>
         </div>
       </form>
@@ -156,9 +125,9 @@ export default function SignupForm() {
             width: "auto"
           }}
         >
-          have an account?{" "}
-          <Link style={{ fontSize: "1.0rem" }} to="/login">
-            login
+          don't have an account?
+          <Link style={{ fontSize: "1.0rem" }} to="/signup">
+            signup
           </Link>
         </p>
       </div>
