@@ -13,7 +13,7 @@ export const login = ({ username, password, email }, history) => (dispatch) => {
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
       localStorage.setItem("currentUser", username);
       localStorage.setItem("token", res.data.token);
-      history.push("/", { currentUser: username });
+      history.push("/");
     })
     .catch((err) => dispatch({ type: ERROR, payload: err }));
 };
@@ -28,7 +28,7 @@ export const signup = ({ username, password, email }, history) => (
       dispatch({ type: SIGNUP_SUCCESS, payload: res.data });
       localStorage.setItem("currentUser", username);
       localStorage.setItem("token", res.data.token);
-      history.push("/", { currentUser: username });
+      history.push("/");
     })
     .catch((err) => dispatch({ type: ERROR, payload: err }));
 };
