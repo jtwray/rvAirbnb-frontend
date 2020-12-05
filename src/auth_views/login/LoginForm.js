@@ -1,17 +1,13 @@
-import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import { axiosWithAuth } from "./utils/axiosWithAuth";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Avatar } from "@material-ui/core";
-import { useStyles } from "./utils/useStyles";
-
-
+import { useStyles } from "../../utils/useStyles";
 
 export default function LoginForm(props) {
   const { register, handleSubmit, errors, formState } = useForm({
-    defaultValues: { username: "", email: "", password: "", terms: false }
+    defaultValues: { username: "", email: "", password: "", terms: false },
   });
   const history = useHistory();
   const classes = useStyles();
@@ -27,11 +23,10 @@ export default function LoginForm(props) {
       <form
         style={{ fontSize: "4rem" }}
         onSubmit={handleSubmit(async (formData) => {
-
           setSubmitting(true);
           try {
             let { username, password, email } = formData;
-            props.login(formData,history);
+            props.login(formData, history);
 
             setSubmitting(false);
           } catch (error) {
@@ -106,7 +101,7 @@ export default function LoginForm(props) {
           display: "flex",
           border: "solid black .2rem",
           width: "90%",
-          justifyContent: "flex-end"
+          justifyContent: "flex-end",
         }}
       >
         <p
@@ -114,7 +109,7 @@ export default function LoginForm(props) {
             fontSize: "1rem",
             margin: "0",
             paddingRight: "1rem",
-            width: "auto"
+            width: "auto",
           }}
         >
           don't have an account?
