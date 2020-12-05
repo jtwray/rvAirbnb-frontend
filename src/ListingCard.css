@@ -1,0 +1,36 @@
+.listingCard {
+  width: 100%;
+  padding: 1rem;
+  border: solid;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subcardGroup {
+  width: 30%;
+  height: 200px;
+  border: double;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+img {
+  width: 100%; /* height: auto; */
+  max-height: -webkit-fill-available;
+}
+.subcardGroup.CTA {
+    width: auto;
+}
+
+.subcardGroup.cardImg {
+    width: fit-content;
+    max-width: 60%;
+    border-radius: 10%;
+    height: -webkit-fill-available;
+    max-height: 200px;
+    image-rendering: pixelated;
+    overflow: hidden;
+}
