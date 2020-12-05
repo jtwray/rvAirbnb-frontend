@@ -3,7 +3,6 @@ import { login } from "./redux/actions/index.js";
 import { connect } from "react-redux";
 import LoginForm from "./LoginForm";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 import logo from "./images/logo.png";
 import bgImage from "./images/tallNightSky.png";
 import { useFetchImg } from "./useFetchImg";
@@ -12,8 +11,6 @@ const left = {
   display: "flex",
   width: "50%",
   height: "100%",
-  // backgroundImage: `url(${image || bgImage})`,
-  // backgroundImage:`url(${localStorage.getItem('img2')})`,
   backgroundSize: "cover",
   backgroundPosition: "center"
 };
@@ -28,7 +25,7 @@ const right = {
 };
 
 function Login(props) {
-  const [images, setImages] = useState("");
+  const [images, setImages] = useState([]);
   const [i] = useFetchImg(images, setImages);
 
   function getRanNum(n) {
@@ -37,16 +34,9 @@ function Login(props) {
   const [image, setImage] = useState("");
 
   useEffect(() => {
-    i && setImage(i[getRanNum(9)].urls.full);
+    i.length && setImage(i[getRanNum(9)].urls.full);
   }, [i]);
-  const history = useHistory();
 
-  function pushHome(state) {
-    if (state) {
-      history.push("/", { state: state });
-    }
-    history.push("/");
-  }
 
   return (
     <div
@@ -67,7 +57,7 @@ function Login(props) {
         }}
       ></div>
       <div className="half right form" style={right}>
-        <LoginForm pushHome={pushHome} login={props.login} />
+        <LoginForm login={props.login} />
       </div>
     </div>
   );

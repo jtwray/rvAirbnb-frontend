@@ -1,6 +1,5 @@
 import React from "react";
 import SignupForm from "./SignupForm";
-import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { signup } from "../redux/actions";
 
@@ -23,14 +22,6 @@ const right = {
 };
 
 function Signup(props) {
-  const history = useHistory();
-
-  function pushHome(state) {
-    if (state) {
-      history.push("/", { state: state });
-    }
-    history.push("/");
-  }
 
   return (
     <div
@@ -46,8 +37,6 @@ function Signup(props) {
       <div className="half left image" style={left}></div>
       <div className="half right form" style={right}>
         <SignupForm
-          pushHome={pushHome}
-          history={history}
           signup={props.signup}
         />
       </div>

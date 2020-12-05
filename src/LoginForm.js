@@ -1,23 +1,19 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { axiosWithAuth } from "./utils/axiosWithAuth";
 import { useForm } from "react-hook-form";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Avatar } from "@material-ui/core";
 import { useStyles } from "./utils/useStyles";
 
-// interface FormData {
-//   username: string;
-//   email: string;
-//   password: string;
-//   terms: boolean;
-// }
+
 
 export default function LoginForm(props) {
   const { register, handleSubmit, errors, formState } = useForm({
     defaultValues: { username: "", email: "", password: "", terms: false }
   });
-
+  const history = useHistory();
   const classes = useStyles();
   const [submitting, setSubmitting] = useState(false);
   const { dirtyFields } = formState;
@@ -31,17 +27,12 @@ export default function LoginForm(props) {
       <form
         style={{ fontSize: "4rem" }}
         onSubmit={handleSubmit(async (formData) => {
-          // if (submitting) {
-          //   return false;
-          // }
+
           setSubmitting(true);
           try {
             let { username, password, email } = formData;
-            props.login(formData);
-            props.pushHome(username);
-            // history.push("/", {
-            //   username: username
-            // });
+            props.login(formData,history);
+
             setSubmitting(false);
           } catch (error) {
             console.error(error);
