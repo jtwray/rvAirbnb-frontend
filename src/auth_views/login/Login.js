@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { login } from "../../redux/actions/index.js";
 import { connect } from "react-redux";
-import LoginForm from "../../../LoginForm";
+import LoginForm from "./LoginForm";
 import axios from "axios";
-import logo from "./images/logo.png";
-import bgImage from "./images/tallNightSky.png";
+import logo from "../../images/logo.png";
+import bgImage from "../../images/tallNightSky.png";
 import { useFetchImg } from "../../useFetchImg";
 
 const left = {
