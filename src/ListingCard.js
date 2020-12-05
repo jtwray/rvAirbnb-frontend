@@ -14,7 +14,7 @@ export default function ListingCard(props) {
     <>
       <div className="listingCard" key={props.key}>
         <div className="subcardGroup cardImg">
-          <img src={photo} />
+          <img src={photo} alt={description} />
         </div>
         <div className="subcardGroup cardInfo">
           <h2 className="location_zipcode">
