@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ListingCard.css";
 export default function ListingCard(props) {
   let {
@@ -22,7 +22,14 @@ export default function ListingCard(props) {
           </h2>
           <p className="subcard_description">{description} </p>
 
-          <p className="subcard_amenities"> {amenities} </p>
+          <p className="subcard_amenities">
+            {" "}
+            <ul>
+              {Object.entries(amenities).map((a) => (
+                <li>{a}</li>
+              ))}
+            </ul>
+          </p>
         </div>
         <div className="subcardGroup CTA">
           <div className="favoriteBtn">🤍|💘</div>

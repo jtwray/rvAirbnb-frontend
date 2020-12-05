@@ -4,7 +4,7 @@
   /* width: 100%; */
   margin: 0 auto;
 }
-/* form & form children-->labels & inputs */
+/* auth forms -login/signup- & form children-->labels & inputs */
 form {
   width: 100%;
   height: 60%;
@@ -12,6 +12,8 @@ form {
   justify-content: space-evenly;
   flex-direction: column;
 }
+/* input_label_animation  |placeholder_text to border_text| 
+on-focus & if input has value */
 label {
   position: absolute;
   background: white;
@@ -45,7 +47,7 @@ form:last-child {
   text-align: left;
 }
 
-/* form checkbox(terms) & label */
+/* form checkbox(terms/remember me) & label */
 div.termsContainer {
   width: 90%;
 }
@@ -79,7 +81,7 @@ button {
   padding: 1rem 2rem;
   border-radius: 4px;
 }
-/* the lock pink on signup  -->onclick allows register with google/firebase/phone#/auth2 etc */
+/* the lock pink on signup -->TODO: onclick allows register with google/firebase/phone#/auth2 etc */
 
 MuiSvgIcon-root {
   fill: currentColor;
