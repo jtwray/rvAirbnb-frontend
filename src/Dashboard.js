@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import Navigation from "./Navigation";
-import Listings from "./Listings";
-// import json from "./listings.json";
+import Listings from "./listings/Listings";
+
 
 function Dashboard(props) {
   // console.log({ json });
