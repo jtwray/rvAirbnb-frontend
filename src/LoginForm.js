@@ -32,7 +32,6 @@ export default function LoginForm(props) {
           try {
             let { username, password, email } = formData;
             props.login(formData,history);
-            props.pushHome(username);
 
             setSubmitting(false);
           } catch (error) {

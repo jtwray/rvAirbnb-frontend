@@ -25,7 +25,7 @@ const right = {
 };
 
 function Login(props) {
-  const [images, setImages] = useState("");
+  const [images, setImages] = useState([]);
   const [i] = useFetchImg(images, setImages);
 
   function getRanNum(n) {
@@ -34,7 +34,7 @@ function Login(props) {
   const [image, setImage] = useState("");
 
   useEffect(() => {
-    i && setImage(i[getRanNum(9)].urls.full);
+    i.length && setImage(i[getRanNum(9)].urls.full);
   }, [i]);
 
 
