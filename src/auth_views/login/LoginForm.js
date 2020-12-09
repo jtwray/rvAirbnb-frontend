@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Avatar } from "@material-ui/core";
 import { useStyles } from "../../utils/useStyles";
+import { LoadingClackers } from "./LoadingClackers";
 
 export default function LoginForm(props) {
   const { register, handleSubmit, errors, formState } = useForm({
@@ -26,9 +27,8 @@ export default function LoginForm(props) {
           setSubmitting(true);
           try {
             let { username, password, email } = formData;
-            props.login(formData, history);
 
-            setSubmitting(false);
+            props.login(formData, history);
           } catch (error) {
             console.error(error);
           }
@@ -90,8 +90,9 @@ export default function LoginForm(props) {
           <label htmlFor="terms">Remember Me</label>
         </div>
         <div className="button">
-          <button type="submit" disabled={submitting}>
+          <button type="submit" disabled={props.isLoading}>
             Login
+            {props.isLoading && <span>{<LoadingClackers />} </span>}
           </button>
         </div>
       </form>
