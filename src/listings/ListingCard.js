@@ -9,9 +9,11 @@ export default function ListingCard(props) {
     price,
     landowner_id,
   } = props.listing;
+  
   if (!props.listing || props.listing.length === 0) {
     return <h2>"Loading Spinner"</h2>;
   }
+
   return (
     <>
       <div className="listingCard" key={props.key}>
@@ -27,9 +29,9 @@ export default function ListingCard(props) {
           <p className="subcard_amenities">
             {" "}
             <ul>
-              {Object.entries(amenities).map(({ key, value }) => (
+              {Object.entries(amenities).map((amenity) => (
                 <li>
-                  {key}:{value}
+                  {amenity[0]}:{amenity[1]}
                 </li>
               ))}
             </ul>
