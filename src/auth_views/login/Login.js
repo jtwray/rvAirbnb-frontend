@@ -12,7 +12,7 @@ const left = {
   width: "50%",
   height: "100%",
   backgroundSize: "cover",
-  backgroundPosition: "center"
+  backgroundPosition: "center",
 };
 const right = {
   display: "flex",
@@ -21,7 +21,7 @@ const right = {
   alignItems: "center",
   width: "50%",
   height: "100%",
-  boxShadow: "-1px 0px 5px .2px black"
+  boxShadow: "-1px 0px 5px .2px black",
 };
 
 function Login(props) {
@@ -37,7 +37,6 @@ function Login(props) {
     i.length && setImage(i[getRanNum(9)].urls.full);
   }, [i]);
 
-
   return (
     <div
       style={{
@@ -46,24 +45,24 @@ function Login(props) {
         height: "99vh",
         padding: "0",
         border: "red solid 1rem",
-        fontSize: "3rem"
+        fontSize: "3rem",
       }}
     >
       <div
         className="half left image"
         style={{
           ...left,
-          backgroundImage: `url(${image || bgImage})`
+          backgroundImage: `url(${image || bgImage})`,
         }}
       ></div>
       <div className="half right form" style={right}>
-        <LoginForm login={props.login} />
+        <LoginForm login={props.login} isLoading={props.isLoading}/>
       </div>
     </div>
   );
 }
 
 function mapStateToProps(state) {
-  return { state };
+  return { isLoading:state.isLoading };
 }
 export default connect(mapStateToProps, { login })(Login);

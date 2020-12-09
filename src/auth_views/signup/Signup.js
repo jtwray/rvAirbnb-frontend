@@ -9,7 +9,7 @@ const left = {
   height: "100%",
   backgroundImage: "url(https://source.unsplash.com/random)",
   backgroundSize: "cover",
-  backgroundPosition: "center"
+  backgroundPosition: "center",
 };
 const right = {
   display: "flex",
@@ -18,11 +18,10 @@ const right = {
   alignItems: "center",
   width: "50%",
   height: "100%",
-  boxShadow: "-1px 0px 5px .2px black"
+  boxShadow: "-1px 0px 5px .2px black",
 };
 
 function Signup(props) {
-
   return (
     <div
       style={{
@@ -31,16 +30,17 @@ function Signup(props) {
         height: "99vh",
         padding: "0",
         border: "red solid 1rem",
-        fontSize: "3rem"
+        fontSize: "3rem",
       }}
     >
       <div className="half left image" style={left}></div>
       <div className="half right form" style={right}>
-        <SignupForm
-          signup={props.signup}
-        />
+        <SignupForm signup={props.signup} isLoading={props.isLoading} />
       </div>
     </div>
   );
 }
-export default connect(null, { signup })(Signup);
+function mapState(state) {
+  return { isLoading: state.isLoading };
+}
+export default connect(mapState, { signup })(Signup);
