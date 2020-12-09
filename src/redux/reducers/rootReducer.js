@@ -4,14 +4,14 @@ import { initialState } from "../store";
 export function rootReducer(state = initialState, action) {
   switch (action.type) {
     case START: {
-      return { ...state };
+      return { ...state, isLoading: true };
     }
     case LOGIN_SUCCESS: {
       return {
         ...state,
         isLoading: false,
         currentToken: action.payload.token,
-        currentUser: action.payload.username
+        currentUser: action.payload.username,
       };
     }
     case SIGNUP_SUCCESS: {
@@ -19,14 +19,15 @@ export function rootReducer(state = initialState, action) {
         ...state,
         isLoading: false,
         currentToken: action.payload.token,
-        currentUser: action.payload.username
+        currentUser: action.payload.username,
       };
     }
     case ERROR:
       return {
         ...state,
         isError: true,
-        error: action.payload
+        isLoading: false,
+        error: action.payload,
       };
     default:
       return { ...state };

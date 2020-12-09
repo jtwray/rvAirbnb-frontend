@@ -14,8 +14,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        localToken ? (
-          // && localToken === currentToken
+        localToken && localToken === currentToken ? (
           <Component {...props} />
         ) : (
           <Redirect to="/login" />
