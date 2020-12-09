@@ -2,13 +2,19 @@ import React, { useEffect, useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 import ListingCard from "./ListingCard";
 
-export default function Listings() {
+export default function Listings(props) {
   const [listings, setListings] = useState(newListings);
 
-  useEffect(()=>{
-
-    newListings.length>1&&setListings(newListings)
-  },[])
+  useEffect(() => {
+    newListings.length > 1 && setListings(newListings);
+  }, []);
+  // useEffect(() => {
+  //   newListings.length > 1 &&
+  //     axiosWithAuth()
+  //       .post("https://rventure.herokuapp.com/api/listings", { listings })
+  //       .then(() => console.log("listingsLOG", listings))
+  //       .catch((e) => console.error(e), console.log("listingsLOG", listings));
+  // }, []);
 
   //   useEffect(() => {
   //     axiosWithAuth()
@@ -17,20 +23,24 @@ export default function Listings() {
   //       .catch((e) => console.error(e));
   //   }, []);
 
+  function routeToSingleListing(event, listing) {
+    event.preventDefault();
+    props.history.push(`listings/${listing.id}`);
+  }
   return (
     <section>
       {listings
         ? listings.map((listing) => (
-            <ListingCard key={listing.id} listing={listing} />
+            <ListingCard
+              key={listing.id}
+              listing={listing}
+              routeToSingleListing={routeToSingleListing}
+            />
           ))
         : ""}
     </section>
   );
 }
-
-
-
-
 
 const new_amenities = [
   {
