@@ -9,7 +9,9 @@ export default function ListingCard(props) {
     price,
     landowner_id,
   } = props.listing;
-
+  if (!props.listing || props.listing.length === 0) {
+    return <h2>"Loading Spinner"</h2>;
+  }
   return (
     <>
       <div className="listingCard" key={props.key}>
@@ -25,16 +27,21 @@ export default function ListingCard(props) {
           <p className="subcard_amenities">
             {" "}
             <ul>
-              {Object.entries(amenities).map((a) => (
-                <li>{a}</li>
+              {Object.entries(amenities).map(({ key, value }) => (
+                <li>
+                  {key}:{value}
+                </li>
               ))}
             </ul>
           </p>
         </div>
         <div className="subcardGroup CTA">
           <div className="favoriteBtn">🤍|💘</div>
-          <p className="LO_id">{landowner_id} </p>
-          <div className="subcard_price">{price}</div>
+          <p className="Vendor_id">{landowner_id} </p>
+          <div className="subcard_price">
+            {price}{" "}
+            <button onClick={props.routeToSingleListing}>intrigued?</button>
+          </div>
         </div>
       </div>
     </>
