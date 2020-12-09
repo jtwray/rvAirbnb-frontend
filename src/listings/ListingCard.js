@@ -9,7 +9,7 @@ export default function ListingCard(props) {
     price,
     landowner_id,
   } = props.listing;
-  
+
   if (!props.listing || props.listing.length === 0) {
     return <h2>"Loading Spinner"</h2>;
   }
@@ -29,9 +29,10 @@ export default function ListingCard(props) {
           <p className="subcard_amenities">
             {" "}
             <ul>
-              {Object.entries(amenities).map((amenity) => (
+            {Object.entries(amenities).map(
+                ([key,value]) => (
                 <li>
-                  {amenity[0]}:{amenity[1]}
+                  {key}:{value.toString()}
                 </li>
               ))}
             </ul>
