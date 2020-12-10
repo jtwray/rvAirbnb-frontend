@@ -27,6 +27,12 @@ export default function Listings(props) {
 
   return (
     <section>
+      {page > 1 && (
+        <button onClick={() => setPage((page - 1))}>⬅ back </button>
+      )}
+      {page < paginatedListings.length - 1 && (
+        <button onClick={() => setPage((page + 1))}> more ➡</button>
+      )}
       {pageOfListings
         ? pageOfListings.map((listing) => (
             <ListingCard
