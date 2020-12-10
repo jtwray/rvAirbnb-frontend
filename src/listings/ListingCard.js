@@ -4,12 +4,12 @@ export default function ListingCard(props) {
   let {
     amenities,
     photo,
-    location,
-    description,
+    address,
+    title,
     price,
     landowner_id,
   } = props.listing;
-console.log({amenities},JSON.parse(amenities))
+console.log({props},{amenities},JSON.parse(amenities))
   if (!props.listing || props.listing.length === 0) {
     return <h2>"Loading Spinner"</h2>;
   }
@@ -18,13 +18,13 @@ console.log({amenities},JSON.parse(amenities))
     <>
       <div className="listingCard" key={props.key}>
         <div className="subcardGroup cardImg">
-          <img src={photo} alt={description} />
+          <img src={photo} alt={title} />
         </div>
         <div className="subcardGroup cardInfo">
           <h2 className="location_zipcode">
-            Entire Apartment in zipcode: {location}
+            Entire Apartment in zipcode: {address}
           </h2>
-          <p className="subcard_description">{description} </p>
+          <p className="subcard_description">{title} </p>
 
           <p className="subcard_amenities">
             <ul>
