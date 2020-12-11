@@ -8,6 +8,10 @@ import Logout from "./auth_views/Logout";
 import Signup from "./auth_views/signup/Signup";
 import SingleListingView from "./listings/SingleListingView";
 import Listings from "./listings/Listings";
+import Mytrips from "./Mytrips";
+import Messages from "./Messages";
+import Profile from "./Profile";
+import Discover from "./Discover";
 
 export default function App(props) {
   const { currentUser } = props;
