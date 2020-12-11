@@ -21,7 +21,7 @@ export default function Navigation() {
         <NavLink to="/home/discover">discover</NavLink>
         <NavLink to="/home/profile">profile</NavLink>
         <NavLink to="/home/mytrips">my trips</NavLink>
-        <NavLink to="/home/messagess">messages</NavLink>
+        <NavLink to="/home/messages">messages</NavLink>
         <NavLink onClick={handleLogout} to="/login">
           logout
         </NavLink>
