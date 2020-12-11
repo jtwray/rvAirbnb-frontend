@@ -16,8 +16,16 @@ export default function App(props) {
       <div className="App">
         {/* <PrivateRoute exact path="/*" component={Dashboard} /> */}
         <Route exact path="/" component={Dashboard} />
-        <PrivateRoute exact path="/listings/" component={Listings} />
-        <PrivateRoute
+
+        {/*
+        <Route path="/home" component={Navigation} />
+        <PrivateRoute path="/home/discover" component={Discover} />
+        <PrivateRoute path="/home/messages" component={Messages} />
+        <PrivateRoute path="/home/mytrips"  component={Mytrips} />
+        <PrivateRoute path="/home/profile"  component={Profile} /> 
+        */}
+
+        <Route
           exact
           path="/listings/:listingID"
           component={SingleListingView}
