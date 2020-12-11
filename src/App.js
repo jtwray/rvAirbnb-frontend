@@ -19,7 +19,7 @@ export default function App(props) {
     <>
       <div className="App">
         {/* <PrivateRoute exact path="/*" component={Dashboard} /> */}
-        <Route exact path="/" component={Dashboard} />
+        <Route path="/home" component={Dashboard} />
 
         {/*
         <Route path="/home" component={Navigation} />

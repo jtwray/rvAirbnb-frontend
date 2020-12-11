@@ -19,7 +19,7 @@ export const login = ({ username, password, email }, history) => (dispatch) => {
         }
         let routeToDashboard = await verifyCredentials().then(
           () => console.log("pushing to dashboard"),
-          history.push("/")
+          history.push("/home")
         );
       })
       .catch((err) => dispatch({ type: ERROR, payload: err }));
@@ -36,7 +36,7 @@ export const signup = ({ username, password, email }, history) => (
       dispatch({ type: SIGNUP_SUCCESS, payload: res.data });
       localStorage.setItem("currentUser", username);
       localStorage.setItem("token", res.data.token);
-      history.push("/");
+      history.push("/home");
     })
     .catch((err) => dispatch({ type: ERROR, payload: err }));
 };
