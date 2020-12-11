@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Listings from "./listings/Listings";
 import axios from "axios";
+import { LoadingClackers } from "./utils/LoadingClackers";
 
 export default function Discover(props) {
+  let listings;
   return (
     <div style={{ fontSize: "3rem" }}>
       <div>
@@ -14,10 +16,15 @@ export default function Discover(props) {
       </div>
       <div style={{ width: "100%", display: "flex" }}>
         <section style={{ width: "50%" }}>
-          <Listings listings={listings} />
+          {listings !== null && listings !== undefined &&listings.length > 0 ? (
+            <Listings listings={listings} />
+          ) : (
+            <LoadingClackers />
+          )}
         </section>
         <section style={{ width: "50%" }}>"MAPBOX"</section>
       </div>
+      {/* random suggested listings  */}
     </div>
   );
 }
