@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import{useHistory} from "react-router-dom"
 import ListingCard from "./ListingCard";
 import { usePagination } from "../utils/usePagination.js";
 
 export default function Listings(props) {
+  const history=useHistory()
   const [listings, setListings] = useState([]);
   const [paginatedListings] = usePagination(listings, 10);
   const [page, setPage] = useState(1);
   const [pageOfListings, setPageOfListings] = useState(paginatedListings[page]);
-
+console.log("Listings.js line11",{props})
   useEffect(() => {
     axiosWithAuth()
       .get("/api/listing")
@@ -22,21 +24,19 @@ export default function Listings(props) {
 
   function routeToSingleListing(event, listing) {
     event.preventDefault();
-    props.history.push(`listings/${listing.id}`);
+    console.log("p.history",props,history)
+ history.push(`listings/${listing.id}`,{listing:listing});
   }
 
   return (
     <section>
-      {page > 1 && (
-        <button onClick={() => setPage((page - 1))}>⬅ back </button>
-      )}
+      {page > 1 && <button onClick={() => setPage(page - 1)}>⬅ back </button>}
       {page < paginatedListings.length - 1 && (
-        <button onClick={() => setPage((page + 1))}> more ➡</button>
+        <button onClick={() => setPage(page + 1)}> more ➡</button>
       )}
       {pageOfListings
         ? pageOfListings.map((listing) => (
             <ListingCard
-              key={listing.id}
               listing={listing}
               routeToSingleListing={routeToSingleListing}
             />
