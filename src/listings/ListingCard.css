@@ -22,15 +22,74 @@ img {
   max-height: -webkit-fill-available;
 }
 .subcardGroup.CTA {
-    width: auto;
+  width: auto;
 }
 
 .subcardGroup.cardImg {
-    width: fit-content;
-    max-width: 60%;
-    border-radius: 10%;
-    height: -webkit-fill-available;
-    max-height: 200px;
-    image-rendering: pixelated;
-    overflow: hidden;
+  width: fit-content;
+  max-width: 60%;
+  border-radius: 10%;
+  height: -webkit-fill-available;
+  max-height: 200px;
+  image-rendering: pixelated;
+  overflow: hidden;
+}
+
+#suggestedListings .listingCard {
+  padding: 0;
+  height: 100%;
+  max-width: 24vw;
+}
+#suggestedListings img {
+  object-fit: contain;
+  width: auto;
+  height: auto;
+}
+#suggestedListings .subcardGroup.CTA {
+  width: auto;
+}
+
+#suggestedListings .subcardGroup.cardImg {
+  width: 24vw;
+  border-radius: 10%;
+  max-height: 24vw;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: pixelated;
+  overflow: hidden;
+}
+
+#suggestedListings .subcardGroup.cardImg {
+  width: 100%;
+  max-width: fit-content;
+  max-height: 50%;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: pixelated;
+  overflow: hidden;
+}
+#suggestedListings .subcardGroup {
+  width: 100%;
+  max-height: 200px;
+  height: auto;
+}
+
+
+#suggestedListings .listingCard {
+  padding: 0;
+  height: auto;
+  max-width: 100%;
+}
+
+#suggestedListings .subcardGroup.cardImg {
+  width: 100%;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  max-height: 50%;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: pixelated;
+  overflow: hidden;
+}
+#suggestedListings img {
+  width: 22vw;
+  height: 24vw;
 }
