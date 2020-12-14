@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import Navigation from "./Navigation";
-import {usePosition} from "./utils/usePosition"
-
-
+import { usePosition } from "./utils/usePosition";
+import { LoadingClackers } from "./utils/LoadingClackers";
 
 function Dashboard(props) {
   const [latitude, longitude, accuracy] = usePosition();
@@ -23,8 +22,18 @@ function Dashboard(props) {
       any notifications since last login
        */}
       <h1 style={{ fontSize: "5rem" }}>welcome {props.currentUser} !</h1>
-      <h2 style={{ fontSize: "5rem" }}>"current location /geolocation" !</h2>
-
+      {!gps ? (
+        <LoadingClackers />
+      ) : (
+        <>
+          <h2 style={{ fontSize: "5rem" }}>
+            "current location /geolocation"
+          </h2>
+          <h6>
+          lat:{gps.latitude} lon:{gps.longitude}
+          </h6>
+        </>
+      )}
     </div>
   );
 }
