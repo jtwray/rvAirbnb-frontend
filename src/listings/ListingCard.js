@@ -1,15 +1,23 @@
 import React, { useState } from "react";
 import "./ListingCard.css";
 export default function ListingCard(props) {
-  const { listing } = props;
-  const { amenities, photo, address, title, price, landowner_id, id } = listing;
-  console.log({listing},{ props }, { amenities }, JSON.parse(amenities));
+  const {styleOBJ_card, listing } = props;
+  const { photo, address, title, price, landowner_id, id } = listing;
+  // console.log({listing},{ props }, { amenities }, JSON.parse(amenities));
   if (!props.listing || props.listing.length === 0) {
     return <h2>"Loading Spinner"</h2>;
   }
+{/**
+address: "{"address":"30 Memorial Drive","city":"Avon","state":"MA","zip":"2322"}"
+id: 1
+landowner_id: 28
+photo: "https://i.imgur.com/zmbaXFD.jpg"
+price: "$98.13"
+title: "Lake Front Dream Escap
 
+*/}
   return (
-    <div className="listingCard" key={id}>
+    <div style={styleOBJ_card} className="listingCard" key={id}>
       <div className="subcardGroup cardImg">
         <img src={photo} alt={title} />
       </div>
@@ -20,13 +28,13 @@ export default function ListingCard(props) {
         <p className="subcard_description">{title} </p>
 
         <p className="subcard_amenities">
-          <ul>
-            {Object.entries(JSON.parse(amenities)).map(([key, value]) => (
+          {/* <ul>
+            {Object.entries(amenities).map(([key, value]) => (
               <li>
                 {key}:{value.toString()}
               </li>
             ))}
-          </ul>
+          </ul> */}
         </p>
       </div>
       <div className="subcardGroup CTA">
