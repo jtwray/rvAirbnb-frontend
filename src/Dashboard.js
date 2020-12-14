@@ -2,10 +2,17 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import Navigation from "./Navigation";
+import {usePosition} from "./utils/usePosition"
 
 
 
 function Dashboard(props) {
+  const [latitude, longitude, accuracy] = usePosition();
+  const [gps, setGps] = useState(latitude, longitude, accuracy);
+
+  useEffect(() => {
+    setGps({ latitude, longitude, accuracy });
+  }, [latitude, longitude, accuracy]);
 
   return (
     <div style={{ fontSize: "3rem" }}>
