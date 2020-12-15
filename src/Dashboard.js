@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { axiosWithAuth } from "./utils/axiosWithAuth";
 import { connect } from "react-redux";
@@ -11,40 +11,42 @@ import { StepContent } from "@material-ui/core";
 function Dashboard(props, { currentGeoLocation }) {
   const [latitude, longitude, accuracy] = usePosition();
   const [gps, setGps] = useState(latitude, longitude, accuracy);
+  const [roundedGps, setRoundedGps] = useState();
 
   useEffect(() => {
     getCoords();
   }, []);
 
   useEffect(() => {
-    latitude && console.log({gps},{ latitude });
-    latitude &&
-      axiosWithAuth()
-        .post(`api/listing/geo_address`, gps)
-        .then(({ data }) => {
-          console.log({ data });
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-  }, [gps,latitude]);
-
-  useEffect(() => {
-    setGps({ latitude, longitude, accuracy });
-    updateCoords({ latitude, longitude, accuracy });
+    if (latitude) {
+      console.log({ latitude });
+      setGps({ latitude, longitude, accuracy });
+      setRoundedGps({
+        latitude: latitude.toFixed(9),
+        longitude: longitude.toFixed(9),
+      });
+      updateCoords({ latitude, longitude, accuracy });
+      console.log({ latitude }, { gps }, { roundedGps });
+    }
   }, [latitude, longitude, accuracy]);
 
-  // useEffect(() => {
-  //   latitude && console.log({ latitude });
-  //   latitude &&
-  //     axiosWithAuth()
-  //       .post(`api/listing/geo_address`, {
-  //         gps,
-  //       })
-  //       .then((res) => {
-  //         console.log(res);
-  //       });
-  // }, [gps]);
+  const getAddressFromGpsCoords = useCallback(() => {
+    axiosWithAuth()
+      .post(`api/listing/geo_address`, gps)
+      .then(({ data }) => {
+        console.log({ data });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    console.log({ roundedGps }, "gotAddresssfromgps");
+  }, [roundedGps]);
+
+  useEffect(() => {
+    latitude && console.log({ gps }, { latitude });
+    latitude && getAddressFromGpsCoords();
+  }, [gps, latitude]);
+
   return (
     <div style={{ fontSize: "3rem" }}>
       <Navigation />
@@ -61,8 +63,7 @@ function Dashboard(props, { currentGeoLocation }) {
           <h2 style={{ fontSize: "5rem" }}>"current location /geolocation"</h2>
           <h6>
             store.lat:{currentGeoLocation?.latitude}
-            {/**  GeoLocationCoordinates.getlatitude()*/}gps.lat{gps.latitude}{" "}
-            lon:{gps.longitude}
+            gps.lat{gps.latitude} lon:{gps.longitude}
           </h6>
         </>
       )}
