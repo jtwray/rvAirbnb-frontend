@@ -16,19 +16,18 @@ function Discover(props) {
   const [maptype, setMaptype] = useState("roadmap");
   const [mapQuery, setMapQuery] = useState();
 
-  const [zoom, setZoom] = useState(5);
+  const [zoom, setZoom] = useState(3);
   {
     /**import the slider to allow zoom adjustments or just a + / - buttons set*/
   }
   {
     /** maptype= roadmap or satellite*/
-
   }
-  useEffect(()=>{
-      setMapQuery('hospital')
-  },[])
   useEffect(() => {
-    const { latitude, longitude } = currentGeoLocation;
+    setMapQuery("hospital");
+  }, []);
+  const { latitude, longitude } = currentGeoLocation;
+  useEffect(() => {
     setParameters(
       `${mapQuery}&center=${
         (latitude, longitude)
@@ -39,8 +38,9 @@ function Discover(props) {
   useEffect(() => {
     setMap(
       (parameters) =>
-        `https://www.google.com/maps/embed/v1/search?key=${process.env.REACT_APP_GOOGLE_MAP_API}&q=${parameters}`
+        `https://www.google.com/maps/embed/v1/search?key=${process.env.REACT_APP_GOOGLE_API}&q=${parameters}`
     );
+//    setMap( `https://www.google.com/maps/embed/v1/view?key=${process.env.REACT_APP_GOOGLE_API}&center=${latitude},${longitude}&zoom=${zoom}&maptype=satellite`)
   }, [parameters]);
 
   function handleSubmitSearch(event, searchTerms, searchOptions) {
@@ -71,40 +71,8 @@ function Discover(props) {
       .then((res) => setSuggestions(res.data.listings))
       .catch((err) => console.error(err));
   }, []);
+
   let styleOBJ_suggested_listings = {};
-
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(function(position) {
-  //         var latitude = position.coords.latitude;
-  //         var longitude = position.coords.longitude;
-  //         var accuracy = position.coords.accuracy;
-  //         var coords = new google.maps.LatLng(latitude, longitude);
-  //         var mapOptions = {
-  //             zoom: 15,
-  //             center: coords,
-  //             mapTypeControl: true,
-  //             navigationControlOptions: {
-  //                 style: google.maps.NavigationControlStyle.SMALL
-  //             },
-  //             mapTypeId: google.maps.MapTypeId.ROADMAP
-  //         };
-
-  //         var capa = document.getElementById("capa");
-  //         capa.innerHTML = "latitude: " + latitude + ", longitude: " + ", accuracy: " + accuracy;
-
-  //         map = new google.maps.Map(document.getElementById("mapContainer"), mapOptions);
-  //         var marker = new google.maps.Marker({
-  //             position: coords,
-  //             map: map,
-  //             title: "ok"
-  //         });
-
-  //     },
-  //     function error(msg) {alert('Please enable your GPS position feature.');},
-  //     {maximumAge:10000, timeout:5000, enableHighAccuracy: true});
-  // } else {
-  //     alert("Geolocation API is not supported in your browser.");
-  // }
 
   return (
     <div style={{ fontSize: "3rem" }}>
@@ -151,7 +119,14 @@ function Discover(props) {
         <section style={{ width: "50%" }}>
           <div id="capa"></div>
           <section className="mapContainer"></section>
-          {map && <iframe src={map} />}
+          {map && (
+            <iframe
+              width="450"
+              height="250"
+              
+              src={map}
+            />
+          )}
         </section>
       </div>
       {suggestions ? (

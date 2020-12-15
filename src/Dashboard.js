@@ -6,26 +6,23 @@ import Navigation from "./Navigation";
 import { usePosition } from "./utils/usePosition";
 import { LoadingClackers } from "./utils/LoadingClackers";
 import { getCoords, updateCoords } from "./redux/actions/index";
-import { StepContent } from "@material-ui/core";
 
 function Dashboard(props) {
-  const [latitude, longitude, accuracy] = usePosition();
-  const [gps, setGps] = useState(latitude, longitude, accuracy);
-  const [roundedGps, setRoundedGps] = useState();
+  let latitude,longitude;
   const { currentGeoLocation, getCoords, updateCoords } = props;
-  useEffect(() => {
-    getCoords();
-  }, []);
+  if(currentGeoLocation){ const {latitude, longitude} = currentGeoLocation;}
+  const [gps, setGps] = useState(latitude, longitude);
+  const [roundedGps, setRoundedGps] = useState();
 
   useEffect(() => {
     if (latitude) {
       console.log({ latitude });
-      setGps({ latitude, longitude, accuracy });
+      setGps({ latitude, longitude });
       setRoundedGps({
         latitude: latitude.toFixed(9),
         longitude: longitude.toFixed(9),
       });
-      updateCoords({ latitude, longitude, accuracy });
+      updateCoords({ latitude, longitude });
       console.log(
         "updateing state.currentGeoLocation form useeffect line 29 Dshboard.js",
         { latitude },
@@ -33,7 +30,7 @@ function Dashboard(props) {
         { roundedGps }
       );
     }
-  }, [latitude, longitude, accuracy]);
+  }, [latitude, longitude]);
 
   const getAddressFromGpsCoords = useCallback(() => {
     axiosWithAuth()
