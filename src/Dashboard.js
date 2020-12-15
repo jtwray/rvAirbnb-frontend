@@ -8,11 +8,11 @@ import { LoadingClackers } from "./utils/LoadingClackers";
 import { getCoords, updateCoords } from "./redux/actions/index";
 import { StepContent } from "@material-ui/core";
 
-function Dashboard(props, { currentGeoLocation }) {
+function Dashboard(props) {
   const [latitude, longitude, accuracy] = usePosition();
   const [gps, setGps] = useState(latitude, longitude, accuracy);
   const [roundedGps, setRoundedGps] = useState();
-
+  const { currentGeoLocation, getCoords, updateCoords } = props;
   useEffect(() => {
     getCoords();
   }, []);
@@ -26,7 +26,12 @@ function Dashboard(props, { currentGeoLocation }) {
         longitude: longitude.toFixed(9),
       });
       updateCoords({ latitude, longitude, accuracy });
-      console.log({ latitude }, { gps }, { roundedGps });
+      console.log(
+        "updateing state.currentGeoLocation form useeffect line 29 Dshboard.js",
+        { latitude },
+        { gps },
+        { roundedGps }
+      );
     }
   }, [latitude, longitude, accuracy]);
 
