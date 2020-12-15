@@ -3,6 +3,7 @@ import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
 export const START = "START";
 export const ERROR = "ERROR";
+export const UPDATE_GEOCOORDS = "UPDATE_GEOCOORDS";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 
@@ -39,4 +40,31 @@ export const signup = ({ username, password, email }, history) => (
       history.push("/home");
     })
     .catch((err) => dispatch({ type: ERROR, payload: err }));
+};
+export const getCoords = () => (dispatch) => {
+  dispatch({ type: START });
+  const onChange = ({ coords }) => {
+    dispatch({ type: UPDATE_GEOCOORDS, payload: coords });
+  };
+  const onError = (err) => {
+    dispatch({ type: ERROR, payload: err });
+  };
+  const geo = navigator.geolocation;
+  if (!geo) {
+    dispatch({
+      type: ERROR,
+      payload: { error: { message: "Geolocation is not supported" } },
+    });
+  }
+  let watcher = geo.watchPosition(onChange, onError);
+  return () => geo.clearWatch(watcher);
+};
+
+export const updateCoords = (coords) => (dispatch) => {
+  dispatch({ type: START });
+  try {
+    dispatch({ type: UPDATE_GEOCOORDS, payload: coords });
+  } catch (err) {
+    dispatch({ type: ERROR, payload: err });
+  }
 };
