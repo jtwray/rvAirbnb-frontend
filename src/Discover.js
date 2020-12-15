@@ -5,7 +5,7 @@ import { LoadingClackers } from "./utils/LoadingClackers";
 import SuggestedListings from "./listings/SuggestedListings"
 import { axiosWithAuth } from "./utils/axiosWithAuth";
 
-import "./Discover.css";
+
 export default function Discover(props) {
   const [searchTerms, setSearchTerms] = useState();
   const [suggestions, setSuggestions] = useState([]);
