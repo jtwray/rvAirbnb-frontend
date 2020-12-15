@@ -13,7 +13,8 @@ function Discover(props) {
   const [searchResults, setSearchResults] = useState();
   const [map, setMap] = useState();
   const [parameters, setParameters] = useState();
-  const [maptype, setMaptype] = useState('roadmap');
+  const [maptype, setMaptype] = useState("roadmap");
+  const [mapQuery, setMapQuery] = useState();
 
   const [zoom, setZoom] = useState(5);
   {
@@ -21,17 +22,24 @@ function Discover(props) {
   }
   {
     /** maptype= roadmap or satellite*/
+
   }
+  useEffect(()=>{
+      setMapQuery('hospital')
+  },[])
   useEffect(() => {
     const { latitude, longitude } = currentGeoLocation;
     setParameters(
-      `center=${(latitude, longitude)}&zoom=${zoom}&maptype=${maptype}`
+      `${mapQuery}&center=${
+        (latitude, longitude)
+      }&zoom=${zoom}&maptype=${maptype}`
     );
-  }, [zoom, maptype, currentGeoLocation]);
+  }, [mapQuery, zoom, maptype, currentGeoLocation]);
 
   useEffect(() => {
     setMap(
-      (parameters) => `https://www.google.com/maps/embed/v1/search?key=${process.env.REACT_APP_GOOGLE_MAP_API}&${parameters}`
+      (parameters) =>
+        `https://www.google.com/maps/embed/v1/search?key=${process.env.REACT_APP_GOOGLE_MAP_API}&q=${parameters}`
     );
   }, [parameters]);
 
@@ -143,7 +151,7 @@ function Discover(props) {
         <section style={{ width: "50%" }}>
           <div id="capa"></div>
           <section className="mapContainer"></section>
-        {map && <iframe src={map} />}
+          {map && <iframe src={map} />}
         </section>
       </div>
       {suggestions ? (
