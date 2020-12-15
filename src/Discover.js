@@ -4,9 +4,7 @@ import axios from "axios";
 import { LoadingClackers } from "./utils/LoadingClackers";
 import SuggestedListings from "./listings/SuggestedListings"
 import { axiosWithAuth } from "./utils/axiosWithAuth";
-import AmenitiesForm from "./AmenitiesForm.js";
-import DateForm from "./DateForm.js";
-import LocationForm from "./LocationForm.js";
+
 import "./Discover.css";
 export default function Discover(props) {
   const [searchTerms, setSearchTerms] = useState();
@@ -32,6 +30,7 @@ export default function Discover(props) {
     setSearchTerms(e.target.value);
     console.log({ searchTerms });
   }
+ 
   useEffect(() => {
     axios
       .get(`http://localhost:8001/api/listing`)
@@ -40,6 +39,38 @@ export default function Discover(props) {
   }, []);
   let styleOBJ_suggested_listings={}
 
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        var accuracy = position.coords.accuracy;
+        var coords = new google.maps.LatLng(latitude, longitude);
+        var mapOptions = {
+            zoom: 15,
+            center: coords,
+            mapTypeControl: true,
+            navigationControlOptions: {
+                style: google.maps.NavigationControlStyle.SMALL
+            },
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        var capa = document.getElementById("capa");
+        capa.innerHTML = "latitude: " + latitude + ", longitude: " + ", accuracy: " + accuracy;
+
+        map = new google.maps.Map(document.getElementById("mapContainer"), mapOptions);
+        var marker = new google.maps.Marker({
+            position: coords,
+            map: map,
+            title: "ok"
+        });
+
+    },
+    function error(msg) {alert('Please enable your GPS position feature.');},
+    {maximumAge:10000, timeout:5000, enableHighAccuracy: true});
+} else {
+    alert("Geolocation API is not supported in your browser.");
+}
 
   return (
     <div style={{ fontSize: "3rem" }}>
@@ -83,7 +114,12 @@ export default function Discover(props) {
             <LoadingClackers />
           )}
         </section>
-        <section style={{ width: "50%" }}>"MAPBOX"</section>
+        <section style={{ width: "50%" }}>
+            <div id="capa"></div>
+            <section className="mapContainer">
+</section>
+
+        </section>
       </div>
       {suggestions ? (
         <section
