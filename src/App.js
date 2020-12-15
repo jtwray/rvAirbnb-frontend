@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Link } from "react-router-dom";
+import { connect } from "react-redux";
 import { PrivateRoute } from "./utils/PrivateRoute";
 import "./styles.css";
 import Login from "./auth_views/login/Login";
@@ -13,13 +14,14 @@ import Messages from "./Messages";
 import Profile from "./Profile";
 import Discover from "./Discover";
 
-export default function App(props) {
-  const { currentUser } = props;
+function App(props) {
+  const { currentUser, error } = props;
   return (
     <>
       <div className="App">
+        {error && alert(error.response.data.message)}
         {/* <PrivateRoute exact path="/*" component={Dashboard} /> */}
-
+        <Route exact path="/" component={Dashboard} />
         <Route path="/home" component={Dashboard} />
         <Route path="/home/discover" component={Discover} />
         <Route path="/home/messages" component={Messages} />
@@ -39,3 +41,9 @@ export default function App(props) {
     </>
   );
 }
+
+function mapState(state) {
+  return { error: state.error };
+}
+
+export default connect(mapState, {})(App);
