@@ -5,6 +5,7 @@ import { LoadingClackers } from "./utils/LoadingClackers";
 import SuggestedListings from "./listings/SuggestedListings";
 import { axiosWithAuth } from "./utils/axiosWithAuth";
 import { connect } from "react-redux";
+import MapBox from "./MapBox";
 
 function Discover(props) {
   const { currentGeoLocation } = props;
@@ -119,14 +120,16 @@ function Discover(props) {
         <section style={{ width: "50%" }}>
           <div id="capa"></div>
           <section className="mapContainer"></section>
-          {map && (
+          {/* {map && (
             <iframe
               width="450"
               height="250"
               
               src={map}
             />
-          )}
+          )} */}
+
+          <MapBox listings={suggestions}/>
         </section>
       </div>
       {suggestions ? (
