@@ -1,4 +1,4 @@
-.listingCard {
+/** .listingCard {
   width: 100%;
   padding: 1rem;
   border: solid;
@@ -17,9 +17,7 @@
   align-items: center;
 }
 
-img {
-  width: 100%; /* height: auto; */
-  max-height: -webkit-fill-available;
+img {  max-height: -webkit-fill-available;
 }
 .subcardGroup.CTA {
   width: auto;
@@ -92,4 +90,47 @@ img {
 #suggestedListings img {
   width: 22vw;
   height: 24vw;
+} */
+
+section#suggestedListings {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#suggestedListings .listingCard {
+  display: flex;
+  flex-direction: column;
+}
+.listingCard,
+.subcardGroup {
+  display: flex;
+}
+.listingCard {
+  width: 100%;
+  height:300px;
+  border: solid;
+  justify-content: space-between;
+}
+
+.subcardGroup {
+  border: double;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.subcardGroup.cardImg {
+  overflow: hidden;
+  width: 100%;
+  height:60%;
+  border-radius: 10%;
+}
+
+#suggestedListings img {
+  width: 100%;
+  image-rendering: pixelated;
+  overflow: hidden;
+  height: 250px;
 }
