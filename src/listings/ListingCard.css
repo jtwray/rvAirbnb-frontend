@@ -100,10 +100,6 @@ section#suggestedListings {
   align-items: center;
 }
 
-#suggestedListings .listingCard {
-  display: flex;
-  flex-direction: column;
-}
 .listingCard,
 .subcardGroup {
   display: flex;
@@ -114,9 +110,17 @@ section#suggestedListings {
   border: solid;
   justify-content: space-between;
 }
+#suggestedListings .listingCard {
+  display: flex;
+  flex-direction: column;
+  width: 24%;
+  border: solid 1px lightblue;
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+}
 
 .subcardGroup {
-  border: double;
+  border: solid 1px lightblue;
   flex-direction: column;
   justify-content: space-around;
 }
