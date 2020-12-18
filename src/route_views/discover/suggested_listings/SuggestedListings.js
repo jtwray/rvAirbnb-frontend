@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import ListingCard from "./ListingCard";
-import { usePagination } from "../utils/usePagination.js";
+import ListingCard from "../searchlistings/listings/ListingCard";
+import { usePagination } from "../../../utils/hooks/usePagination.js";
 
 export default function SuggestedListings({
   listings,
@@ -15,7 +15,9 @@ export default function SuggestedListings({
   console.log("Listings.js line11", { listings });
 
   useEffect(() => {
+    console.log("before",{paginatedListings})
     paginatedListings && setPageOfListings(paginatedListings[page]);
+    console.log("after",{paginatedListings})
   }, [page, listings, paginatedListings]);
 
   function routeToSingleListing(event, listing) {
@@ -60,13 +62,13 @@ export default function SuggestedListings({
         id="suggestedListings"
       >
         {pageOfListings
-          ? pageOfListings.map((listing) => (
+          ? pageOfListings.map((listing) =>{console.log("msp lidting",{listing});return (
               <ListingCard
                 styleOBJ_card={styleOBJ_card}
                 listing={listing}
                 routeToSingleListing={routeToSingleListing}
               />
-            ))
+            )})
           : ""}
       </section>
     </>

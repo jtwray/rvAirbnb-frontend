@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
-import { LoadingClackers } from "./utils/LoadingClackers";
+import { LoadingClackers } from "../../utils/LoadingClackers";
 import { connect } from "react-redux";
 
 function MapBox(props) {

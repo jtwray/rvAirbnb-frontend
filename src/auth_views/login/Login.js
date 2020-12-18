@@ -5,7 +5,7 @@ import LoginForm from "./LoginForm";
 import axios from "axios";
 import logo from "../../images/logo.png";
 import bgImage from "../../images/tallNightSky.png";
-import { useFetchImg } from "../../useFetchImg";
+import { useFetchImg } from "../../utils/hooks/useFetchImg";
 
 const left = {
   display: "flex",

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./ListingCard.css";
+
 export default function ListingCard(props) {
   const {styleOBJ_card, listing } = props;
   const { photo, address, title, price, landowner_id, id } = listing;
+  console.log("listingCard props.listing",props.listing)
   // console.log({listing},{ props }, { amenities }, JSON.parse(amenities));
   if (!props.listing || props.listing.length === 0) {
     return <h2>"Loading Spinner"</h2>;

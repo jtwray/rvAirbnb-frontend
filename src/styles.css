@@ -1,8 +1,7 @@
 * {
   box-sizing: border-box;
   font-size: 62.5%;
-  /* width: 100%; */
-  margin: 0 auto;
+
 }
 /* auth forms -login/signup- & form children-->labels & inputs */
 form {

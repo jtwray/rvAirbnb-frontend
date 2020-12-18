@@ -1,8 +1,9 @@
-import { ThreeSixtyRounded } from "@material-ui/icons";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import axios from "axios";
 
 export const START = "START";
 export const ERROR = "ERROR";
+export const SETADDRESS = "SETADDRESS";
 export const UPDATE_GEOCOORDS = "UPDATE_GEOCOORDS";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
@@ -16,6 +17,7 @@ export const login = ({ username, password, email }, history) => (dispatch) => {
         async function verifyCredentials() {
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("currentUser", username);
+          localStorage.setItem("currentId", res.data.id);
           dispatch({ type: LOGIN_SUCCESS, payload: res.data });
         }
         let routeToDashboard = await verifyCredentials().then(
@@ -37,10 +39,12 @@ export const signup = ({ username, password, email }, history) => (
       dispatch({ type: SIGNUP_SUCCESS, payload: res.data });
       localStorage.setItem("currentUser", username);
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("currentId", res.data.id);
       history.push("/home");
     })
     .catch((err) => dispatch({ type: ERROR, payload: err }));
 };
+
 export const getCoords = () => (dispatch) => {
   dispatch({ type: START });
   const onChange = ({ coords }) => {
@@ -61,10 +65,38 @@ export const getCoords = () => (dispatch) => {
 };
 
 export const updateCoords = (coords) => (dispatch) => {
+  console.log("coords in update coords action line67", coords);
   dispatch({ type: START });
   try {
     dispatch({ type: UPDATE_GEOCOORDS, payload: coords });
   } catch (err) {
+    console.error("error in the updateCoords action", err);
     dispatch({ type: ERROR, payload: err });
   }
+};
+
+// export const getLocationByLatLng = (lat, lng) =>dispatch=>{
+//   dispatch({type:START})
+
+//   axios.get(
+//     `${process.env.REACT_APP_GOOGLE_MAP_API_URL}?latlng=${lat},${lng}&key=${process.env.REACT_APP_GOOGLE_API}`
+//   )
+//  .then((res) => {
+//     dispatch({ type: SETADDRESS, payload: res.data });
+//   })
+//   .catch((err) => dispatch({ type: ERROR, payload: err }));
+// };
+
+export const setAddress = (lat, lon) => (dispatch) => {
+  console.log("lat", lat, "lon", lon);
+  dispatch({ type: START });
+  axiosWithAuth()
+    .post(`api/listing/geo_address`, { lat, lon })
+    .then((res) => {
+      dispatch({ type: SETADDRESS, payload: res.data });
+    })
+    .catch((err) => {
+      console.error(`error in the seAddress action||${err}`);
+      dispatch({ type: ERROR, payload: err });
+    });
 };
