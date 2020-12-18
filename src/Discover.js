@@ -2,14 +2,47 @@ import React, { useEffect, useState } from "react";
 import Listings from "./listings/Listings";
 import axios from "axios";
 import { LoadingClackers } from "./utils/LoadingClackers";
-import SuggestedListings from "./listings/SuggestedListings"
+import SuggestedListings from "./listings/SuggestedListings";
 import { axiosWithAuth } from "./utils/axiosWithAuth";
+import { connect } from "react-redux";
 
-
-export default function Discover(props) {
+function Discover(props) {
+  const { currentGeoLocation } = props;
   const [searchTerms, setSearchTerms] = useState();
   const [suggestions, setSuggestions] = useState([]);
   const [searchResults, setSearchResults] = useState();
+  const [map, setMap] = useState();
+  const [parameters, setParameters] = useState();
+  const [maptype, setMaptype] = useState("roadmap");
+  const [mapQuery, setMapQuery] = useState();
+
+  const [zoom, setZoom] = useState(3);
+  {
+    /**import the slider to allow zoom adjustments or just a + / - buttons set*/
+  }
+  {
+    /** maptype= roadmap or satellite*/
+  }
+  useEffect(() => {
+    setMapQuery("hospital");
+  }, []);
+  const { latitude, longitude } = currentGeoLocation;
+  useEffect(() => {
+    setParameters(
+      `${mapQuery}&center=${
+        (latitude, longitude)
+      }&zoom=${zoom}&maptype=${maptype}`
+    );
+  }, [mapQuery, zoom, maptype, currentGeoLocation]);
+
+  useEffect(() => {
+    setMap(
+      (parameters) =>
+        `https://www.google.com/maps/embed/v1/search?key=${process.env.REACT_APP_GOOGLE_API}&q=${parameters}`
+    );
+//    setMap( `https://www.google.com/maps/embed/v1/view?key=${process.env.REACT_APP_GOOGLE_API}&center=${latitude},${longitude}&zoom=${zoom}&maptype=satellite`)
+  }, [parameters]);
+
   function handleSubmitSearch(event, searchTerms, searchOptions) {
     event.preventDefault();
     axios
@@ -17,6 +50,7 @@ export default function Discover(props) {
       .then((res) => setSearchResults(res.data))
       .catch((error) => console.error(error));
   }
+
   function handleSubmit(event, searchTerms, searchOptions) {
     event.preventDefault();
     axios
@@ -30,47 +64,15 @@ export default function Discover(props) {
     setSearchTerms(e.target.value);
     console.log({ searchTerms });
   }
- 
+
   useEffect(() => {
     axios
       .get(`http://localhost:8001/api/listing`)
       .then((res) => setSuggestions(res.data.listings))
       .catch((err) => console.error(err));
   }, []);
-  let styleOBJ_suggested_listings={}
 
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(function(position) {
-//         var latitude = position.coords.latitude;
-//         var longitude = position.coords.longitude;
-//         var accuracy = position.coords.accuracy;
-//         var coords = new google.maps.LatLng(latitude, longitude);
-//         var mapOptions = {
-//             zoom: 15,
-//             center: coords,
-//             mapTypeControl: true,
-//             navigationControlOptions: {
-//                 style: google.maps.NavigationControlStyle.SMALL
-//             },
-//             mapTypeId: google.maps.MapTypeId.ROADMAP
-//         };
-
-//         var capa = document.getElementById("capa");
-//         capa.innerHTML = "latitude: " + latitude + ", longitude: " + ", accuracy: " + accuracy;
-
-//         map = new google.maps.Map(document.getElementById("mapContainer"), mapOptions);
-//         var marker = new google.maps.Marker({
-//             position: coords,
-//             map: map,
-//             title: "ok"
-//         });
-
-//     },
-//     function error(msg) {alert('Please enable your GPS position feature.');},
-//     {maximumAge:10000, timeout:5000, enableHighAccuracy: true});
-// } else {
-//     alert("Geolocation API is not supported in your browser.");
-// }
+  let styleOBJ_suggested_listings = {};
 
   return (
     <div style={{ fontSize: "3rem" }}>
@@ -115,10 +117,16 @@ export default function Discover(props) {
           )}
         </section>
         <section style={{ width: "50%" }}>
-            <div id="capa"></div>
-            <section className="mapContainer">
-</section>
-
+          <div id="capa"></div>
+          <section className="mapContainer"></section>
+          {map && (
+            <iframe
+              width="450"
+              height="250"
+              
+              src={map}
+            />
+          )}
         </section>
       </div>
       {suggestions ? (
@@ -136,7 +144,10 @@ export default function Discover(props) {
           }}
         >
           <h2>suggestions</h2>
-          <SuggestedListings listings={suggestions} styleOBJ_suggested_listings={styleOBJ_suggested_listings} />
+          <SuggestedListings
+            listings={suggestions}
+            styleOBJ_suggested_listings={styleOBJ_suggested_listings}
+          />
         </section>
       ) : (
         <LoadingClackers />
@@ -144,3 +155,7 @@ export default function Discover(props) {
     </div>
   );
 }
+function mapState(state) {
+  return { currentGeoLocation: state.currentGeoLocation };
+}
+export default connect(mapState, {})(Discover);
