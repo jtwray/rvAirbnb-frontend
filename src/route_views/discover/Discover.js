@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Listings from "./listings/Listings";
-import axios from "axios";
-import { LoadingClackers } from "./utils/LoadingClackers";
-import SuggestedListings from "./listings/SuggestedListings";
-import { axiosWithAuth } from "./utils/axiosWithAuth";
 import { connect } from "react-redux";
+import axios from "axios";
+import Listings from "./searchlistings/listings/Listings";
+import SuggestedListings from "./suggested_listings/SuggestedListings";
+import { LoadingClackers } from "../../utils/LoadingClackers";
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import MapBox from "./MapBox";
 
 function Discover(props) {
   const { currentGeoLocation } = props;
+  const { latitude, longitude } = currentGeoLocation;
   const [searchTerms, setSearchTerms] = useState();
   const [suggestions, setSuggestions] = useState([]);
   const [searchResults, setSearchResults] = useState();
@@ -15,8 +17,8 @@ function Discover(props) {
   const [parameters, setParameters] = useState();
   const [maptype, setMaptype] = useState("roadmap");
   const [mapQuery, setMapQuery] = useState();
-
   const [zoom, setZoom] = useState(3);
+
   {
     /**import the slider to allow zoom adjustments or just a + / - buttons set*/
   }
@@ -26,7 +28,6 @@ function Discover(props) {
   useEffect(() => {
     setMapQuery("hospital");
   }, []);
-  const { latitude, longitude } = currentGeoLocation;
   useEffect(() => {
     setParameters(
       `${mapQuery}&center=${
@@ -40,7 +41,7 @@ function Discover(props) {
       (parameters) =>
         `https://www.google.com/maps/embed/v1/search?key=${process.env.REACT_APP_GOOGLE_API}&q=${parameters}`
     );
-//    setMap( `https://www.google.com/maps/embed/v1/view?key=${process.env.REACT_APP_GOOGLE_API}&center=${latitude},${longitude}&zoom=${zoom}&maptype=satellite`)
+    //    setMap( `https://www.google.com/maps/embed/v1/view?key=${process.env.REACT_APP_GOOGLE_API}&center=${latitude},${longitude}&zoom=${zoom}&maptype=satellite`)
   }, [parameters]);
 
   function handleSubmitSearch(event, searchTerms, searchOptions) {
@@ -119,14 +120,16 @@ function Discover(props) {
         <section style={{ width: "50%" }}>
           <div id="capa"></div>
           <section className="mapContainer"></section>
-          {map && (
+          {/* {map && (
             <iframe
               width="450"
               height="250"
               
               src={map}
             />
-          )}
+          )} */}
+
+          <MapBox listings={suggestions} />
         </section>
       </div>
       {suggestions ? (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import{useHistory} from "react-router-dom"
 import ListingCard from "./ListingCard";
-import { usePagination } from "../utils/usePagination.js";
+import { usePagination } from "../../../../utils/hooks/usePagination.js";
 
 export default function Listings({listings}) {
   const history=useHistory()

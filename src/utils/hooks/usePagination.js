@@ -8,11 +8,13 @@ const chunkArray = (chunkSize) => (array) => {
     return acc;
   }, []);
 };
+
 export const usePagination = (array, size) => {
   const chunkedArray = useMemo(() => chunkArray(size)(array), [size, array]);
 
   return [chunkedArray];
 };
+
 
 {
   /**
