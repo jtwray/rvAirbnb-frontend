@@ -70,7 +70,7 @@ function MapBox(props) {
               setSelectedListing(null);
             }}
           >
-            <div >
+            <div style={{borderRadius:"3%",padding:".2rem 1.5rem",color:"darkgray",background:"linear-gradient(red,firebrick,darkred)",letterSpacing:"1px",fontWeight:"lighter",textShadow:" .5px .5px 2.5px white, -.15px .15px .5px white,-1.5px -1.5px .5px black, -.15px -.15px 2.5px black",fontSize:"3.7rem",height:"auto",width:"300px"}}>
               <h2>{selectedListing.title}</h2>
               <p>{selectedListing.price}/night</p>
               <p>{selectedListing.city},{selectedListing.state},{selectedListing.zip}</p>
