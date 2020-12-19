@@ -40,7 +40,7 @@ function App(props) {
 
         <Route
           exact
-          path="/listings/:listingID"
+          path="/home/listings/:listingID"
           component={SingleListingView}
         />
 
