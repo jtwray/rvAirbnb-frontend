@@ -1,18 +1,49 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { usePosition } from "./utils/hooks/usePosition";
 import { PrivateRoute } from "./utils/PrivateRoute";
 import "./styles.css";
-import Login from "./Login";
-import Dashboard from "./Dashboard";
-import Logout from "./Logout";
-import Signup from "./Signup/Signup";
+import { updateCoords, setAddress } from "./redux/actions/index";
+import Login from "./auth_views/login/Login";
+import Dashboard from "./route_views/Dashboard";
+import Logout from "./auth_views/Logout";
+import Signup from "./auth_views/signup/Signup";
+import SingleListingView from "./route_views/discover/searchlistings/listings/SingleListingView";
+import Listings from "./route_views/discover/searchlistings/listings/Listings";
+import Mytrips from "./route_views/mytrips/Mytrips";
+import Messages from "./route_views/messages/Messages";
+import Profile from "./route_views/profile/Profile";
+import Discover from "./route_views/discover/Discover";
 
-export default function App() {
+function App(props) {
+  const [latitude, longitude, accuracy] = usePosition();
+  useEffect(() => {
+    props.updateCoords({ latitude, longitude });
+  }, [latitude, longitude]);
+  let currentLocation = props.currentGeoLocation;
+  useEffect(() => {
+    latitude && props.setAddress(latitude, longitude);
+  }, [currentLocation]);
+
   return (
     <>
       <div className="App">
-        <PrivateRoute exact path="/" component={Dashboard} />
+        {/* {props.error && alert(props.error)} */}
         {/* <PrivateRoute exact path="/*" component={Dashboard} /> */}
+        <Route exact path="/" component={Dashboard} />
+        <Route path="/home" component={Dashboard} />
+        <Route path="/home/discover" component={Discover} />
+        <Route path="/home/messages" component={Messages} />
+        <Route path="/home/mytrips" component={Mytrips} />
+        <Route path="/home/profile" component={Profile} />
+
+        <Route
+          exact
+          path="/home/listings/:listingID"
+          component={SingleListingView}
+        />
+
         <PrivateRoute exact path="/logout" component={Logout} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
@@ -20,3 +51,9 @@ export default function App() {
     </>
   );
 }
+
+function mapState(state) {
+  return { error: state.error, currentGeoLocation: state.currentGeoLocation };
+}
+
+export default connect(mapState, { updateCoords, setAddress })(App);

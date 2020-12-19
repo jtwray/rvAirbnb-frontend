@@ -4,10 +4,21 @@ export function axiosWithAuth() {
   const token = localStorage.getItem("token");
 
   return axios.create({
-    baseURL: "https://rventure.herokuapp.com/",
+    baseURL: "http://localhost:8001/",
     headers: {
       Authorization: token,
       "content-type": "application/json"
     }
   });
 }
+// export function axiosWithAuth() {
+//   const token = localStorage.getItem("token");
+
+//   return axios.create({
+//     baseURL: "https://rvadventures.herokuapp.com/",
+//     headers: {
+//       Authorization: token,
+//       "content-type": "application/json"
+//     }
+//   });
+// }
