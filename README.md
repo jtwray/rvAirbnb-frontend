@@ -3,7 +3,7 @@
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/5a502ca580cc32e02669/test_coverage)](https://codeclimate.com/github/jtwray/rvAirbnb-frontend/test_coverage)
 
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/bd488fb9-adc8-47a8-be7f-4f6d9b76e638/deploy-status)](https://app.netlify.com/sites/rvadventures/deploys)
 # RVENTURE
 
  You can find the deployed backend at [backend](https://www.rventure.herokuapp.com).
