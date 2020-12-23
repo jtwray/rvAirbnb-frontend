@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
-import{useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom";
 import ListingCard from "./ListingCard";
 import { usePagination } from "../../../../utils/hooks/usePagination.js";
 
-export default function Listings({listings}) {
-  const history=useHistory()
+export default function Listings({ listings }) {
+  const history = useHistory();
 
   const [paginatedListings] = usePagination(listings, 10);
   const [page, setPage] = useState(1);
   const [pageOfListings, setPageOfListings] = useState(paginatedListings[page]);
-console.log("Listings.js line11",{listings})
-
+  console.log("Listings.js line11", { listings });
 
   useEffect(() => {
     paginatedListings && setPageOfListings(paginatedListings[page]);
-  }, [page, listings, paginatedListings,]);
+  }, [page, listings, paginatedListings]);
 
   function routeToSingleListing(event, listing) {
     event.preventDefault();
-    console.log("p.history",history,"listings",listings)
- history.push(`listings/${listing.id}`,{listing:listing});
+    console.log("p.history", history, "listings", listings);
+    history.push(`listings/${listing.id}`, { listing: listing });
   }
 
   return (
