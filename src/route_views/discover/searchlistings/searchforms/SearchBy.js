@@ -33,12 +33,11 @@ export default function SearchBy({
     e.target.classList.add("active");
   }
 
-  function searchForListingsBy(event) {
-    event.preventDefault();
+  function searchForListingsBy(searchTerms) {
+
     axiosWithAuth()
       .post(`http://localhost:8001/api/search/${searchBy}`, {
-        start_date,
-        end_date,
+        searchTerms
       })
       .then((res) => setSearchResults(res.data.listings))
       .catch((e) => console.error(e));
@@ -59,18 +58,16 @@ export default function SearchBy({
       >
         <form
           style={{ fontSize: "4rem" }}
-          onSubmit={handleSubmit(async (formData) => {
+          onSubmit={handleSubmit(async (formData) => {console.log({formData},{searchTerms})
             setSubmitting(true);
             try {
               let { username, password, email } = formData;
+              searchForListingsBy(searchTerms);
 
-              props.login(formData, history);
-            } catch (error) {
-              console.error(error);
-            }
+            } catch (error) {  console.error(error); }
             setSubmitting(false);
           })}
-        >{searchBy==="dates" ?<CalendarRangePicker />:""}
+        >{searchBy==="dates" ?<CalendarRangePicker searchTerms={searchTerms} setSearchTerms={setSearchTerms}/>:""}
           <div className="input">
             {dirtyFields.search ? (
               <label className="isDirty" htmlFor="search">
@@ -84,6 +81,7 @@ export default function SearchBy({
               type="search"
               name="search"
               id="search"
+              value={Object.values(searchTerms)}
               ref={register({ required: "required" })}
             />
             {errors.search ? <p>search required</p> : null}
