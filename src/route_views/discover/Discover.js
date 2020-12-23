@@ -9,7 +9,7 @@ import SearchBy from "./searchlistings/searchforms/SearchBy";
 import MapBox from "./MapBox";
 
 function Discover(props) {
-  const { currentGeoLocation } = props;
+  const { currentGeoLocation,isLoading } = props;
   const { latitude, longitude } = currentGeoLocation;
   const [searchDates, setSearchDates] = useState();
   const [suggestions, setSuggestions] = useState([]);
@@ -53,6 +53,7 @@ function Discover(props) {
           setSearchResults={setSearchResults}
           searchResults={searchResults}
           searchDates={searchDates}
+          isLoading={isLoading}
         />
       </div>
 
@@ -103,6 +104,6 @@ function Discover(props) {
   );
 }
 function mapState(state) {
-  return { currentGeoLocation: state.currentGeoLocation };
+  return { currentGeoLocation: state.currentGeoLocation,isLoading:state.isLoading };
 }
 export default connect(mapState, {})(Discover);
