@@ -1,7 +1,7 @@
 import react, { useEffect,useState } from "react";
 import Slider from "react-smooth-range-input";
 
-const RangeSlider = ({ value, min, max ,searchTerms,setSearchTerms}) => {
+const RangeSlider = ({ value, min, max ,searchTerms,setSearchTerms,style}) => {
 
     
     const[rvalue,setValue]=useState()
@@ -12,7 +12,7 @@ const RangeSlider = ({ value, min, max ,searchTerms,setSearchTerms}) => {
   }, [value,searchTerms]);
   return (
     <>
-    <label style={{position:"unset",}} htmlFor="minPriceSlider">min price</label>
+    <label style={style} htmlFor="minPriceSlider">min price</label>
       <Slider id="minPriceSlider" value={value} min={min} max={max} onChange={(value)=>{setSearchTerms(value)}}/>
 
     </>
