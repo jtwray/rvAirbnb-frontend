@@ -3,13 +3,12 @@ import axios from "axios";
 import { axiosWithAuth } from "../../../../utils/axiosWithAuth";
 import "./SearchBy.css";
 import { useForm } from "react-hook-form";
-import  CalendarRangePicker from "../../../../utils/CalendarRangePicker";
+import CalendarRangePicker from "../../../../utils/CalendarRangePicker";
 
-export default function SearchBy({
-  setSearchResults,
-  searchResults,
-  searchDates,
-},props) {
+export default function SearchBy(
+  { setSearchResults, searchResults, searchDates },
+  props
+) {
   const [searchBy, setSearchBy] = useState("dates");
   const [searchTerms, setSearchTerms] = useState("");
   let today = new Date();
@@ -34,10 +33,9 @@ export default function SearchBy({
   }
 
   function searchForListingsBy(searchTerms) {
-
     axiosWithAuth()
       .post(`http://localhost:8001/api/search/${searchBy}`, {
-        searchTerms
+        searchTerms,
       })
       .then((res) => setSearchResults(res.data.listings))
       .catch((e) => console.error(e));
@@ -58,34 +56,49 @@ export default function SearchBy({
       >
         <form
           style={{ fontSize: "4rem" }}
-          onSubmit={handleSubmit(async (formData) => {console.log({formData},{searchTerms})
+          onSubmit={handleSubmit(async (formData) => {
+            console.log({ formData }, { searchTerms });
             setSubmitting(true);
             try {
               let { username, password, email } = formData;
               searchForListingsBy(searchTerms);
-
-            } catch (error) {  console.error(error); }
+            } catch (error) {
+              console.error(error);
+            }
             setSubmitting(false);
           })}
-        >{searchBy==="dates" ?<CalendarRangePicker searchTerms={searchTerms} setSearchTerms={setSearchTerms}/>:""}
-          <div className="input">
-            {dirtyFields.search ? (
-              <label className="isDirty" htmlFor="search">
-                search
-              </label>
-            ) : (
-              <label htmlFor="search">search</label>
-            )}
-            <input
-              autoComplete="off"
-              type="search"
-              name="search"
-              id="search"
-              value={Object.values(searchTerms)}
-              ref={register({ required: "required" })}
+        >
+          {searchBy === "dates" ? (
+            <CalendarRangePicker
+              searchTerms={searchTerms}
+              setSearchTerms={setSearchTerms}
             />
-            {errors.search ? <p>search required</p> : null}
-          </div>
+          ) : (
+            ""
+          )}
+          {searchBy === "location" ? (
+            <div className="input">
+              {dirtyFields.search ? (
+                <label className="isDirty" htmlFor="search">
+                  search
+                </label>
+              ) : (
+                <label htmlFor="search">search</label>
+              )}
+
+              <input
+                autoComplete="off"
+                type="search"
+                name="search"
+                id="search"
+                value={Object.values(searchTerms)}
+                ref={register({ required: "required" })}
+              />
+              {errors.search ? <p>search required</p> : null}
+            </div>
+          ) : (
+            ""
+          )}
           <div className="button">
             <button type="submit" disabled={props.isLoading}>
               find listings!
