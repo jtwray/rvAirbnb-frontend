@@ -92,6 +92,13 @@ img {  max-height: -webkit-fill-available;
   height: 24vw;
 } */
 
+section#searchedListings {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  justify-content: space-evenly;
+  align-items: center;
+}
 section#suggestedListings {
   display: flex;
   flex-direction: row;
@@ -106,7 +113,7 @@ section#suggestedListings {
 }
 .listingCard {
   width: 100%;
-  height:300px;
+  height: 300px;
   border: solid;
   justify-content: space-between;
 }
@@ -125,10 +132,23 @@ section#suggestedListings {
   justify-content: space-around;
 }
 
-.subcardGroup.cardImg {
+#searchedListings .subcardGroup.cardImg {
+  overflow: hidden;
+  width: 65%;
+  height: 100%;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+  border: double 0.5rem lightcyan;
+}
+
+#searchedListings .subcardGroup.cardInfo {
+  width: 25%;
+}
+
+#suggestedListings .subcardGroup.cardImg {
   overflow: hidden;
   width: 100%;
-  height:60%;
+  height: 100%;
   border-radius: 10%;
 }
 
