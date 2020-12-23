@@ -31,13 +31,13 @@ console.log({searchTerms})
     >
       {({ startDateInputProps, endDateInputProps, focus }) => (
         <div className="date-range">
-          <input
+          <input style={{width:"200px"}}
             className={"input" + (focus === START_DATE ? " -focused" : "")}
             {...startDateInputProps}
             placeholder="Start date"
           />
           <span className="date-range_arrow" />
-          <input
+          <input style={{width:"200px"}}
             className={"input" + (focus === END_DATE ? " -focused" : "")}
             {...endDateInputProps}
             placeholder="End date"
