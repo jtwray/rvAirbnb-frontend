@@ -9,9 +9,9 @@ function MapBox(props) {
     latitude: props.currentGeoLocation.latitude || 50,
     longitude: props.currentGeoLocation.longitude || 50,
     width: "50vw",
-    height: "100vw",
+    height: "100vh",
     zoom: 1,
-    transitionDuration: 5000,
+    transitionDuration: 500,
     transitionInterpolator: new FlyToInterpolator(),
  
   });
@@ -37,7 +37,7 @@ function MapBox(props) {
         onViewportChange={(viewport) => {
           setViewport({
             ...viewport,
-            transitionDuration: 5000,
+            transitionDuration: 500,
             transitionInterpolator: new FlyToInterpolator(),
        
           });
