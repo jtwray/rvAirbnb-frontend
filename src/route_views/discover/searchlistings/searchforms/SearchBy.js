@@ -96,16 +96,16 @@ export default function SearchBy({
               <RangeSlider
                 setSearchTerms={setSearchTerms}
                 searchTerms={searchTerms}
-                value={searchTerms.min_value}
+                value={searchTerms["min value"]}
                 min={1}
                 max={30}
-                label={"min_price_slider"}        
+                label={"min_price_slider"}
                 classname={"priceslider"}
               />
               <RangeSlider
                 setSearchTerms={setSearchTerms}
                 searchTerms={searchTerms}
-                value={searchTerms.max_value}
+                value={searchTerms["max value"]}
                 min={1}
                 max={30}
                 label={"max_price_slider"}

@@ -11,14 +11,7 @@ const RangeSlider = ({
   label,
   classname,
 }) => {
-  let valueName = value;
-  console.log({ label }, { searchTerms }, { value });
-  useEffect(() => {
-    if (value) {
-      console.log({ value }, { searchTerms });
-    }
-  }, [value, searchTerms]);
-
+    
   function removeSliderFromLabelText(labelText) {
     return labelText.split("_").splice(0, 2).join(" ");
   }
@@ -29,7 +22,7 @@ const RangeSlider = ({
       <label htmlFor={label}>{labeltext}</label>
       <Slider
         id={label}
-        value={valueName}
+        value={value}
         min={min}
         max={max}
         onChange={(value) => {
