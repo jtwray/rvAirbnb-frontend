@@ -5,11 +5,14 @@ import "./SearchBy.css";
 import { useForm } from "react-hook-form";
 import CalendarRangePicker from "../../../../utils/CalendarRangePicker";
 import RangeSlider from "../../../../utils/RangeSlider.js";
+import { LoadingClackers } from "../../../../utils/LoadingClackers";
 
-export default function SearchBy(
-  { setSearchResults, searchResults, searchDates },
-  props
-) {
+export default function SearchBy({
+  setSearchResults,
+  searchResults,
+  searchDates,
+  isLoading,
+}) {
   const [searchBy, setSearchBy] = useState("dates");
   const [searchTerms, setSearchTerms] = useState("");
   let today = new Date();
@@ -78,14 +81,37 @@ export default function SearchBy(
             ""
           )}
           {searchBy === "price" ? (
-            <RangeSlider
-              setSearchTerms={setSearchTerms}
-              searchTerms={searchTerms}
-              value={searchTerms||1}
-              min={1}
-              max={30}
-              style={{position:"unset",}}
-            />
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: " row",
+                justifyContent: " space-around",
+                border: "solid .2rem blueviolet",
+                padding: "2rem 1rem",
+                background: "silver",
+              }}
+            >
+              <h2> Set Price Range</h2>
+              <RangeSlider
+                setSearchTerms={setSearchTerms}
+                searchTerms={searchTerms}
+                value={searchTerms.min_value}
+                min={1}
+                max={30}
+                label={"min_price_slider"}        
+                classname={"priceslider"}
+              />
+              <RangeSlider
+                setSearchTerms={setSearchTerms}
+                searchTerms={searchTerms}
+                value={searchTerms.max_value}
+                min={1}
+                max={30}
+                label={"max_price_slider"}
+                classname={"priceslider"}
+              />
+            </div>
           ) : (
             ""
           )}
@@ -113,9 +139,9 @@ export default function SearchBy(
             ""
           )}
           <div className="button">
-            <button type="submit" disabled={props.isLoading}>
+            <button type="submit" disabled={isLoading}>
               find listings!
-              {props.isLoading && <span>{<LoadingClackers />} </span>}
+              {isLoading && <span>{<LoadingClackers />} </span>}
             </button>
           </div>
         </form>
