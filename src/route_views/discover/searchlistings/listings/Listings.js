@@ -6,14 +6,34 @@ import { usePagination } from "../../../../utils/hooks/usePagination.js";
 export default function Listings({ listings }) {
   const history = useHistory();
 
-  const [paginatedListings] = usePagination(listings, 10);
-  const [page, setPage] = useState(1);
-  const [pageOfListings, setPageOfListings] = useState(paginatedListings[page]);
-  console.log("Listings.js line11", { listings });
 
-  useEffect(() => {
-    paginatedListings && setPageOfListings(paginatedListings[page]);
-  }, [page, listings, paginatedListings]);
+
+// const cardWidth=Math.floor(innerWidth / 275);
+const [height, setHeight] = useState();
+const [windowSize, setWindowSize] = useState({
+  width: undefined,
+  height: undefined,
+});
+const [paginatedListings] = usePagination(listings, (Math.floor(windowSize?.height/300))||4);
+const [page, setPage] = useState(1);
+const [pageOfListings, setPageOfListings] = useState(paginatedListings[page]);
+
+useEffect(() => {
+  function handleResize() {
+    setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+       }
+  handleResize();
+  window.addEventListener("resize", handleResize());
+  return () => {
+    window.removeEventListener("resize", handleResize());
+  };
+}, []);
+
+useEffect(() => {
+  paginatedListings && setPageOfListings(paginatedListings[page]);
+}, [page, listings, paginatedListings,windowSize]);
+
+
 
   function routeToSingleListing(event, listing) {
     event.preventDefault();
