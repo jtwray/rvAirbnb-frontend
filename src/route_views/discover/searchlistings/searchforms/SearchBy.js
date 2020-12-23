@@ -4,6 +4,7 @@ import { axiosWithAuth } from "../../../../utils/axiosWithAuth";
 import "./SearchBy.css";
 import { useForm } from "react-hook-form";
 import CalendarRangePicker from "../../../../utils/CalendarRangePicker";
+import Slider from "../../../../utils/RangeSlider.js";
 
 export default function SearchBy(
   { setSearchResults, searchResults, searchDates },
@@ -72,6 +73,17 @@ export default function SearchBy(
             <CalendarRangePicker
               searchTerms={searchTerms}
               setSearchTerms={setSearchTerms}
+            />
+          ) : (
+            ""
+          )}
+          {searchBy === "price" ? (
+            <Slider
+              setSearchTerms={setSearchTerms}
+              searchTerms={searchTerms}
+              value={searchTerms||1}
+              min={1}
+              max={30}
             />
           ) : (
             ""
