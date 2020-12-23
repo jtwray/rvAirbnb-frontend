@@ -12,7 +12,8 @@ const RangeSlider = ({ value, min, max ,searchTerms,setSearchTerms}) => {
   }, [value,searchTerms]);
   return (
     <>
-      <Slider value={value} min={min} max={max} onChange={(value)=>{setSearchTerms(value)}}/>
+    <label style={{position:"unset",}} htmlFor="minPriceSlider">min price</label>
+      <Slider id="minPriceSlider" value={value} min={min} max={max} onChange={(value)=>{setSearchTerms(value)}}/>
 
     </>
   );
