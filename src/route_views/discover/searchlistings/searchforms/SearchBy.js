@@ -3,6 +3,7 @@ import axios from "axios";
 import { axiosWithAuth } from "../../../../utils/axiosWithAuth";
 import "./SearchBy.css";
 import { useForm } from "react-hook-form";
+import  CalendarRangePicker from "../../../../utils/CalendarRangePicker";
 
 export default function SearchBy({
   setSearchResults,
@@ -69,7 +70,7 @@ export default function SearchBy({
             }
             setSubmitting(false);
           })}
-        >
+        >{searchBy==="dates" ?<CalendarRangePicker />:""}
           <div className="input">
             {dirtyFields.search ? (
               <label className="isDirty" htmlFor="search">
