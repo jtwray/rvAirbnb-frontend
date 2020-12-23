@@ -98,7 +98,7 @@ export default function SearchBy({
                 searchTerms={searchTerms}
                 value={searchTerms["min value"]}
                 min={1}
-                max={30}
+                max={2000}
                 label={"min_price_slider"}
                 classname={"priceslider"}
               />
@@ -107,7 +107,7 @@ export default function SearchBy({
                 searchTerms={searchTerms}
                 value={searchTerms["max value"]}
                 min={1}
-                max={30}
+                max={2000}
                 label={"max_price_slider"}
                 classname={"priceslider"}
               />
