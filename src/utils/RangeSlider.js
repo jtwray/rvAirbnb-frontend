@@ -11,11 +11,14 @@ const RangeSlider = ({
   label,
   classname,
 }) => {
-    
   function removeSliderFromLabelText(labelText) {
-    return labelText.split("_").splice(0, 2).join(" ");
+    return [
+      labelText.split("_").splice(0, 2).join(" "),
+      labelText.split("_").splice(0, 2).join("_"),
+    ];
   }
-  const labeltext = removeSliderFromLabelText(label);
+
+  const [labeltext, stateVar] = removeSliderFromLabelText(label);
 
   return (
     <div className={classname}>
@@ -26,7 +29,7 @@ const RangeSlider = ({
         min={min}
         max={max}
         onChange={(value) => {
-          setSearchTerms({ ...searchTerms, [labeltext]: value });
+          setSearchTerms({ ...searchTerms, [stateVar]: value });
         }}
       />
     </div>
