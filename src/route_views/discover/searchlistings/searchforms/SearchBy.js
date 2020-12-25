@@ -116,7 +116,7 @@ export default function SearchBy({
             ""
           )}
           {searchBy === "location" ? (
-            <div className="input">
+            <div className="input location">
               {dirtyFields.searchLocation ? (
                 <label className="isDirty" htmlFor="searchLocation">
                   location
@@ -132,7 +132,22 @@ export default function SearchBy({
                 value={searchTerms.searchLocation}
                 ref={register({ required: "required" })}
               />
-              <label htmlFor="searchWithin">within</label>
+              {errors.searchLocation ? <p>location required</p> : null}
+{/**
+ * 
+ * input searchLocation  ☝🏻⬆🔼
+ * 
+ * 
+ * input searchWithin 👇🏻🔽⬇
+ * 
+*/}
+              {dirtyFields.searchWithin ? (
+                <label className="isDirty" htmlFor="searchWithin">
+                  within
+                </label>
+              ) : (
+                <label htmlFor="searchWithin">within</label>
+              )}
               <input
                 autoComplete="off"
                 type="text"
@@ -141,9 +156,7 @@ export default function SearchBy({
                 value={searchTerms.searchWithin}
                 ref={register({ required: "required" })}
               />
-              {errors.searchLocation ? <p>location required</p> : null}
-
-              {console.log({ searchWithin }, { searchLocation })}
+              {errors.searchWithin ? <p>search radius required</p> : null}
             </div>
           ) : (
             ""
