@@ -117,23 +117,33 @@ export default function SearchBy({
           )}
           {searchBy === "location" ? (
             <div className="input">
-              {dirtyFields.search ? (
-                <label className="isDirty" htmlFor="search">
-                  search
+              {dirtyFields.searchLocation ? (
+                <label className="isDirty" htmlFor="searchLocation">
+                  location
                 </label>
               ) : (
-                <label htmlFor="search">search</label>
+                <label htmlFor="searchLocation">location</label>
               )}
-
               <input
                 autoComplete="off"
-                type="search"
-                name="search"
-                id="search"
-                value={Object.values(searchTerms)}
+                type="text"
+                name="searchLocation"
+                id="searchLocation"
+                value={searchTerms.searchLocation}
                 ref={register({ required: "required" })}
               />
-              {errors.search ? <p>search required</p> : null}
+              <label htmlFor="searchWithin">within</label>
+              <input
+                autoComplete="off"
+                type="text"
+                name="searchWithin"
+                id="searchWithin"
+                value={searchTerms.searchWithin}
+                ref={register({ required: "required" })}
+              />
+              {errors.searchLocation ? <p>location required</p> : null}
+
+              {console.log({ searchWithin }, { searchLocation })}
             </div>
           ) : (
             ""
