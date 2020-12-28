@@ -15,6 +15,7 @@ export default function SearchBy({
 }) {
   const [searchBy, setSearchBy] = useState("dates");
   const [searchTerms, setSearchTerms] = useState("");
+  const [searchLocation, setSearchLocation] = useState("");
   // let today = new Date();
   // let todays_date =
   //   today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
@@ -28,7 +29,13 @@ export default function SearchBy({
   function handleChange(e) {
     setSearchTerms(e.target.value);
   }
-
+ function  handleSearchLocation(e){
+setSearchLocation(e.target.textContent)
+document
+.querySelectorAll("button.SearchByLocation")
+.forEach((btn) => btn.classList.remove("active"));
+e.target.classList.add("active");
+  }
   function handleSelectSearchBy(e) {
     setSearchBy(e.target.textContent);
     document
@@ -119,6 +126,15 @@ export default function SearchBy({
           )}
           {searchBy === "location" ? (
             <div className="input location">
+              <div>
+                <h3>search listings near</h3>
+<button onClick={(e)=>handleSearchLocation(e)}>zip</button>
+<button onClick={(e)=>handleSearchLocation(e)}>city/state</button>
+<button onClick={(e)=>handleSearchLocation(e)}>current location</button>
+{searchLocation==="zip" ?  "" :""}
+{searchLocation==="city/state" ?  "" :""}
+{searchLocation==="current location" ?  "" :""}
+              </div>
 
               <div>
                 {dirtyFields.searchLocation ? (
