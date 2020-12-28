@@ -15,19 +15,20 @@ export default function SearchBy({
 }) {
   const [searchBy, setSearchBy] = useState("dates");
   const [searchTerms, setSearchTerms] = useState("");
-  let today = new Date();
-  let todays_date =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  // let today = new Date();
+  // let todays_date =
+  //   today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
-  let start_date = searchDates?.start_date
-    ? searchDates.start_date
-    : `${todays_date}`;
-  let end_date = searchDates?.end_date
-    ? searchDates.end_date
-    : `${todays_date}`;
+  // let start_date = searchDates?.start_date
+  //   ? searchDates.start_date
+  //   : `${todays_date}`;
+  // let end_date = searchDates?.end_date
+  //   ? searchDates.end_date
+  //   : `${todays_date}`;
   function handleChange(e) {
     setSearchTerms(e.target.value);
   }
+
   function handleSelectSearchBy(e) {
     setSearchBy(e.target.textContent);
     document
@@ -43,11 +44,11 @@ export default function SearchBy({
       })
       .then((res) => setSearchResults(res.data.listings))
       .catch((e) => console.error(e));
-    console.log({ searchBy }, { searchResults });
+
   }
 
   const { register, handleSubmit, errors, formState } = useForm({
-    defaultValues: { username: "", email: "", password: "", terms: false },
+    defaultValues: { },
   });
 
   const [submitting, setSubmitting] = useState(false);
@@ -59,6 +60,7 @@ export default function SearchBy({
         style={{ width: "100vw", display: "flex", flexDirection: "column" }}
       >
         <form
+           onChange={(e)=>{setSearchTerms({...searchTerms,[e.target.name]:e.target.value});console.log("e.target.value:",e.target.value,"searchTerms:",searchTerms,"searchTerms.searchWithinRange:",searchTerms.searchWithinRange)}}
           style={{ fontSize: "4rem" }}
           onSubmit={handleSubmit(async (formData) => {
             console.log({ formData }, { searchTerms });
@@ -117,46 +119,52 @@ export default function SearchBy({
           )}
           {searchBy === "location" ? (
             <div className="input location">
-              {dirtyFields.searchLocation ? (
-                <label className="isDirty" htmlFor="searchLocation">
-                  location
-                </label>
-              ) : (
-                <label htmlFor="searchLocation">location</label>
-              )}
-              <input
-                autoComplete="off"
-                type="text"
-                name="searchLocation"
-                id="searchLocation"
-                value={searchTerms.searchLocation}
-                ref={register({ required: "required" })}
-              />
-              {errors.searchLocation ? <p>location required</p> : null}
-{/**
- * 
- * input searchLocation  ☝🏻⬆🔼
- * 
- * 
- * input searchWithin 👇🏻🔽⬇
- * 
-*/}
-              {dirtyFields.searchWithin ? (
-                <label className="isDirty" htmlFor="searchWithin">
-                  within
-                </label>
-              ) : (
-                <label htmlFor="searchWithin">within</label>
-              )}
-              <input
-                autoComplete="off"
-                type="text"
-                name="searchWithin"
-                id="searchWithin"
-                value={searchTerms.searchWithin}
-                ref={register({ required: "required" })}
-              />
-              {errors.searchWithin ? <p>search radius required</p> : null}
+
+              <div>
+                {dirtyFields.searchLocation ? (
+                  <label className="isDirty" htmlFor="searchLocation">
+                    location
+                  </label>
+                ) : (
+                  <label htmlFor="searchLocation">location</label>
+                )}
+                <input
+                  autoComplete="off"
+                  type="text"
+                  name="searchLocation"
+                  id="searchLocation"
+                  value={searchTerms.searchLocation}
+                  ref={register({ required: "required" })}
+                />
+                {errors.searchLocation ? <p>location required</p> : null}
+              </div>
+              {/**
+               *
+               * input searchLocation  ☝🏻⬆🔼
+               *
+               *
+               * input searchWithinRange 👇🏻🔽⬇
+               *
+               */}
+              <div>
+                {dirtyFields.searchWithinRange ? (
+                  <label className="isDirty" htmlFor="searchWithinRange">
+                    within
+                  </label>
+                ) : (
+                  <label htmlFor="searchWithinRange">within</label>
+                )}
+                <input
+                  autoComplete="off"
+                  type="text"
+                  name="searchWithinRange"
+                  id="searchWithinRange"
+                  value={searchTerms.searchWithinRange}
+                  ref={register({ required: "required" })}
+                
+                />
+                {errors.searchWithinRange ? <p>search radius required</p> : null}
+              </div>
             </div>
           ) : (
             ""
