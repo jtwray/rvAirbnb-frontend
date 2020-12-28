@@ -32,7 +32,7 @@ export default function SearchBy({
   function handleSearchLocation(e) {
     setSearchLocation(e.target.textContent);
     document
-      .querySelectorAll("button.SearchByLocation")
+      .querySelectorAll("button.searchByLocation")
       .forEach((btn) => btn.classList.remove("active"));
     e.target.classList.add("active");
   }
@@ -137,11 +137,22 @@ export default function SearchBy({
             <div className="input location">
               <div>
                 <h3>search listings near</h3>
-                <button onClick={(e) => handleSearchLocation(e)}>zip</button>
-                <button onClick={(e) => handleSearchLocation(e)}>
+                <button
+                  className="searchByLocation"
+                  onClick={(e) => handleSearchLocation(e)}
+                >
+                  zip
+                </button>
+                <button
+                  className="searchByLocation"
+                  onClick={(e) => handleSearchLocation(e)}
+                >
                   city/state
                 </button>
-                <button onClick={(e) => handleSearchLocation(e)}>
+                <button
+                  className="searchByLocation"
+                  onClick={(e) => handleSearchLocation(e)}
+                >
                   current location
                 </button>
                 {searchLocation === "zip" ? "" : ""}

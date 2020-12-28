@@ -78,6 +78,8 @@ button {
   height: 100%;
   padding: 1rem 2rem;
   border-radius: 4px;
+  transform: all;
+  transition: all .13s ease-out;
 }
 
 button.SearchBy {
@@ -93,7 +95,7 @@ button.SearchBy {
 
 div.priceslider {
   width: 45%;
-  display:flex;
+  display: flex;
 }
 /* 
 .priceslider label {
@@ -110,12 +112,11 @@ div.priceslider {
   text-align: center;
 } */
 
-.priceslider label{
+.priceslider label {
   transition: unset;
   transform: none;
-  border-radius:5px;
+  border-radius: 5px;
   text-align: center;
-  width:auto;
-  position:unset;
-
+  width: auto;
+  position: unset;
 }
