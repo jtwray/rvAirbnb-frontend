@@ -29,12 +29,12 @@ export default function SearchBy({
   function handleChange(e) {
     setSearchTerms(e.target.value);
   }
- function  handleSearchLocation(e){
-setSearchLocation(e.target.textContent)
-document
-.querySelectorAll("button.SearchByLocation")
-.forEach((btn) => btn.classList.remove("active"));
-e.target.classList.add("active");
+  function handleSearchLocation(e) {
+    setSearchLocation(e.target.textContent);
+    document
+      .querySelectorAll("button.SearchByLocation")
+      .forEach((btn) => btn.classList.remove("active"));
+    e.target.classList.add("active");
   }
   function handleSelectSearchBy(e) {
     setSearchBy(e.target.textContent);
@@ -51,11 +51,10 @@ e.target.classList.add("active");
       })
       .then((res) => setSearchResults(res.data.listings))
       .catch((e) => console.error(e));
-
   }
 
   const { register, handleSubmit, errors, formState } = useForm({
-    defaultValues: { },
+    defaultValues: {},
   });
 
   const [submitting, setSubmitting] = useState(false);
@@ -67,7 +66,17 @@ e.target.classList.add("active");
         style={{ width: "100vw", display: "flex", flexDirection: "column" }}
       >
         <form
-           onChange={(e)=>{setSearchTerms({...searchTerms,[e.target.name]:e.target.value});console.log("e.target.value:",e.target.value,"searchTerms:",searchTerms,"searchTerms.searchWithinRange:",searchTerms.searchWithinRange)}}
+          onChange={(e) => {
+            setSearchTerms({ ...searchTerms, [e.target.name]: e.target.value });
+            console.log(
+              "e.target.value:",
+              e.target.value,
+              "searchTerms:",
+              searchTerms,
+              "searchTerms.searchWithinRange:",
+              searchTerms.searchWithinRange
+            );
+          }}
           style={{ fontSize: "4rem" }}
           onSubmit={handleSubmit(async (formData) => {
             console.log({ formData }, { searchTerms });
@@ -128,12 +137,16 @@ e.target.classList.add("active");
             <div className="input location">
               <div>
                 <h3>search listings near</h3>
-<button onClick={(e)=>handleSearchLocation(e)}>zip</button>
-<button onClick={(e)=>handleSearchLocation(e)}>city/state</button>
-<button onClick={(e)=>handleSearchLocation(e)}>current location</button>
-{searchLocation==="zip" ?  "" :""}
-{searchLocation==="city/state" ?  "" :""}
-{searchLocation==="current location" ?  "" :""}
+                <button onClick={(e) => handleSearchLocation(e)}>zip</button>
+                <button onClick={(e) => handleSearchLocation(e)}>
+                  city/state
+                </button>
+                <button onClick={(e) => handleSearchLocation(e)}>
+                  current location
+                </button>
+                {searchLocation === "zip" ? "" : ""}
+                {searchLocation === "city/state" ? "" : ""}
+                {searchLocation === "current location" ? "" : ""}
               </div>
 
               <div>
@@ -177,9 +190,10 @@ e.target.classList.add("active");
                   id="searchWithinRange"
                   value={searchTerms.searchWithinRange}
                   ref={register({ required: "required" })}
-                
                 />
-                {errors.searchWithinRange ? <p>search radius required</p> : null}
+                {errors.searchWithinRange ? (
+                  <p>search radius required</p>
+                ) : null}
               </div>
             </div>
           ) : (
