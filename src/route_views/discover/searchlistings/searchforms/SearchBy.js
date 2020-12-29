@@ -6,12 +6,14 @@ import { useForm } from "react-hook-form";
 import CalendarRangePicker from "../../../../utils/CalendarRangePicker";
 import RangeSlider from "../../../../utils/RangeSlider.js";
 import { LoadingClackers } from "../../../../utils/LoadingClackers";
+import { LocationForm } from "./LocationForm.js";
 
 export default function SearchBy({
   setSearchResults,
   searchResults,
   searchDates,
   isLoading,
+  currentLocation,
 }) {
   const [searchBy, setSearchBy] = useState("dates");
   const [searchTerms, setSearchTerms] = useState("");
@@ -29,14 +31,18 @@ export default function SearchBy({
   function handleChange(e) {
     setSearchTerms(e.target.value);
   }
+
   function handleSearchLocation(e) {
+    e.preventDefault();
     setSearchLocation(e.target.textContent);
     document
       .querySelectorAll("button.searchByLocation")
       .forEach((btn) => btn.classList.remove("active"));
     e.target.classList.add("active");
   }
+
   function handleSelectSearchBy(e) {
+    e.preventDefault();
     setSearchBy(e.target.textContent);
     document
       .querySelectorAll("button.SearchBy")
@@ -51,6 +57,7 @@ export default function SearchBy({
       })
       .then((res) => setSearchResults(res.data.listings))
       .catch((e) => console.error(e));
+    console.log({ searchTerms, searchResults });
   }
 
   const { register, handleSubmit, errors, formState } = useForm({
@@ -65,18 +72,50 @@ export default function SearchBy({
       <section
         style={{ width: "100vw", display: "flex", flexDirection: "column" }}
       >
-        <form
-          onChange={(e) => {
-            setSearchTerms({ ...searchTerms, [e.target.name]: e.target.value });
-            console.log(
-              "e.target.value:",
-              e.target.value,
-              "searchTerms:",
-              searchTerms,
-              "searchTerms.searchWithinRange:",
-              searchTerms.searchWithinRange
-            );
+        <div style={{ width: "100vw", display: "flex", height: "40px" }}>
+          <button className="SearchBy" onClick={(e) => handleSelectSearchBy(e)}>
+            dates
+          </button>
+          <button className="SearchBy" onClick={(e) => handleSelectSearchBy(e)}>
+            price
+          </button>
+          <button className="SearchBy" onClick={(e) => handleSelectSearchBy(e)}>
+            location
+          </button>
+          <button className="SearchBy" onClick={(e) => handleSelectSearchBy(e)}>
+            amenities
+          </button>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            width: "300px",
+            transition: "all 1s",
+            backgroundColor: "darkgray",
+            color: "indigo",
+            borderRadius: "5px",
+            textAlign: "center",
+            fontSize: "2.5rem",
+            fontWeight: "800",
+            textShadow: ` .5px .5px 0.1px black,
+            -.5px -.5px  .1px white,
+            .5px -.5px 1px black,
+            -.5px -.5px  1px white`,
+            boxShadow:
+              "inset 1px 1px 1px 1px white,inset -1px -1px 1px 1px white,-1px -1px 1px 1px black,0px 15px 15px -15px grey",
+            marginBottom: "1rem",
           }}
+        >
+          <h2 style={{ width: "125px", textAlign: "left", padding: "0 1rem" }}>
+            search by:
+          </h2>
+
+          <p> - {searchBy} - </p>
+        </div>
+        <form
+          onChange={(e) =>
+            setSearchTerms({ ...searchTerms, [e.target.name]: e.target.value })
+          }
           style={{ fontSize: "4rem" }}
           onSubmit={handleSubmit(async (formData) => {
             console.log({ formData }, { searchTerms });
@@ -90,6 +129,13 @@ export default function SearchBy({
             setSubmitting(false);
           })}
         >
+          {" "}
+          <div className="button">
+            <button type="submit" disabled={isLoading}>
+              find listings!
+              {isLoading && <span>{<LoadingClackers />} </span>}
+            </button>
+          </div>
           {searchBy === "dates" ? (
             <CalendarRangePicker
               searchTerms={searchTerms}
@@ -141,6 +187,12 @@ export default function SearchBy({
                   className="searchByLocation"
                   onClick={(e) => handleSearchLocation(e)}
                 >
+                  current location
+                </button>
+                <button
+                  className="searchByLocation"
+                  onClick={(e) => handleSearchLocation(e)}
+                >
                   zip
                 </button>
                 <button
@@ -149,123 +201,41 @@ export default function SearchBy({
                 >
                   city/state
                 </button>
-                <button
-                  className="searchByLocation"
-                  onClick={(e) => handleSearchLocation(e)}
-                >
-                  current location
-                </button>
-                {searchLocation === "zip" ? "" : ""}
-                {searchLocation === "city/state" ? "" : ""}
-                {searchLocation === "current location" ? "" : ""}
-              </div>
 
-              <div>
-                {dirtyFields.searchLocation ? (
-                  <label className="isDirty" htmlFor="searchLocation">
-                    location
-                  </label>
+                {searchLocation == null ? (
+                  ""
+                ) : searchLocation == "zip" ? (
+                  <div className="inputBox">
+                    <label htmlFor="zip">zip</label>
+                    <input ref={register} name="zip" />
+                    <label htmlFor="range">range</label>
+                    <input ref={register} name="range" />
+                  </div>
+                ) : searchLocation == "city/state" ? (
+                  <div className="inputBox">
+                    <label htmlFor="city">city</label>
+                    <input ref={register} name="city" />
+                    <label htmlFor="state">state</label>
+                    <input ref={register} name="state" />
+                    <label htmlFor="range">range</label>
+                    <input ref={register} name="range" />
+                  </div>
+                ) : searchLocation == "current location" ? (
+                  <div className="inputBox">
+                    distance from {currentLocation}:
+                    <label htmlFor="range">range</label>
+                    <input ref={register} name="range" />
+                  </div>
                 ) : (
-                  <label htmlFor="searchLocation">location</label>
+                  ""
                 )}
-                <input
-                  autoComplete="off"
-                  type="text"
-                  name="searchLocation"
-                  id="searchLocation"
-                  value={searchTerms.searchLocation}
-                  ref={register({ required: "required" })}
-                />
-                {errors.searchLocation ? <p>location required</p> : null}
-              </div>
-              {/**
-               *
-               * input searchLocation  ☝🏻⬆🔼
-               *
-               *
-               * input searchWithinRange 👇🏻🔽⬇
-               *
-               */}
-              <div>
-                {dirtyFields.searchWithinRange ? (
-                  <label className="isDirty" htmlFor="searchWithinRange">
-                    within
-                  </label>
-                ) : (
-                  <label htmlFor="searchWithinRange">within</label>
-                )}
-                <input
-                  autoComplete="off"
-                  type="text"
-                  name="searchWithinRange"
-                  id="searchWithinRange"
-                  value={searchTerms.searchWithinRange}
-                  ref={register({ required: "required" })}
-                />
-                {errors.searchWithinRange ? (
-                  <p>search radius required</p>
-                ) : null}
               </div>
             </div>
           ) : (
             ""
           )}
-          <div className="button">
-            <button type="submit" disabled={isLoading}>
-              find listings!
-              {isLoading && <span>{<LoadingClackers />} </span>}
-            </button>
-          </div>
         </form>
-        <div
-          style={{
-            display: "flex",
-            width: "300px",
-            transition: "all 1s",
-            backgroundColor: "darkgray",
-            color: "indigo",
-            borderRadius: "5px",
-            textAlign: "center",
-            fontSize: "2.5rem",
-            fontWeight: "800",
-            textShadow: ` .5px .5px 0.1px black,
-            -.5px -.5px  .1px white,
-            .5px -.5px 1px black,
-            -.5px -.5px  1px white`,
-            boxShadow:
-              "inset 1px 1px 1px 1px white,inset -1px -1px 1px 1px white,-1px -1px 1px 1px black,0px 15px 15px -15px grey",
-            marginBottom: "1rem",
-          }}
-        >
-          <h2 style={{ width: "125px", textAlign: "left", padding: "0 1rem" }}>
-            search by:
-          </h2>
-
-          <p> - {searchBy} - </p>
-        </div>
-        <div style={{ width: "100vw", display: "flex", height: "40px" }}>
-          <button className="SearchBy" onClick={(e) => handleSelectSearchBy(e)}>
-            dates
-          </button>
-          <button className="SearchBy" onClick={(e) => handleSelectSearchBy(e)}>
-            price
-          </button>
-          <button className="SearchBy" onClick={(e) => handleSelectSearchBy(e)}>
-            location
-          </button>
-          <button className="SearchBy" onClick={(e) => handleSelectSearchBy(e)}>
-            amenities
-          </button>
-        </div>
       </section>
     </>
   );
-}
-
-{
-  /**
-
-add submit button on prps object?
-
-*/
 }
