@@ -79,7 +79,7 @@ button {
   padding: 1rem 2rem;
   border-radius: 4px;
   transform: all;
-  transition: all .13s ease-out;
+  transition: all .2s ease-out;
 }
 
 button.SearchBy {
