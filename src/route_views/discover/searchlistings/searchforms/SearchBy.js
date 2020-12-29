@@ -4,11 +4,15 @@ import { axiosWithAuth } from "../../../../utils/axiosWithAuth";
 import "./SearchBy.css";
 import { useForm } from "react-hook-form";
 import CalendarRangePicker from "../../../../utils/CalendarRangePicker";
+import RangeSlider from "../../../../utils/RangeSlider.js";
+import { LoadingClackers } from "../../../../utils/LoadingClackers";
 
-export default function SearchBy(
-  { setSearchResults, searchResults, searchDates },
-  props
-) {
+export default function SearchBy({
+  setSearchResults,
+  searchResults,
+  searchDates,
+  isLoading,
+}) {
   const [searchBy, setSearchBy] = useState("dates");
   const [searchTerms, setSearchTerms] = useState("");
   let today = new Date();
@@ -76,6 +80,41 @@ export default function SearchBy(
           ) : (
             ""
           )}
+          {searchBy === "price" ? (
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: " row",
+                justifyContent: " space-around",
+                border: "solid .2rem blueviolet",
+                padding: "2rem 1rem",
+                background: "silver",
+              }}
+            >
+              <h2> Set Price Range</h2>
+              <RangeSlider
+                setSearchTerms={setSearchTerms}
+                searchTerms={searchTerms}
+                value={searchTerms["min value"]}
+                min={1}
+                max={2000}
+                label={"min_price_slider"}
+                classname={"priceslider"}
+              />
+              <RangeSlider
+                setSearchTerms={setSearchTerms}
+                searchTerms={searchTerms}
+                value={searchTerms["max value"]}
+                min={1}
+                max={2000}
+                label={"max_price_slider"}
+                classname={"priceslider"}
+              />
+            </div>
+          ) : (
+            ""
+          )}
           {searchBy === "location" ? (
             <div className="input">
               {dirtyFields.search ? (
@@ -100,9 +139,9 @@ export default function SearchBy(
             ""
           )}
           <div className="button">
-            <button type="submit" disabled={props.isLoading}>
+            <button type="submit" disabled={isLoading}>
               find listings!
-              {props.isLoading && <span>{<LoadingClackers />} </span>}
+              {isLoading && <span>{<LoadingClackers />} </span>}
             </button>
           </div>
         </form>

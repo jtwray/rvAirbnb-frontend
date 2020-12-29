@@ -66,3 +66,9 @@ section#suggestedListings {
   overflow: hidden;
   height: 250px;
 }
+#searchedListings img {
+  width: 100%;
+  image-rendering: pixelated;
+  overflow: hidden;
+  height: 100%;
+}
