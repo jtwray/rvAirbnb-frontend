@@ -32,14 +32,14 @@ function Discover(props) {
   let styleOBJ_suggested_listings = {};
 
   return (
-    <div style={{ fontSize: "3rem" }}>
-      <div>
+    <div className="discover--MainContainer" style={{ fontSize: "3rem" }}>
+      <div className="discover--MainContainer header">
         <h1>Discover an Adventure</h1>
       </div>
-      <div>"search and filters"</div>
+
 
 {/**<!---- ⬇  |- searchBy component |  ---!>*/}
-      <div
+      <div className="discover--MainContainer searchBy"
         style={{
           width: "100%",
           height: "300px",
@@ -58,7 +58,7 @@ function Discover(props) {
       </div>
 
 {/**<!---- ⬇  |-searchResults  cond`t`l|  ---!>*/}
-      <div style={{ width: "100%", display: "flex" }}>
+      <div className="discover--MainContainer searchResults"style={{ width: "100%", display: "flex" }}>
         <section style={{ width: "50%" }}>
           {searchResults?.length > 0 ? (
             <div>{console.log("searchresults",searchResults)}
