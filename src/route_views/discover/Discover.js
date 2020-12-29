@@ -77,7 +77,7 @@ function Discover(props) {
 
 {/**<!----| ⬇   |-suggestions cond`t`l     |---!>*/}
       {suggestions ? (
-        <section
+        <section className="discover--MainContainer Suggestions"
           id="suggestions"
           style={{
             height: "500px",
