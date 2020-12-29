@@ -132,4 +132,36 @@ div.priceslider {
 }
   
 
+.discover--SubmitContainer {
+    width: 100%;
+    height: 50px;
+    display: flex;
+}
+
+.discover--SubmitContainer div.button {
+    width: 50%;
+    min-width: 300px;
+    height: 100%;
+    border: none;
+    border-radius: 4px;
+}
+
+.discover--SubmitContainer div.searchBy-status
+{
+    display: flex;
+    width: 50%;
+    min-width: 300px;
+    height: 100%;
+    margin-bottom: 1rem;
+    transition: all 1s ease 0s;
+    background-color: darkgray;
+    color: indigo;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-shadow: black 0.5px 0.5px 0.1px, white -0.5px -0.5px 0.1px, black 0.5px -0.5px 1px, white -0.5px -0.5px 1px;
+    box-shadow: white 1px 1px 1px 1px inset, white -1px -1px 1px 1px inset, black -1px -1px 1px 1px, grey 0px 15px 15px -15px;
+}
+
 /* discover searchByLocation */

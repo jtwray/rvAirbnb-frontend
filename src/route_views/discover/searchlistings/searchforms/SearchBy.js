@@ -86,31 +86,21 @@ export default function SearchBy({
             amenities
           </button>
         </div>
-        <div
-          style={{
-            display: "flex",
-            width: "300px",
-            transition: "all 1s",
-            backgroundColor: "darkgray",
-            color: "indigo",
-            borderRadius: "5px",
-            textAlign: "center",
-            fontSize: "2.5rem",
-            fontWeight: "800",
-            textShadow: ` .5px .5px 0.1px black,
-            -.5px -.5px  .1px white,
-            .5px -.5px 1px black,
-            -.5px -.5px  1px white`,
-            boxShadow:
-              "inset 1px 1px 1px 1px white,inset -1px -1px 1px 1px white,-1px -1px 1px 1px black,0px 15px 15px -15px grey",
-            marginBottom: "1rem",
-          }}
-        >
-          <h2 style={{ width: "125px", textAlign: "left", padding: "0 1rem" }}>
-            search by:
-          </h2>
-
-          <p> - {searchBy} - </p>
+        <div className="discover--SubmitContainer" >
+        <div className="discover--SubmitContainer searchBy-status" >
+            <h2
+              style={{ width: "125px", textAlign: "left", padding: "0 1rem" }}
+            >
+              search by:
+            </h2>
+            <p> - {searchBy} - </p>
+          </div>
+          <div className="button">
+            <button type="submit" disabled={isLoading}>
+              find listings!
+              {isLoading && <span>{<LoadingClackers />} </span>}
+            </button>
+          </div>
         </div>
         <form
           onChange={(e) =>
@@ -129,13 +119,6 @@ export default function SearchBy({
             setSubmitting(false);
           })}
         >
-          {" "}
-          <div className="button">
-            <button type="submit" disabled={isLoading}>
-              find listings!
-              {isLoading && <span>{<LoadingClackers />} </span>}
-            </button>
-          </div>
           {searchBy === "dates" ? (
             <CalendarRangePicker
               searchTerms={searchTerms}
