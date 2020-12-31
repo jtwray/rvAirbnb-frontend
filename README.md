@@ -1,15 +1,20 @@
-
-[![Maintainability](https://api.codeclimate.com/v1/badges/5a502ca580cc32e02669/maintainability)](https://codeclimate.com/github/jtwray/rvAirbnb-frontend/maintainability)
-
-[![Test Coverage](https://api.codeclimate.com/v1/badges/5a502ca580cc32e02669/test_coverage)](https://codeclimate.com/github/jtwray/rvAirbnb-frontend/test_coverage)
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/bd488fb9-adc8-47a8-be7f-4f6d9b76e638/deploy-status)](https://app.netlify.com/sites/rvadventures/deploys)
 # RVENTURE
+_________________
+| build    | status  |
+|----------|---------|
+| frontend |   [![Netlify Status](https://api.netlify.com/api/v1/badges/bd488fb9-adc8-47a8-be7f-4f6d9b76e638/deploy-status)](https://app.netlify.com/sites/rvadventures/deploys) |
+| backend | [![Heroku App Status](http://heroku-shields.herokuapp.com/rvadventures)](https://rvadventures.herokuapp.com) |
+| analysis| scores|
+| test coverage   |   [![Test Coverage](https://api.codeclimate.com/v1/badges/5a502ca580cc32e02669/test_coverage)](https://codeclimate.com/github/jtwray/rvAirbnb-frontend/test_coverage) |
+| maintainability| [![Maintainability](https://api.codeclimate.com/v1/badges/5a502ca580cc32e02669/maintainability)](https://codeclimate.com/github/jtwray/rvAirbnb-frontend/maintainability)|
 
- You can find the deployed backend at [backend](https://www.rventure.herokuapp.com).
- You can find the deployed frontend at [W.I.P](https://www.rventure.herokuapp.com).
+__________________________________
+ You can find the deployed backend at [backend](https://rvadventures.herokuapp.com).
+ 
+ You can find the deployed frontend at [W.I.P](https://rvadventures.netlify.app/).
 
 
+__________________________________
 
 ## Project Overview
 
@@ -20,6 +25,8 @@ By using 5th wheel Airbnb,
   - 💑  RV owners get access to use these previously unknown/unavailable sites, 🏞🚌
   - 💰 and Landowners get to cash-in on otherwise dormant or underutilized land/>
   
+  ______________________________
+
 ## Key Features
 rVenture a mobile app for end users, and Two Dashboard views accessible by authenticated and authorized users. 
 #### The Landowner Dashboard 
@@ -34,6 +41,7 @@ rVenture a mobile app for end users, and Two Dashboard views accessible by authe
  - your current and next assignment details viewable
 
  
+_______________________________________
 
 ## Tech Stack
 React | Redux | ReactRouter V4 | Netlify | Formik | Yup | Axios | JWT | Material UI | Styled-Componenets
@@ -66,9 +74,14 @@ React | Redux | ReactRouter V4 | Netlify | Formik | Yup | Axios | JWT | Material
 -    Implements the SQL standard very well.
 -    Completely open source.
 -    It supports lots of advanced data types, such as (multi-dimensional) arrays, user-defined types, etc.
+_____________________________
+## Testing
 
+### 1️⃣ [Jest](https://jestjs.io/) ![Jest](https://img.shields.io/badge/jest-v4.2.4-red.svg)
+-   Jest is a JavaScript Testing Framework with a focus on simplicity. It works with projects using: Babel, TypeScript, Node, React, Angular, Vue and more!
+_____________________________
 
-# APIs
+## APIs
 ##### the HERE and UnSplash api both require environment variables to be created in the .env file of this project
 
 - there are some links here to get you started
@@ -103,7 +116,9 @@ REACT_APP_API_KEY_= your-randomized-api-key-from-unsplash-goes-here-noquotes
 ## 3️⃣ BOM Browser Object Model & geolocation api 
   This api integrates with the skyscanner-flight-search allowing the user to find and store their home airport by latitude and longitude coordinates available through the current browser session on the user's device. 
 
-# Environment Variables
+______________________________
+
+## Environment Variables
 
 In order for the app to function correctly, the user must set up their own environment variables; 
 Either in their local path
@@ -116,21 +131,17 @@ The .env file could contain the following ( no spaces | no <>'s | no "quotes" ):
 - REACT_APP_UNSPLASH_API_:<your registered access token with the UnSplash Platform>
 - REACT_APP_HERE_API_:<your registered access key with HERE platform>
 
-
-# Testing
-
-## 1️⃣ [Jest](https://jestjs.io/) ![Jest](https://img.shields.io/badge/jest-v4.2.4-red.svg)
--   Jest is a JavaScript Testing Framework with a focus on simplicity. It works with projects using: Babel, TypeScript, Node, React, Angular, Vue and more!
+_______________________________
 
 
-# Installation Instructions
+## Installation Instructions
 
 * Clone this repo
 * run `yarn install` to install all required dependencies
 * run `yarn start` to start the local server
 
 
-## Other Scripts
+### Other Scripts
 
 * start - ***"react-scripts start",*** starts the production server after a build is created
 * build - ***"react-scripts build",*** creates a build of the application
@@ -138,14 +149,15 @@ The .env file could contain the following ( no spaces | no <>'s | no "quotes" ):
 * eject - ***"react-scripts eject",*** copy the configuration files and dependencies into the project so you have full control over them
 * coverage - ***"CI=true yarn test --coverage --watchAll=false || true"*** refers to how much of your app code is covered by unit tests
 
+________________________________________
 
-# Contributing
+## Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
 
 Please note we have a [code of conduct](./CODE_OF_CONDUCT.md). Please follow it in all your interactions with the project.
 
-## Issue/Bug Request
+### Issue/Bug Request
    
  **If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
  - Check first to see if your issue has already been reported.
