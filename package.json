@@ -43,9 +43,19 @@
   "devDependencies": {
     "msw": "^0.24.1"
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/stories/",
+      "<rootDir>/node_modules/"
+    ]
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "rm -rdf build && react-scripts build && echo '/* /index.html 200' >> build/_redirects",
+    "coverage": "npm test -- --coverage --watchAll=false",
     "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
     "eject": "react-scripts eject"
   },
