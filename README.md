@@ -1,5 +1,5 @@
 # RVENTURE
-_________________
+________________________________________
 | build    | status  |
 |----------|---------|
 | frontend |   [![Netlify Status](https://api.netlify.com/api/v1/badges/bd488fb9-adc8-47a8-be7f-4f6d9b76e638/deploy-status)](https://app.netlify.com/sites/rvadventures/deploys) |
@@ -7,15 +7,11 @@ _________________
 | analysis| scores|
 | test coverage   |   [![Test Coverage](https://api.codeclimate.com/v1/badges/5a502ca580cc32e02669/test_coverage)](https://codeclimate.com/github/jtwray/rvAirbnb-frontend/test_coverage) |
 | maintainability| [![Maintainability](https://api.codeclimate.com/v1/badges/5a502ca580cc32e02669/maintainability)](https://codeclimate.com/github/jtwray/rvAirbnb-frontend/maintainability)|
+|The deployed backend| [API](https://rvadventures.herokuapp.com)|
+ |The deployed frontend| [W.I.P](https://rvadventures.netlify.app/).|
 
-__________________________________
- You can find the deployed backend at [backend](https://rvadventures.herokuapp.com).
- 
- You can find the deployed frontend at [W.I.P](https://rvadventures.netlify.app/).
-
-
-__________________________________
-
+  ______________________________
+  
 ## Project Overview
 
 5th wheel Airbnb is a company that connects land owners and 5th wheel / RV owners. 
@@ -25,7 +21,9 @@ By using 5th wheel Airbnb,
   - 💑  RV owners get access to use these previously unknown/unavailable sites, 🏞🚌
   - 💰 and Landowners get to cash-in on otherwise dormant or underutilized land/>
   
-  ______________________________
+
+__________________________________
+
 
 ## Key Features
 rVenture a mobile app for end users, and Two Dashboard views accessible by authenticated and authorized users. 
