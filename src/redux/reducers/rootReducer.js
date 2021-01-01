@@ -33,11 +33,11 @@ export function rootReducer(state = initialState, action) {
       };
     }
     case SETADDRESS: {
-      console.log("updating address")
+      console.log("updating address",action.payload)
       return {
         ...state,
         isLoading: false,
-        currentAddress: action.payload,
+        currentAddress: action.payload.data.data[0],
       };
     }
     case ERROR:

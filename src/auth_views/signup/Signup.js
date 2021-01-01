@@ -34,7 +34,7 @@ function Signup(props) {
       }}
     >
       <div className="half left image" style={left}></div>
-      <div className="half right form" style={right}>
+      <div className="half right form authform" style={right}>
         <SignupForm signup={props.signup} isLoading={props.isLoading} />
       </div>
     </div>
