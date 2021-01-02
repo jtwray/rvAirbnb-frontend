@@ -8,32 +8,8 @@ import { LoadingClackers } from "../utils/LoadingClackers";
 import { getCoords, updateCoords } from "../redux/actions/index";
 
 function Dashboard(props) {
-  let coordsparsed;
   const { currentGeoLocation, currentAddress, getCoords, updateCoords } = props;
-  let confidence,
-    continent,
-    country_code,
-    county,
-    label,
-    name,
-    locality,
-    postal_code,
-    region;
-
-  if (currentAddress) {
-    let {
-      confidence,
-      continent,
-      country_code,
-      county,
-      label,
-      name,
-      locality,
-      postal_code,
-      region,
-    } = currentAddress;
-  }
-
+ 
   let { latitude, longitude } = currentGeoLocation;
   const [gps, setGps] = useState({ latitude, longitude });
   const [roundedGps, setRoundedGps] = useState();
@@ -58,13 +34,14 @@ function Dashboard(props) {
       .catch((error) => {
         console.error(error);
       });
-    console.log({ roundedGps }, "gotAddresssfromgps");
   }, [roundedGps]);
 
   useEffect(() => {
     latitude && console.log({ gps }, { latitude });
     latitude && getAddressFromGpsCoords();
   }, [gps, latitude]);
+
+
 
   return (
     <div style={{ fontSize: "3rem" }}>
@@ -81,11 +58,12 @@ function Dashboard(props) {
         <>
           <div style={{ fontSize: "2rem" }}>
             current address:
-            {currentAddress && (
+            {
               <>
-                {name} {locality},{region} {postal_code}{" "}
+                {currentAddress?.name} {currentAddress?.locality},
+                {currentAddress?.region} {currentAddress?.postal_code}
               </>
-            )}
+            }
           </div>
           <table style={{ border: "solid 2px indigo" }}>
             <th>geo coords</th>
@@ -97,8 +75,7 @@ function Dashboard(props) {
                   padding: "0px 1px",
                 }}
               >
-                {" "}
-                lat{" "}
+                lat
               </td>
               <td
                 style={{
@@ -107,8 +84,7 @@ function Dashboard(props) {
                   padding: "0px 1px",
                 }}
               >
-                {" "}
-                lon{" "}
+                lon
               </td>
               <td
                 style={{
@@ -146,7 +122,6 @@ function Dashboard(props) {
                   padding: "0px 1px",
                 }}
               >
-                {" "}
                 {currentAddress?.label}
               </td>
             </tr>
