@@ -13,7 +13,7 @@ function Discover(props) {
   const { latitude, longitude } = currentGeoLocation;
   const [searchDates, setSearchDates] = useState();
   const [suggestions, setSuggestions] = useState([]);
-  const [searchResults, setSearchResults] = useState();
+  const [searchResults, setSearchResults] = usegit statusState();
   const [zoom, setZoom] = useState(3);
 
   function handleUpdateSearchDates(e) {
