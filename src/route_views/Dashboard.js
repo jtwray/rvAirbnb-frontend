@@ -10,8 +10,7 @@ import { getCoords, updateCoords } from "../redux/actions/index";
 function Dashboard(props) {
   let coordsparsed;
   const { currentGeoLocation, currentAddress, getCoords, updateCoords } = props;
-  let {
-    confidence,
+  let confidence,
     continent,
     country_code,
     county,
@@ -19,15 +18,28 @@ function Dashboard(props) {
     name,
     locality,
     postal_code,
-    region,
-  } = currentAddress;
+    region;
+
+  if (currentAddress) {
+    let {
+      confidence,
+      continent,
+      country_code,
+      county,
+      label,
+      name,
+      locality,
+      postal_code,
+      region,
+    } = currentAddress;
+  }
 
   let { latitude, longitude } = currentGeoLocation;
   const [gps, setGps] = useState({ latitude, longitude });
   const [roundedGps, setRoundedGps] = useState();
 
   useEffect(() => {
-    if (latitude || currentGeoLocation) {
+    if (latitude && currentGeoLocation) {
       setGps({ latitude, longitude });
       setRoundedGps({
         latitude: latitude.toFixed(9),
@@ -105,7 +117,7 @@ function Dashboard(props) {
                   padding: "0px 1px",
                 }}
               >
-        address
+                address
               </td>
             </tr>
             <tr>
@@ -116,7 +128,6 @@ function Dashboard(props) {
                   padding: "0px 1px",
                 }}
               >
- 
                 {currentGeoLocation?.latitude}
               </td>
               <td
@@ -126,7 +137,6 @@ function Dashboard(props) {
                   padding: "0px 1px",
                 }}
               >
- 
                 {currentGeoLocation?.longitude}
               </td>
               <td
