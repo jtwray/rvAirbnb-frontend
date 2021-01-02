@@ -72,7 +72,7 @@
   }, 
   "scripts": {
     "start": "craco start",
-    "build": "rm -rdf build && craco build && echo '/* /index.html 200' >> build/_redirects",
+    "build": "craco build",
     "test": "craco test --env=jest-environment-jsdom-sixteen",
     "eject": "react-scripts eject",
     "prettier": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
