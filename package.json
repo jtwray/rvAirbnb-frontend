@@ -1,9 +1,9 @@
 {
   "name": "react",
-  "version": "1.0.0",
-  "private": false,
-  "license": "MIT",
-  "repository": "github:jtwrays/rvAirbnb-frontend",
+  "version": '1.0.0",
+  "private":false,
+  "license":"MIT",
+  "repository":"github:jtwray/rvAirbnb-frontend",
   "description": "rventure2020",
   "keywords": [
     "react",
