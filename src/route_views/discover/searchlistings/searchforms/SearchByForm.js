@@ -7,7 +7,12 @@ import RangeSlider from "../../../../utils/RangeSlider.js";
 
 import "./SearchByForm.css";
 
-export default function SearchByForm() {
+export default function SearchByForm(props,{  setSearchResults,
+    searchResults,
+    searchDates,
+    isLoading,
+    currentLocation,}) {
+        console.log({props})
   const buttonsStyle = {
     width: "500px",
     margin: "0 auto",
@@ -17,8 +22,8 @@ export default function SearchByForm() {
     alignItems: "center",
   };
 
-  const [searchBy, setSearchBy] = useState();
-  const [searchTerms, setSearchTerms] = useState();
+  const [searchBy, setSearchBy] = useState('currentLocation');
+  const [searchTerms, setSearchTerms] = useState(currentLocation);
   const [searchLocationOption, setSearchLocationOption] = useState();
   const { register, handleSubmit, formState } = useForm();
 
@@ -30,7 +35,7 @@ export default function SearchByForm() {
       .forEach((btn) => btn.classList.remove("active"));
     e.target.classList.add("active");
   };
-  
+
   const handleLocationSearchOption = (e, option) => {
     e.preventDefault();
     setSearchLocationOption(option);
@@ -154,7 +159,7 @@ export default function SearchByForm() {
         ""
       )}
       {searchBy === "price" ? (
-        <div>
+        <div className="priceRangeContainer">
           <h2> Set Price Range</h2>
           <RangeSlider
             setSearchTerms={setSearchTerms}
