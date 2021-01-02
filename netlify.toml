@@ -1,7 +1,7 @@
   
 [build]
   publish = "./build"
-  command = "CI= npm run build"
+  command = "CI= craco build"
 [[redirects]]
   from = "/*"
   to = "/index.html"
