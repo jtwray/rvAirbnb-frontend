@@ -1,4 +1,4 @@
-import react, { useEffect } from "react";
+import React, { useEffect } from "react";
 import Slider from "react-smooth-range-input";
 
 const RangeSlider = ({
@@ -7,14 +7,13 @@ const RangeSlider = ({
   max,
   searchTerms,
   setSearchTerms,
-  labelstyle,
   label,
-  classname,
+  classname
 }) => {
   function removeSliderFromLabelText(labelText) {
     return [
       labelText.split("_").splice(0, 2).join(" "),
-      labelText.split("_").splice(0, 2).join("_"),
+      labelText.split("_").splice(0, 2).join("_")
     ];
   }
 
