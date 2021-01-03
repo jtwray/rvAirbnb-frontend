@@ -7,12 +7,11 @@ import RangeSlider from "../../../../utils/RangeSlider.js";
 
 import "./SearchByForm.css";
 
-export default function SearchByForm(props,{  setSearchResults,
-    searchResults,
-    searchDates,
-    isLoading,
-    currentLocation,}) {
-        console.log({props})
+export default function SearchByForm(
+  props,
+  { setSearchResults, searchResults, searchDates, isLoading, currentLocation }
+) {
+  console.log({ props });
   const buttonsStyle = {
     width: "500px",
     margin: "0 auto",
@@ -22,7 +21,7 @@ export default function SearchByForm(props,{  setSearchResults,
     alignItems: "center",
   };
 
-  const [searchBy, setSearchBy] = useState('currentLocation');
+  const [searchBy, setSearchBy] = useState("currentLocation");
   const [searchTerms, setSearchTerms] = useState(currentLocation);
   const [searchLocationOption, setSearchLocationOption] = useState();
   const { register, handleSubmit, formState } = useForm();

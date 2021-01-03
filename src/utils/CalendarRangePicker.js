@@ -6,19 +6,15 @@ import "react-nice-dates/build/style.css";
 export default function CalendarRangePicker({ searchTerms, setSearchTerms }) {
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
+
   useEffect(() => {
     if (startDate && endDate) {
       setSearchTerms({
         start_date: startDate?.toISOString().split("T")[0],
         end_date: endDate?.toISOString().split("T")[0],
       });
-      console.log(
-        "satrtDate.toISOstring().split('T')[0]",
-        startDate.toISOString().split("T")[0]
-      );
     }
   }, [endDate]);
-  console.log({ searchTerms });
   return (
     <DateRangePicker
       startDate={startDate}

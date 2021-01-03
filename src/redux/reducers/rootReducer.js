@@ -1,4 +1,11 @@
-import { START, ERROR, LOGIN_SUCCESS, SIGNUP_SUCCESS,UPDATE_GEOCOORDS,SETADDRESS } from "../actions";
+import {
+  START,
+  ERROR,
+  LOGIN_SUCCESS,
+  SIGNUP_SUCCESS,
+  UPDATE_GEOCOORDS,
+  SETADDRESS,
+} from "../actions";
 import { initialState } from "../store";
 
 export function rootReducer(state = initialState, action) {

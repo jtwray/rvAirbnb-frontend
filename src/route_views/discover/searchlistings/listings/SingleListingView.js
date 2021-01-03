@@ -3,10 +3,7 @@ import { useParams } from "react-router-dom";
 import CalendarRangePicker from "../../../../utils/CalendarRangePicker";
 
 export default function SingleListingView(props) {
-  console.log("LINE | #5 | 🎈 PROPS SINGLELISTINGVIEW", { props });
-  console.log("props.match.params", props.match.params);
   const params = useParams();
-  console.log({ params });
   const { listing } = props.location.state;
   const { title, price, photo } = listing;
   return (
