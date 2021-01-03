@@ -25,7 +25,6 @@ export function rootReducer(state = initialState, action) {
       };
     }
     case UPDATE_GEOCOORDS: {
-      console.log("updating coords")
       return {
         ...state,
         isLoading: false,
@@ -33,7 +32,6 @@ export function rootReducer(state = initialState, action) {
       };
     }
     case SETADDRESS: {
-      console.log("updating address",action.payload)
       return {
         ...state,
         isLoading: false,

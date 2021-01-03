@@ -37,3 +37,56 @@ export default function DateForm() {
     </>
   );
 }
+// {searchLocation === "" ? "" : 
+// searchLocation === "zip" ? (
+//   ""
+// ) : (
+//   <div>
+//     <div>
+//       {dirtyFields.searchLocation ? (
+//         <label className="isDirty" htmlFor="searchLocation">
+//           location
+//         </label>
+//       ) : (
+//         <label htmlFor="searchLocation">location</label>
+//       )}
+//       <input
+//         autoComplete="off"
+//         type="text"
+//         name="searchLocation"
+//         id="searchLocation"
+//         value={searchTerms.searchLocation}
+//         ref={register({ required: "required" })}
+//       />
+//       {errors.searchLocation ? <p>location required</p> : null}
+//     </div>
+//     {/**
+//      *
+//      * input searchLocation  ☝🏻⬆🔼
+//      *
+//      *
+//      * input searchWithinRange 👇🏻🔽⬇
+//      *
+//      */}
+//     <div>
+//       {dirtyFields.searchWithinRange ? (
+//         <label className="isDirty" htmlFor="searchWithinRange">
+//           within
+//         </label>
+//       ) : (
+//         <label htmlFor="searchWithinRange">within</label>
+//       )}
+//       <input
+//         autoComplete="off"
+//         type="text"
+//         name="searchWithinRange"
+//         id="searchWithinRange"
+//         value={searchTerms.searchWithinRange}
+//         ref={register({ required: "required" })}
+//       />
+//       {errors.searchWithinRange ? (
+//         <p>search radius required</p>
+//       ) : null}
+//     </div>
+//   </div>
+// )}

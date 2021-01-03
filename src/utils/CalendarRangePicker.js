@@ -10,7 +10,7 @@ export default function CalendarRangePicker({ searchTerms, setSearchTerms }) {
     if (startDate && endDate) {
       setSearchTerms({
         start_date: startDate?.toISOString().split("T")[0],
-        end_date: endDate?.toISOString().split("T")[0]
+        end_date: endDate?.toISOString().split("T")[0],
       });
       console.log(
         "satrtDate.toISOstring().split('T')[0]",
@@ -54,22 +54,4 @@ export default function CalendarRangePicker({ searchTerms, setSearchTerms }) {
       )}
     </DateRangePicker>
   );
-}
-
-{
-  /**
-
-step1:
-logout startDate and endDate to console
-step2:
-save to a state OBject
-step3:
-makesure its in the correct format to go to backend yyyymmdd
-step4:
-pass the stateoBject to the backend function
-step5:
-setup insubmit button to all axiosWithAUth to backend server with stateobject
-
-
-*/
 }
