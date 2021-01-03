@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import ReactMapGL, { Marker, Popup,LinearInterpolator, FlyToInterpolator } from "react-map-gl";
 import { LoadingClackers } from "../../utils/LoadingClackers";
 import { connect } from "react-redux";
 import { ReactComponent as RV_Site_Marker } from "../../images/rv_site_marker.svg";
@@ -9,8 +9,11 @@ function MapBox(props) {
     latitude: props.currentGeoLocation.latitude || 50,
     longitude: props.currentGeoLocation.longitude || 50,
     width: "50vw",
-    height: "100vw",
+    height: "100vh",
     zoom: 1,
+    transitionDuration: 500,
+    transitionInterpolator: new FlyToInterpolator(),
+ 
   });
   const [selectedListing, setSelectedListing] = useState(null);
 
@@ -32,7 +35,12 @@ function MapBox(props) {
         {...viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         onViewportChange={(viewport) => {
-          setViewport(viewport);
+          setViewport({
+            ...viewport,
+            transitionDuration: 500,
+            transitionInterpolator: new FlyToInterpolator(),
+       
+          });
         }}
       >
         {props.listings ? (

@@ -5,65 +5,21 @@ import Listings from "./searchlistings/listings/Listings";
 import SuggestedListings from "./suggested_listings/SuggestedListings";
 import { LoadingClackers } from "../../utils/LoadingClackers";
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
+import SearchBy from "./searchlistings/searchforms/SearchBy";
 import MapBox from "./MapBox";
 
 function Discover(props) {
-  const { currentGeoLocation } = props;
+  const { currentGeoLocation,isLoading } = props;
   const { latitude, longitude } = currentGeoLocation;
-  const [searchTerms, setSearchTerms] = useState();
+  const [searchDates, setSearchDates] = useState();
   const [suggestions, setSuggestions] = useState([]);
   const [searchResults, setSearchResults] = useState();
-  const [map, setMap] = useState();
-  const [parameters, setParameters] = useState();
-  const [maptype, setMaptype] = useState("roadmap");
-  const [mapQuery, setMapQuery] = useState();
   const [zoom, setZoom] = useState(3);
 
-  {
-    /**import the slider to allow zoom adjustments or just a + / - buttons set*/
-  }
-  {
-    /** maptype= roadmap or satellite*/
-  }
-  useEffect(() => {
-    setMapQuery("hospital");
-  }, []);
-  useEffect(() => {
-    setParameters(
-      `${mapQuery}&center=${
-        (latitude, longitude)
-      }&zoom=${zoom}&maptype=${maptype}`
-    );
-  }, [mapQuery, zoom, maptype, currentGeoLocation]);
-
-  useEffect(() => {
-    setMap(
-      (parameters) =>
-        `https://www.google.com/maps/embed/v1/search?key=${process.env.REACT_APP_GOOGLE_API}&q=${parameters}`
-    );
-    //    setMap( `https://www.google.com/maps/embed/v1/view?key=${process.env.REACT_APP_GOOGLE_API}&center=${latitude},${longitude}&zoom=${zoom}&maptype=satellite`)
-  }, [parameters]);
-
-  function handleSubmitSearch(event, searchTerms, searchOptions) {
-    event.preventDefault();
-    axios
-      .get(`http://localhost:8001/api/listing/searchlistings`, { searchTerms })
-      .then((res) => setSearchResults(res.data))
-      .catch((error) => console.error(error));
-  }
-
-  function handleSubmit(event, searchTerms, searchOptions) {
-    event.preventDefault();
-    axios
-      .get(`http://localhost:8001/api/listing/searchlistings`, { searchTerms })
-      .then((res) => setSearchResults(res.data.listings))
-      .catch((error) => console.error(error));
-  }
-
-  function handleUpdateSearchTerms(e) {
+  function handleUpdateSearchDates(e) {
     e.preventDefault();
-    setSearchTerms(e.target.value);
-    console.log({ searchTerms });
+    setSearchDates(e.target.value);
+    console.log({ searchDates });
   }
 
   useEffect(() => {
@@ -81,6 +37,8 @@ function Discover(props) {
         <h1>Discover an Adventure</h1>
       </div>
       <div>"search and filters"</div>
+
+{/**<!---- ⬇  |- searchBy component |  ---!>*/}
       <div
         style={{
           width: "100%",
@@ -90,48 +48,34 @@ function Discover(props) {
           display: "flex",
         }}
       >
-        <form onSubmit={handleSubmit} style={{ position: "unset" }}>
-          <label htmlFor="searchTerms">discover an adventure</label>
-          <input
-            type="text"
-            name="searchTerms"
-            id="searchTerms"
-            value={searchTerms || ""}
-            onChange={(e) => handleUpdateSearchTerms(e)}
-          />
 
-          <button
-          // onSubmit={(e) => {
-          //   handleSubmitSearch(e, searchTerms);
-          // }}
-          ></button>
-        </form>
+        <SearchBy
+          setSearchResults={setSearchResults}
+          searchResults={searchResults}
+          searchDates={searchDates}
+          isLoading={isLoading}
+        />
       </div>
+
+{/**<!---- ⬇  |-searchResults  cond`t`l|  ---!>*/}
       <div style={{ width: "100%", display: "flex" }}>
         <section style={{ width: "50%" }}>
-          {searchResults !== null &&
-          searchResults !== undefined &&
-          searchResults.length > 0 ? (
-            <Listings searchResults={searchResults} />
+          {searchResults?.length > 0 ? (
+            <div>{console.log("searchresults",searchResults)}
+              <h2>!!search results!!</h2>
+              <Listings listings={searchResults} />
+            </div>
           ) : (
             <LoadingClackers />
           )}
         </section>
         <section style={{ width: "50%" }}>
-          <div id="capa"></div>
-          <section className="mapContainer"></section>
-          {/* {map && (
-            <iframe
-              width="450"
-              height="250"
-              
-              src={map}
-            />
-          )} */}
-
-          <MapBox listings={suggestions} />
+          <MapBox listings={searchResults||suggestions} />
         </section>
       </div>
+{/**<!----| ⬆    |-searchResults cond`t`l   |---!>*/}
+
+{/**<!----| ⬇   |-suggestions cond`t`l     |---!>*/}
       {suggestions ? (
         <section
           id="suggestions"
@@ -155,10 +99,11 @@ function Discover(props) {
       ) : (
         <LoadingClackers />
       )}
+{/**<!---| ⬆  |-suggestions cond`t`l  |---!>*/}
     </div>
   );
 }
 function mapState(state) {
-  return { currentGeoLocation: state.currentGeoLocation };
+  return { currentGeoLocation: state.currentGeoLocation,isLoading:state.isLoading };
 }
 export default connect(mapState, {})(Discover);
