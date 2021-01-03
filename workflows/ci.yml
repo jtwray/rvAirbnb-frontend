@@ -1,49 +1,26 @@
 name: build
 on:
   push:
-    branches:
-      - master
-    tags:
-      - '!*' # Do not execute on tags
-    paths:
-      - src/*
-      - test/*
-      - '*.json'
-      - yarn.lock
+    branches: [main]
   pull_request:
-    paths:
-      - '!*.MD'
+    branches: [main]
 jobs:
-  test:
-    strategy:
-      matrix:
-        platform: [ ubuntu-latest, macOS-latest ]
-        node: [ '12', '10' ]
-    name: test/node ${{ matrix.node }}/${{ matrix.platform }}
-    runs-on: ${{ matrix.platform }}
-    steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-node@master
-      with:
-        node-version: ${{ matrix.node }}
-    - run: npm install -g yarn
-    - run: yarn install
-    - run: yarn build
-    - run: yarn test
   coverage:
-    needs: [ test ]
-    name: coverage
+    name: Test and Publish Coverage
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-node@master
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
       with:
         node-version: '12'
-    - run: npm install -g yarn
-    - run: yarn install
-    - run: yarn build
-    - uses: paambaati/codeclimate-action@v2.2.4
+    - run: npm install
+    - run: cp .env.sample .env  
+    - uses: paambaati/codeclimate-action@v2.6.0
       env:
         CC_TEST_REPORTER_ID: e6377f3ac429229d3c7fa4b815d4827f1ed8112a32e4624e9d776acb018f8821
       with:
-        coverageCommand: yarn coverage
+          coverageCommand: npm run coverage
+          # By default, this looks for a `coverage` folder in the root of your project, but you may need to change this
+          coverageLocations: './coverage/clover.xml:clover'
+          # Great for troubleshooting
+          debug: true

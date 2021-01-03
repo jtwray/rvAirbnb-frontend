@@ -9,6 +9,11 @@ ________________________________________
 | maintainability| [![Maintainability](https://api.codeclimate.com/v1/badges/5a502ca580cc32e02669/maintainability)](https://codeclimate.com/github/jtwray/rvAirbnb-frontend/maintainability)|
 |The deployed backend| [API](https://rvadventures.herokuapp.com)|
  |The deployed frontend| [W.I.P](https://rvadventures.netlify.app/).|
+ 
+ 
+ ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
+![React](https://img.shields.io/badge/react-v17.0.1-blue.svg)
+![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)
 
   ______________________________
   
