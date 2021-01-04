@@ -1,0 +1,36 @@
+name: build
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  coverage:
+    name: Test and Publish Coverage
+    command: |
+    ./cc-test-reporter before-build
+    npm run test
+    ./cc-test-reporter upload-coverage --debug -i codeclimate.total.json
+    ./cc-test-reporter after-build --debug -t lcov --exit-code $?
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+    - uses: actions/setup-node@main
+      with:
+        node-version: '12'
+    - run: npm install
+    - run: npm run test
+    - run: cp .env.sample .env  
+    - uses: paambaati/codeclimate-action@v2.7.2
+      env:
+        CC_TEST_REPORTER_ID: e6377f3ac429229d3c7fa4b815d4827f1ed8112a32e4624e9d776acb018f8821
+      with:
+          coverageCommand: npm run coverage
+          # By default, this looks for a `coverage` folder in the root of your project, but you may need to change this
+          coverageLocations: './coverage/clover.xml:clover'
+          # Great for troubleshooting
+          debug: true
+
+
+
+          
