@@ -52,10 +52,10 @@ function Login(props) {
         className="half left image"
         style={{
           ...left,
-          backgroundImage: `url(${image || bgImage})`,
+          backgroundImage: `url(${bgImage})`,
         }}
       ></div>
-      <div className="half right form" style={right}>
+      <div className="half right form authform" style={right}>
         <LoginForm login={props.login} isLoading={props.isLoading}/>
       </div>
     </div>

@@ -9,7 +9,7 @@ body {
   padding: 0;
 }
 /* auth forms -login/signup- & form children-->labels & inputs */
-form {
+.authform form {
   width: 100%;
   height: 60%;
   display: flex;
@@ -18,23 +18,23 @@ form {
 }
 /* input_label_animation  |placeholder_text to border_text| 
 on-focus & if input has value */
-label {
+.authform label {
   position: absolute;
   background: white;
   transform: translate3d(15px, 10px, 0px);
   transition: all 0.3s ease-in-out;
   font-size: 1.5rem;
 }
-input {
+.authform input {
   padding: 1rem 2rem;
   border-radius: 4px;
   width: 100%;
 }
-div.input {
+.authform div.input {
   width: 90%;
 }
-div.input:focus-within label,
-label.isDirty {
+.authform div.input:focus-within label,
+.authform label.isDirty {
   position: absolute;
   transform: translate3d(25px, -3px, 0px);
   transition: all 0.3s ease-in-out;
@@ -43,20 +43,20 @@ label.isDirty {
   background: white;
   color: indigo;
 }
-div.input:focus-within {
+.authform  div.input:focus-within {
   border: 0.1rem solid indigo;
   border-radius: 4px;
 }
-form:last-child {
+.authform  form:last-child {
   text-align: left;
 }
 
 /* form checkbox(terms/remember me) & label */
-div.termsContainer {
+.authform  div.termsContainer {
   width: 90%;
 }
 
-input#terms {
+.authform  input#terms {
   width: auto;
   width: 20px;
   height: auto;
@@ -64,7 +64,7 @@ input#terms {
   height: 20px;
 }
 
-input[type="checkbox"] + label {
+.authform  input[type="checkbox"] + label {
   border: none;
   background: initial;
   margin: 1rem;
@@ -72,12 +72,12 @@ input[type="checkbox"] + label {
   vertical-align: middle;
 }
 /* form button */
-div.button {
+.authform  div.button {
   width: 90%;
   border: 1px solid red;
   border-radius: 4px;
 }
-button {
+.authform  button {
   width: 100%;
   background: indigo;
   color: snow;
@@ -87,7 +87,7 @@ button {
 }
 /* the lock pink on signup -->TODO: onclick allows register with google/firebase/phone#/auth2 etc */
 
-MuiSvgIcon-root {
+.authform  MuiSvgIcon-root {
   fill: currentColor;
   width: 1em;
   height: 1em;

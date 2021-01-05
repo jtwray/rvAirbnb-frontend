@@ -9,7 +9,7 @@ import SearchBy from "./searchlistings/searchforms/SearchBy";
 import MapBox from "./MapBox";
 
 function Discover(props) {
-  const { currentGeoLocation,isLoading } = props;
+  const { currentGeoLocation, isLoading } = props;
   const { latitude, longitude } = currentGeoLocation;
   const [searchDates, setSearchDates] = useState();
   const [suggestions, setSuggestions] = useState([]);
@@ -32,24 +32,17 @@ function Discover(props) {
   let styleOBJ_suggested_listings = {};
 
   return (
-    <div style={{ fontSize: "3rem" }}>
-      <div>
+    <div className="discover--MainContainer" style={{ fontSize: "3rem" }}>
+      <div className="discover--MainContainer header">
         <h1>Discover an Adventure</h1>
       </div>
-      <div>"search and filters"</div>
 
-{/**<!---- ⬇  |- searchBy component |  ---!>*/}
+      {/**<!---- ⬇  |- searchBy component |  ---!>*/}
       <div
-        style={{
-          width: "100%",
-          height: "300px",
-          border: "solid 4px aqua",
-          fontSize: "20px",
-          display: "flex",
-        }}
+        className="discover--MainContainer searchBy"
       >
-
         <SearchBy
+          currentLocation={currentGeoLocation}
           setSearchResults={setSearchResults}
           searchResults={searchResults}
           searchDates={searchDates}
@@ -57,11 +50,15 @@ function Discover(props) {
         />
       </div>
 
-{/**<!---- ⬇  |-searchResults  cond`t`l|  ---!>*/}
-      <div style={{ width: "100%", display: "flex" }}>
+      {/**<!---- ⬇  |-searchResults  cond`t`l|  ---!>*/}
+      <div
+        className="discover--MainContainer searchResults"
+        style={{ width: "100%", display: "flex" }}
+      >
         <section style={{ width: "50%" }}>
           {searchResults?.length > 0 ? (
-            <div>{console.log("searchresults",searchResults)}
+            <div>
+              {console.log("searchresults", searchResults)}
               <h2>!!search results!!</h2>
               <Listings listings={searchResults} />
             </div>
@@ -70,14 +67,15 @@ function Discover(props) {
           )}
         </section>
         <section style={{ width: "50%" }}>
-          <MapBox listings={searchResults||suggestions} />
+          <MapBox listings={searchResults || suggestions} />
         </section>
       </div>
-{/**<!----| ⬆    |-searchResults cond`t`l   |---!>*/}
+      {/**<!----| ⬆    |-searchResults cond`t`l   |---!>*/}
 
-{/**<!----| ⬇   |-suggestions cond`t`l     |---!>*/}
+      {/**<!----| ⬇   |-suggestions cond`t`l     |---!>*/}
       {suggestions ? (
         <section
+          className="discover--MainContainer Suggestions"
           id="suggestions"
           style={{
             height: "500px",
@@ -99,11 +97,14 @@ function Discover(props) {
       ) : (
         <LoadingClackers />
       )}
-{/**<!---| ⬆  |-suggestions cond`t`l  |---!>*/}
+      {/**<!---| ⬆  |-suggestions cond`t`l  |---!>*/}
     </div>
   );
 }
 function mapState(state) {
-  return { currentGeoLocation: state.currentGeoLocation,isLoading:state.isLoading };
+  return {
+    currentGeoLocation: state.currentGeoLocation,
+    isLoading: state.isLoading,
+  };
 }
 export default connect(mapState, {})(Discover);
