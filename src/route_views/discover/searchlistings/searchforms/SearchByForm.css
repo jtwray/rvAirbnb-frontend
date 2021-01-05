@@ -151,3 +151,7 @@ input[type="button"]:active,
   border-bottom: 0.2rem solid white;
 }
 
+div.priceslider {
+  /* width: 45%; */
+  /* display: flex; */
+}
