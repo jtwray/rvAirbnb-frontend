@@ -115,7 +115,7 @@ export default function LoginForm(props) {
         style={{
           display: "flex",
           width: "90%",
-          justifyContent: "center"
+          justifyContent: "flex-end"
         }}
       >
         <p

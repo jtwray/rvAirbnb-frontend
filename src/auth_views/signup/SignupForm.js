@@ -136,7 +136,6 @@ export default function SignupForm(props) {
         className="footerLinks--sigunupform"
         style={{
           display: "flex",
-          border: "solid black .2rem",
           width: "90%",
           justifyContent: "flex-end"
         }}

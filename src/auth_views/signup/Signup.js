@@ -9,7 +9,7 @@ const left = {
   height: "100%",
   backgroundImage: "url(https://source.unsplash.com/random)",
   backgroundSize: "cover",
-  backgroundPosition: "center",
+  backgroundPosition: "center"
 };
 const right = {
   display: "flex",
@@ -18,7 +18,7 @@ const right = {
   alignItems: "center",
   width: "50%",
   height: "100%",
-  boxShadow: "-1px 0px 5px .2px black",
+  boxShadow: "-1px 0px 5px .2px black"
 };
 
 function Signup(props) {
@@ -29,8 +29,8 @@ function Signup(props) {
         width: "100%",
         height: "99vh",
         padding: "0",
-        border: "red solid 1rem",
-        fontSize: "3rem",
+        border: " #f50057 solid .5rem",
+        fontSize: "3rem"
       }}
     >
       <div className="half left image" style={left}></div>
