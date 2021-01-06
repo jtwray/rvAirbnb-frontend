@@ -19,7 +19,13 @@ export default function SignupForm(props) {
 
   const history = useHistory();
   const classes = useStyles();
-
+  const authFormSTYLE = {
+    fontSize: "4rem",
+    margin: "0 auto",
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center"
+  };
   return (
     <>
       <Avatar className={classes.avatar}>
@@ -27,7 +33,7 @@ export default function SignupForm(props) {
       </Avatar>
       Nice To Meet You!
       <form
-        style={{ fontSize: "4rem" }}
+        style={{ ...authFormSTYLE, fontSize: "4rem" }}
         onSubmit={handleSubmit(async (formData) => {
           if (submitting) {
             return false;

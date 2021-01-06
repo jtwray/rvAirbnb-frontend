@@ -31,14 +31,14 @@ function App(props) {
       <div className="App">
         {/* {props.error && alert(props.error)} */}
         {/* <PrivateRoute exact path="/*" component={Dashboard} /> */}
-        <Route exact path="/" component={Dashboard} />
-        <Route path="/home" component={Dashboard} />
-        <Route path="/home/discover" component={Discover} />
-        <Route path="/home/messages" component={Messages} />
-        <Route path="/home/mytrips" component={Mytrips} />
-        <Route path="/home/profile" component={Profile} />
+        <PrivateRoute exact path="/" component={Dashboard} />
+        <PrivateRoute path="/home" component={Dashboard} />
+        <PrivateRoute path="/home/discover" component={Discover} />
+        <PrivateRoute path="/home/messages" component={Messages} />
+        <PrivateRoute path="/home/mytrips" component={Mytrips} />
+        <PrivateRoute path="/home/profile" component={Profile} />
 
-        <Route
+        <PrivateRoute
           exact
           path="/home/listings/:listingID"
           component={SingleListingView}
