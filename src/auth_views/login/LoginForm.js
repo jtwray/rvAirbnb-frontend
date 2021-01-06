@@ -97,8 +97,16 @@ export default function LoginForm(props) {
         </div>
         <div className="button">
           <button type="submit" disabled={props.isLoading}>
-            Login
-            {props.isLoading && <span>{<LoadingClackers />} </span>}
+            {!props.isLoading ? (
+              "Login"
+            ) : (
+              <span>
+                <LoadingClackers
+                  style={{ transform: " scale(0.25)", fontSize: "10rem" }}
+                  message={"logging in"}
+                />
+              </span>
+            )}
           </button>
         </div>
       </form>

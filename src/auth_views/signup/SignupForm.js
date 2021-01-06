@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Avatar } from "@material-ui/core";
 import { useStyles } from "../../utils/useStyles";
+import { LoadingClackers } from "../../utils/LoadingClackers";
 
 export default function SignupForm(props) {
   const { register, handleSubmit, errors, formState } = useForm({
@@ -118,7 +119,16 @@ export default function SignupForm(props) {
         </div>
         <div className="button">
           <button type="submit" disabled={submitting}>
-            Signup
+            {!props.isLoading ? (
+              "Signup"
+            ) : (
+              <span>
+                <LoadingClackers
+                  style={{ transform: " scale(0.25)", fontSize: "10rem" }}
+                  message={"signing up"}
+                />
+              </span>
+            )}
           </button>
         </div>
       </form>

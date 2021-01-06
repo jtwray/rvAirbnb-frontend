@@ -1,8 +1,8 @@
 import React from "react";
 
-export const LoadingClackers = () => {
+export const LoadingClackers = (props) => {
   return (
-    <svg width="300" height="120" id="clackers">
+    <svg style={props.style || ""} width="300" height="120" id="clackers">
       {/**   <!-- Left arc path -->*/}
       <svg>
         <path id="arc-left-up" fill="none" d="M 90 90 A 90 90 0 0 1 0 0" />
@@ -20,7 +20,7 @@ export const LoadingClackers = () => {
         font-size="18"
         text-anchor="middle"
       >
-        L O A D I N G
+        {props.message || "L O A D I N G"}
       </text>
       <circle cx="15" cy="15" r="15">
         {/**<!-- I used a python script to calculate the keyPoints and keyTimes based on a quadratic function. -->*/}
