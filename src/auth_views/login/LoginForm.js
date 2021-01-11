@@ -28,7 +28,7 @@ export default function LoginForm(props) {
       </Avatar>
       Welcome Back Stranger
       <form
-        style={{ ...authFormSTYLE, fontSize: "5rem" }}
+        style={{ ...authFormSTYLE, fontSize: "4rem" }}
         onSubmit={handleSubmit(async (formData) => {
           setSubmitting(true);
           try {

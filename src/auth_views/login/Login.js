@@ -45,7 +45,7 @@ function Login(props) {
         height: "100vh",
         padding: "0",
         border: " #f50057 solid .5rem",
-        fontSize: "3rem"
+        fontSize: "4rem"
       }}
     >
       <div

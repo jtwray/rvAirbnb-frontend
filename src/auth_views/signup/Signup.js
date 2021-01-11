@@ -26,11 +26,11 @@ function Signup(props) {
     <div
       style={{
         display: "flex",
-        width: "100%",
-        height: "99vh",
-        padding: "0",
+        width: "100vw",
+        height: "100vh",
+        padding: "0px",
         border: " #f50057 solid .5rem",
-        fontSize: "3rem"
+        fontSize: "4rem"
       }}
     >
       <div className="half left image" style={left}></div>
