@@ -23,8 +23,8 @@ function Discover(props) {
   }
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8001/api/listing`)
+    axiosWithAuth
+      .get(`api/listing`)
       .then((res) => setSuggestions(res.data.listings))
       .catch((err) => console.error(err));
   }, []);
