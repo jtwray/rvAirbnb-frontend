@@ -4,7 +4,7 @@ export function axiosWithAuth() {
   const token = localStorage.getItem("token");
 
   return axios.create({
-    baseURL: "http://localhost:8001/",
+    baseURL: "http://rv-adventure.us-east-1.elasticbeanstalk.com/",
     headers: {
       Authorization: token,
       "content-type": "application/json"
