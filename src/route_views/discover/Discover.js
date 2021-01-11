@@ -23,7 +23,7 @@ function Discover(props) {
   }
 
   useEffect(() => {
-    axiosWithAuth
+    axiosWithAuth()
       .get(`api/listing`)
       .then((res) => setSuggestions(res.data.listings))
       .catch((err) => console.error(err));

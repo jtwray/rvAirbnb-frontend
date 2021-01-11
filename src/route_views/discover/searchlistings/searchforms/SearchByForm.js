@@ -48,7 +48,7 @@ export default function SearchByForm(
     let query = { ...searchTerms, ...data };
     console.log({ query });
     axiosWithAuth()
-      .post(`http://localhost:8001/api/search/${searchBy}`, {
+      .post(`api/search/${searchBy}`, {
         ...searchTerms,
         ...data,
       })
