@@ -43,20 +43,20 @@ on-focus & if input has value */
   background: white;
   color: indigo;
 }
-.authform  div.input:focus-within {
+.authform div.input:focus-within {
   border: 0.1rem solid indigo;
   border-radius: 4px;
 }
-.authform  form:last-child {
+.authform form:last-child {
   text-align: left;
 }
 
 /* form checkbox(terms/remember me) & label */
-.authform  div.termsContainer {
+.authform div.termsContainer {
   width: 90%;
 }
 
-.authform  input#terms {
+.authform input#terms {
   width: auto;
   width: 20px;
   height: auto;
@@ -64,7 +64,7 @@ on-focus & if input has value */
   height: 20px;
 }
 
-.authform  input[type="checkbox"] + label {
+.authform input[type="checkbox"] + label {
   border: none;
   background: initial;
   margin: 1rem;
@@ -72,22 +72,25 @@ on-focus & if input has value */
   vertical-align: middle;
 }
 /* form button */
-.authform  div.button {
+.authform div.button {
   width: 90%;
-  border: 1px solid red;
-  border-radius: 4px;
 }
-.authform  button {
+.authform button {
   width: 100%;
   background: indigo;
   color: snow;
   height: 100%;
   padding: 1rem 2rem;
   border-radius: 4px;
+  max-height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 /* the lock pink on signup -->TODO: onclick allows register with google/firebase/phone#/auth2 etc */
 
-.authform  MuiSvgIcon-root {
+.authform MuiSvgIcon-root {
   fill: currentColor;
   width: 1em;
   height: 1em;
