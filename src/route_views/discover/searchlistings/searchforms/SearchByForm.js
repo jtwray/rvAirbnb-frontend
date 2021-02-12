@@ -8,10 +8,9 @@ import RangeSlider from "../../../../utils/RangeSlider.js";
 import "./SearchByForm.css";
 
 export default function SearchByForm(
-  props,
   { setSearchResults, searchResults, searchDates, isLoading, currentLocation }
 ) {
-  console.log({ props });
+ 
   const buttonsStyle = {
     width: "500px",
     margin: "0 auto",

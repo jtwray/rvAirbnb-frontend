@@ -9,8 +9,9 @@ import { getCoords, updateCoords } from "../redux/actions/index";
 
 function Dashboard(props) {
   const { currentGeoLocation, currentAddress, getCoords, updateCoords } = props;
- 
-  let { latitude, longitude } = currentGeoLocation;
+
+  let latitude = currentGeoLocation?.latitude;
+  let longitude  = currentGeoLocation?.longitude;
   const [gps, setGps] = useState({ latitude, longitude });
   const [roundedGps, setRoundedGps] = useState();
 
@@ -40,8 +41,6 @@ function Dashboard(props) {
     latitude && console.log({ gps }, { latitude });
     latitude && getAddressFromGpsCoords();
   }, [gps, latitude]);
-
-
 
   return (
     <div style={{ fontSize: "3rem" }}>
