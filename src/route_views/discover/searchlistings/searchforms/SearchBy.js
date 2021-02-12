@@ -21,7 +21,6 @@ export default function SearchBy({
     <>
       <section className="searchByForm">
         <SearchByForm
-          props={props}
           setSearchResults={setSearchResults}
           searchDates={searchDates}
           searchResults={searchResults}
