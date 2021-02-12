@@ -50,12 +50,13 @@ export default function Listings({ listings }) {
     fontWeight: "600",
     height: "100px",
   };
-  const paginationButtonBoxStyles = { display: "block" };
+  const paginationButtonBoxStyles = { width:"100%" };
   return (
     <section id="searchedListings">
       <div className="paginationButtonsBox" style={paginationButtonBoxStyles}>
         {page > 1 && (
           <button
+            style={paginationButtonStyles}
             className="paginationButton"
             onClick={() => setPage(page - 1)}
           >
@@ -64,6 +65,7 @@ export default function Listings({ listings }) {
         )}
         {page < paginatedListings.length - 1 && (
           <button
+            style={paginationButtonStyles}
             className="paginationButton"
             onClick={() => setPage(page + 1)}
           >
