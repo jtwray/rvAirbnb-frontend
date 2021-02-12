@@ -19,7 +19,7 @@ function Discover(props) {
   function handleUpdateSearchDates(e) {
     e.preventDefault();
     setSearchDates(e.target.value);
-    console.log({ searchDates });
+
   }
 
   useEffect(() => {
@@ -58,8 +58,6 @@ function Discover(props) {
         <section style={{ width: "50%" }}>
           {searchResults?.length > 0 ? (
             <div>
-              {console.log("searchresults", searchResults)}
-              <h2>!!search results!!</h2>
               <Listings listings={searchResults} />
             </div>
           ) : (
