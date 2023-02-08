@@ -16,18 +16,18 @@ export default function SearchBy({
   isLoading,
   currentLocation,
 }) {
-  let props = {
-    setSearchResults,
-    searchResults,
-    searchDates,
-    isLoading,
-    currentLocation,
-  };
+
 
   return (
     <>
       <section className="searchByForm">
-        <SearchByForm props={props} />
+        <SearchByForm
+          setSearchResults={setSearchResults}
+          searchResults={searchResults}
+          searchDates={searchDates}
+          isLoading={isLoading}
+          currentLocation={currentLocation}
+        />
       </section>
     </>
   );

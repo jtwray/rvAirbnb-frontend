@@ -54,7 +54,7 @@
     "start": "craco start",
     "build": "craco build",
     "start:proxy": "REACT_APP_PROXY=true craco start",
-    "test": "react-scripts test --env=jest-environment-jsdom-sixteen",
+    "test": " react-scripts test --env=jest-environment-jsdom-sixteen",
     "eject": "react-scripts eject",
     "coverage": "CI=true npm run test -- --coverage --watchAll=false || true",
     "coverage-local": "npm run test -- --coverage --watchAll=false --debug || true"

@@ -7,11 +7,13 @@ import RangeSlider from "../../../../utils/RangeSlider.js";
 
 import "./SearchByForm.css";
 
-export default function SearchByForm(
-  props,
-  { setSearchResults, searchResults, searchDates, isLoading, currentLocation }
-) {
-  console.log({ props });
+export default function SearchByForm({
+  setSearchResults,
+  searchResults,
+  searchDates,
+  isLoading,
+  currentLocation,
+}) {
   const buttonsStyle = {
     width: "500px",
     margin: "0 auto",
@@ -48,7 +50,7 @@ export default function SearchByForm(
     let query = { ...searchTerms, ...data };
     console.log({ query });
     axiosWithAuth()
-      .post(`http://localhost:8001/api/search/${searchBy}`, {
+      .post(`api/search/${searchBy}`, {
         ...searchTerms,
         ...data,
       })
