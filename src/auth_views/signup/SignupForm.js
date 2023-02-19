@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Avatar } from "@material-ui/core";
 import { useStyles } from "../../utils/useStyles";
+import { LoadingClackers } from "../../utils/LoadingClackers";
 
 export default function SignupForm(props) {
   const { register, handleSubmit, errors, formState } = useForm({
@@ -19,7 +20,13 @@ export default function SignupForm(props) {
 
   const history = useHistory();
   const classes = useStyles();
-
+  const authFormSTYLE = {
+    fontSize: "4rem",
+    margin: "0 auto",
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center"
+  };
   return (
     <>
       <Avatar className={classes.avatar}>
@@ -27,7 +34,7 @@ export default function SignupForm(props) {
       </Avatar>
       Nice To Meet You!
       <form
-        style={{ fontSize: "4rem" }}
+        style={{ ...authFormSTYLE, fontSize: "4rem" }}
         onSubmit={handleSubmit(async (formData) => {
           if (submitting) {
             return false;
@@ -112,7 +119,16 @@ export default function SignupForm(props) {
         </div>
         <div className="button">
           <button type="submit" disabled={submitting}>
-            Signup
+            {!props.isLoading ? (
+              "Signup"
+            ) : (
+              <span>
+                <LoadingClackers
+                  style={{ transform: " scale(0.25)", fontSize: "10rem" }}
+                  message={"signing up"}
+                />
+              </span>
+            )}
           </button>
         </div>
       </form>
@@ -120,7 +136,6 @@ export default function SignupForm(props) {
         className="footerLinks--sigunupform"
         style={{
           display: "flex",
-          border: "solid black .2rem",
           width: "90%",
           justifyContent: "flex-end"
         }}

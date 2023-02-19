@@ -26,7 +26,7 @@ export const login = ({ username, password, email }, history) => (dispatch) => {
         );
       })
       .catch((err) => dispatch({ type: ERROR, payload: err }));
-  }, 5000);
+  }, 1500);
 };
 
 export const signup = ({ username, password, email }, history) => (
@@ -57,7 +57,7 @@ export const getCoords = () => (dispatch) => {
   if (!geo) {
     dispatch({
       type: ERROR,
-      payload: { error: { message: "Geolocation is not supported" } },
+      payload: { error: { message: "Geolocation is not supported" } }
     });
   }
   let watcher = geo.watchPosition(onChange, onError);

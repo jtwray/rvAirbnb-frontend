@@ -8,13 +8,19 @@ import { LoadingClackers } from "../../utils/LoadingClackers";
 
 export default function LoginForm(props) {
   const { register, handleSubmit, errors, formState } = useForm({
-    defaultValues: { username: "", email: "", password: "", terms: false },
+    defaultValues: { username: "", email: "", password: "", terms: false }
   });
   const history = useHistory();
   const classes = useStyles();
   const [submitting, setSubmitting] = useState(false);
   const { dirtyFields } = formState;
-
+  const authFormSTYLE = {
+    fontSize: "4rem",
+    margin: "0 auto",
+    display: "flex",
+    justifyContent: "space-evenly",
+    alignItems: "center"
+  };
   return (
     <>
       <Avatar className={classes.avatar}>
@@ -22,7 +28,7 @@ export default function LoginForm(props) {
       </Avatar>
       Welcome Back Stranger
       <form
-        style={{ fontSize: "4rem" }}
+        style={{ ...authFormSTYLE, fontSize: "4rem" }}
         onSubmit={handleSubmit(async (formData) => {
           setSubmitting(true);
           try {
@@ -91,8 +97,16 @@ export default function LoginForm(props) {
         </div>
         <div className="button">
           <button type="submit" disabled={props.isLoading}>
-            Login
-            {props.isLoading && <span>{<LoadingClackers />} </span>}
+            {!props.isLoading ? (
+              "Login"
+            ) : (
+              <span>
+                <LoadingClackers
+                  style={{ transform: " scale(0.25)", fontSize: "10rem" }}
+                  message={"logging in"}
+                />
+              </span>
+            )}
           </button>
         </div>
       </form>
@@ -100,9 +114,8 @@ export default function LoginForm(props) {
         className="footerLinks--sigunupform"
         style={{
           display: "flex",
-          border: "solid black .2rem",
           width: "90%",
-          justifyContent: "flex-end",
+          justifyContent: "flex-end"
         }}
       >
         <p
@@ -110,7 +123,7 @@ export default function LoginForm(props) {
             fontSize: "1rem",
             margin: "0",
             paddingRight: "1rem",
-            width: "auto",
+            width: "auto"
           }}
         >
           don't have an account?

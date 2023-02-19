@@ -8,27 +8,20 @@ import { LoadingClackers } from "../utils/LoadingClackers";
 import { getCoords, updateCoords } from "../redux/actions/index";
 
 function Dashboard(props) {
-  let latitude,longitude;
-  const { currentGeoLocation, getCoords, updateCoords } = props;
-  if(currentGeoLocation){ const {latitude, longitude} = currentGeoLocation;}
-  const [gps, setGps] = useState(latitude, longitude);
+  const { currentGeoLocation, currentAddress, getCoords, updateCoords } = props;
+ 
+  let { latitude, longitude } = currentGeoLocation;
+  const [gps, setGps] = useState({ latitude, longitude });
   const [roundedGps, setRoundedGps] = useState();
 
   useEffect(() => {
-    if (latitude) {
-      console.log({ latitude });
+    if (latitude && currentGeoLocation) {
       setGps({ latitude, longitude });
       setRoundedGps({
         latitude: latitude.toFixed(9),
         longitude: longitude.toFixed(9),
       });
       updateCoords({ latitude, longitude });
-      console.log(
-        "updateing state.currentGeoLocation form useeffect line 29 Dshboard.js",
-        { latitude },
-        { gps },
-        { roundedGps }
-      );
     }
   }, [latitude, longitude]);
 
@@ -41,13 +34,14 @@ function Dashboard(props) {
       .catch((error) => {
         console.error(error);
       });
-    console.log({ roundedGps }, "gotAddresssfromgps");
   }, [roundedGps]);
 
   useEffect(() => {
     latitude && console.log({ gps }, { latitude });
     latitude && getAddressFromGpsCoords();
   }, [gps, latitude]);
+
+
 
   return (
     <div style={{ fontSize: "3rem" }}>
@@ -62,11 +56,76 @@ function Dashboard(props) {
         <LoadingClackers />
       ) : (
         <>
-          <h2 style={{ fontSize: "5rem" }}>"current location /geolocation"</h2>
-          <h6>
-            store.lat:{currentGeoLocation?.latitude}
-            gps.lat{gps.latitude} lon:{gps.longitude}
-          </h6>
+          <div style={{ fontSize: "2rem" }}>
+            current address:
+            {
+              <>
+                {currentAddress?.name} {currentAddress?.locality},
+                {currentAddress?.region} {currentAddress?.postal_code}
+              </>
+            }
+          </div>
+          <table style={{ border: "solid 2px indigo" }}>
+            <th>geo coords</th>
+            <tr>
+              <td
+                style={{
+                  border: "solid 1px indigo",
+                  margin: "0 auto",
+                  padding: "0px 1px",
+                }}
+              >
+                lat
+              </td>
+              <td
+                style={{
+                  border: "solid 1px indigo",
+                  margin: "0 auto",
+                  padding: "0px 1px",
+                }}
+              >
+                lon
+              </td>
+              <td
+                style={{
+                  border: "solid 1px indigo",
+                  margin: "0 auto",
+                  padding: "0px 1px",
+                }}
+              >
+                address
+              </td>
+            </tr>
+            <tr>
+              <td
+                style={{
+                  border: "solid 1px indigo",
+                  margin: "0 auto",
+                  padding: "0px 1px",
+                }}
+              >
+                {currentGeoLocation?.latitude}
+              </td>
+              <td
+                style={{
+                  border: "solid 1px indigo",
+                  margin: "0 auto",
+                  padding: "0px 1px",
+                }}
+              >
+                {currentGeoLocation?.longitude}
+              </td>
+              <td
+                style={{
+                  border: "solid 1px indigo",
+                  margin: "0 auto",
+                  padding: "0px 1px",
+                }}
+              >
+                {currentAddress?.label}
+              </td>
+            </tr>
+          </table>
         </>
       )}
     </div>
@@ -77,6 +136,7 @@ function mapState(state) {
   return {
     currentUser: state.currentUser,
     currentGeoLocation: state.currentGeoLocation,
+    currentAddress: state.currentAddress,
   };
 }
 

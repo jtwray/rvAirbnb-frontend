@@ -2,83 +2,6 @@
   box-sizing: border-box;
   font-size: 62.5%;
 }
-/* auth forms -login/signup- & form children-->labels & inputs */
-form {
-  width: 100%;
-  height: 60%;
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
-}
-/* input_label_animation  |placeholder_text to border_text| 
-  on-focus & if input has value */
-label {
-  position: absolute;
-  background: white;
-  transform: translate3d(15px, 10px, 0px);
-  transition: all 0.3s ease-in-out;
-  font-size: 1.5rem;
-}
-input {
-  padding: 1rem 2rem;
-  border-radius: 4px;
-  width: 100%;
-}
-div.input {
-  width: 90%;
-}
-div.input:focus-within label,
-label.isDirty {
-  position: absolute;
-  transform: translate3d(25px, -3px, 0px);
-  transition: all 0.3s ease-in-out;
-  font-size: 1.2rem;
-  font-weight: 900;
-  background: white;
-  color: indigo;
-}
-div.input:focus-within {
-  border: 0.1rem solid indigo;
-  border-radius: 4px;
-}
-form:last-child {
-  text-align: left;
-}
-
-/* form checkbox(terms/remember me) & label */
-div.termsContainer {
-  width: 90%;
-}
-
-input#terms {
-  width: auto;
-  width: 20px;
-  height: auto;
-  vertical-align: middle;
-  height: 20px;
-}
-
-input[type="checkbox"] + label {
-  border: none;
-  background: initial;
-  margin: 1rem;
-  position: relative;
-  vertical-align: middle;
-}
-/* form button */
-div.button {
-  width: 90%;
-  border: 1px solid red;
-  border-radius: 4px;
-}
-button {
-  width: 100%;
-  background: indigo;
-  color: snow;
-  height: 100%;
-  padding: 1rem 2rem;
-  border-radius: 4px;
-}
 
 button.SearchBy {
   color: indigo;
@@ -92,30 +15,50 @@ button.SearchBy {
 }
 
 div.priceslider {
-  width: 45%;
-  display:flex;
+  /* width: 45%; */
+  /* display: flex; */
 }
-/* 
-.priceslider label {
-  color: #3F51B5;
-  background: #244ba8;
-  font-weight: bolder;
-  font-size: 3rem;
-  text-shadow: -0.5px 0.5px 2px black, 0.5px -0.5px 2px white, -0.5px 0.5px 0.2px black, -0.5px -0.5px 0.2px white;
+
+.discover--MainContainer.searchBy {
+  width: 100%;
+  height: auto;
+  min-height: 500px;
+  background: #0e101c;
+  box-shadow: midnightblue 0px -2px 5px 0px, midnightblue 0px 2px 5px 0px;
+  margin-bottom: 1rem;
+}
+
+.discover--SubmitContainer {
+  width: 100%;
+  height: 50px;
+  display: flex;
+}
+
+.discover--SubmitContainer div.button {
+  width: 50%;
+  min-width: 300px;
+  height: 100%;
+  border: none;
+  border-radius: 4px;
+}
+
+.discover--SubmitContainer div.searchBy-status {
+  display: flex;
+  width: 50%;
+  min-width: 300px;
+  height: 100%;
+  margin-bottom: 1rem;
+  transition: all 1s ease 0s;
+  background-color: darkgray;
+  color: indigo;
   border-radius: 5px;
-  width: 350px;
-  border: .2rem solid grey;
-  transition: unset;
-  transform: none;
   text-align: center;
-} */
-
-.priceslider label{
-  transition: unset;
-  transform: none;
-  border-radius:5px;
-  text-align: center;
-  width:auto;
-  position:unset;
-
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-shadow: black 0.5px 0.5px 0.1px, white -0.5px -0.5px 0.1px,
+    black 0.5px -0.5px 1px, white -0.5px -0.5px 1px;
+  box-shadow: white 1px 1px 1px 1px inset, white -1px -1px 1px 1px inset,
+    black -1px -1px 1px 1px, grey 0px 15px 15px -15px;
 }
+
+/* discover searchByLocation */

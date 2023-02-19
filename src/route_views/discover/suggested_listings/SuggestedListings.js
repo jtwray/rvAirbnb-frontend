@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useLayoutEffect } from "react";
-import { useHistory,Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import ListingCard from "../searchlistings/listings/ListingCard";
 import { usePagination } from "../../../utils/hooks/usePagination.js";
 
@@ -14,14 +14,17 @@ export default function SuggestedListings({
     width: undefined,
     height: undefined,
   });
-  const [paginatedListings] = usePagination(listings, (Math.floor(windowSize?.width/255))||4);
+  const [paginatedListings] = usePagination(
+    listings,
+    Math.floor(windowSize?.width / 255) || 4
+  );
   const [page, setPage] = useState(1);
   const [pageOfListings, setPageOfListings] = useState(paginatedListings[page]);
 
   useEffect(() => {
     function handleResize() {
       setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-         }
+    }
     handleResize();
     window.addEventListener("resize", handleResize());
     return () => {
@@ -31,12 +34,12 @@ export default function SuggestedListings({
 
   useEffect(() => {
     paginatedListings && setPageOfListings(paginatedListings[page]);
-  }, [page, listings, paginatedListings,windowSize]);
+  }, [page, listings, paginatedListings, windowSize]);
 
   function routeToSingleListing(event, listing) {
     event.preventDefault();
-console.log({listing})
-    history.push(`/home/listings/${listing.id}`,{listing:listing});
+    console.log({ listing });
+    history.push(`/home/listings/${listing.id}`, { listing: listing });
   }
 
   const styleOBJ_card = { display: "flex", flexDirection: "column" };

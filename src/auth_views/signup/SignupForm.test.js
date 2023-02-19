@@ -48,3 +48,4 @@ test("it should validate user did not duplicate example password", async () => {
     );
   });
 });
+it("displays a loading svg on form submission", () => {});

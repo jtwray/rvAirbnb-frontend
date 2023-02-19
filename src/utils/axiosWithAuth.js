@@ -2,9 +2,8 @@ import axios from "axios";
 
 export function axiosWithAuth() {
   const token = localStorage.getItem("token");
-
   return axios.create({
-    baseURL: "http://localhost:8001/",
+    baseURL: `${process.env.REACT_APP_API_URL}`,
     headers: {
       Authorization: token,
       "content-type": "application/json"
