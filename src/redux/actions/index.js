@@ -8,7 +8,7 @@ export const UPDATE_GEOCOORDS = "UPDATE_GEOCOORDS";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 
-export const login = ({ username, password, email }, history) => (dispatch) => {
+export const login = ({ username, password, email }, navigate) => (dispatch) => {
   dispatch({ type: START });
   setTimeout(() => {
     axiosWithAuth()
@@ -22,14 +22,14 @@ export const login = ({ username, password, email }, history) => (dispatch) => {
         }
         let routeToDashboard = await verifyCredentials().then(
           () => console.log("pushing to dashboard"),
-          history.push("/home")
+          navigate.push("/home")
         );
       })
       .catch((err) => dispatch({ type: ERROR, payload: err }));
   }, 1500);
 };
 
-export const signup = ({ username, password, email }, history) => (
+export const signup = ({ username, password, email }, navigate) => (
   dispatch
 ) => {
   dispatch({ type: START });
@@ -40,7 +40,7 @@ export const signup = ({ username, password, email }, history) => (
       localStorage.setItem("currentUser", username);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("currentId", res.data.id);
-      history.push("/home");
+      navigate.push("/home");
     })
     .catch((err) => dispatch({ type: ERROR, payload: err }));
 };

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Avatar } from "@material-ui/core";
@@ -10,7 +10,7 @@ export default function LoginForm(props) {
   const { register, handleSubmit, errors, formState } = useForm({
     defaultValues: { username: "", email: "", password: "", terms: false }
   });
-  const history = useHistory();
+  const navigate = useNavigate();
   const classes = useStyles();
   const [submitting, setSubmitting] = useState(false);
   const { dirtyFields } = formState;
@@ -34,7 +34,7 @@ export default function LoginForm(props) {
           try {
             let { username, password, email } = formData;
 
-            props.login(formData, history);
+            props.login(formData, navigate);
           } catch (error) {
             console.error(error);
           }
