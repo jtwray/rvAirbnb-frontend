@@ -5,6 +5,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Avatar } from "@material-ui/core";
 import { useStyles } from "../../utils/useStyles";
 import { LoadingClackers } from "../../utils/LoadingClackers";
+import { login } from './../../redux/actions/index';
 
 export default function LoginForm(props) {
   const { register, handleSubmit, errors, formState } = useForm({

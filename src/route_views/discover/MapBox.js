@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import ReactMapGL, { Marker, Popup,LinearInterpolator, FlyToInterpolator } from "react-map-gl";
+// import ReactMapGL, { Marker, Popup,LinearInterpolator } from "react-map-gl/src/index";
+import  {  LinearInterpolator } from 'mapbox-gl';
+// import  { Marker, Popup, LinearInterpolator } from 'mapbox-gl';
+import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import { LoadingClackers } from "../../utils/LoadingClackers";
 import { connect } from "react-redux";
 import { ReactComponent as RV_Site_Marker } from "../../images/rv_site_marker.svg";
@@ -13,8 +16,8 @@ function MapBox(props) {
     height: "100vh",
     zoom: 1,
     transitionDuration: 500,
-    transitionInterpolator: new FlyToInterpolator(),
- 
+    transitionInterpolator: new LinearInterpolator(),
+
   });
   const [selectedListing, setSelectedListing] = useState(null);
 
@@ -30,6 +33,7 @@ function MapBox(props) {
       window.removeEventListener("keydown", listener);
     };
   }, []);
+
   return (
     <div>
       <ReactMapGL
@@ -39,8 +43,9 @@ function MapBox(props) {
           setViewport({
             ...viewport,
             transitionDuration: 500,
-            transitionInterpolator: new FlyToInterpolator(),
-       
+            transitionInterpolator: new LinearInterpolator({ center: [longitude, latitude], duration: 2000 }),
+            // transitionInterpolator: new FlyToInterpolator(),
+
           });
         }}
       >
@@ -120,8 +125,51 @@ function MapBox(props) {
     </div>
   );
 }
+
 function mapState(state) {
   return { currentGeoLocation: state.currentGeoLocation };
 }
 
 export default connect(mapState, {})(MapBox);
+
+
+// import * as React from 'react';
+// import {useRef, useCallback} from 'react';
+// import {render} from 'react-dom';
+// import Map, {MapRef} from 'react-map-gl';
+
+// import ControlPanel from './control-panel';
+
+// const MAPBOX_TOKEN = ''; // Set your mapbox token here
+
+// const initialViewState = {
+//   latitude: 37.7751,
+//   longitude: -122.4193,
+//   zoom: 11,
+//   bearing: 0,
+//   pitch: 0
+// };
+
+// export default function App() {
+//   const mapRef = useRef<MapRef>();
+
+//   const onSelectCity = useCallback(({longitude, latitude}) => {
+//     mapRef.current?.flyTo({center: [longitude, latitude], duration: 2000});
+//   }, []);
+
+//   return (
+//     <>
+//       <Map
+//         ref={mapRef}
+//         initialViewState={initialViewState}
+//         mapStyle="mapbox://styles/mapbox/light-v9"
+//         mapboxAccessToken={MAPBOX_TOKEN}
+//       />
+//       <ControlPanel onSelectCity={onSelectCity} />
+//     </>
+//   );
+// }
+
+// export function renderToDom(container) {
+//   render(<App />, container);
+// }

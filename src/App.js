@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Link } from "react-router-dom";
+import { Route, Routes, Link } from "react-router-dom";
 import { RequireAuth } from "./utils/RequireAuth";
 
 import { connect } from "react-redux";
@@ -34,54 +34,79 @@ function App(props) {
       <div className="App">
         {/* {props.error && alert(props.error)} */}
         {/* <PrivateRoute exact path="/*" component={Dashboard} /> */}
-        <Route exact path="/" element={
-          <RequireAuth>
-            <Dashboard />
-          </RequireAuth>
-        } />
-        <Route path="/home" element={
-          <RequireAuth>
-            <Dashboard />
-          </RequireAuth>
-        } />
-        <Route path="/home/discover" element={
-          <RequireAuth>
-            <Discover />
-          </RequireAuth>
-        } />
-        <Route path="/home/messages" element={
-          <RequireAuth>
-            <Messages />
-          </RequireAuth>
-        } />
-        <Route path="/home/mytrips" element={
-          <RequireAuth>
-            <Mytrips />
-          </RequireAuth>
-        } />
-        <Route path="/home/profile" element={
-          <RequireAuth>
-            <Profile />
-          </RequireAuth>
-        } />
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <RequireAuth>
+                <Dashboard />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/home"
+            element={
+              <RequireAuth>
+                <Dashboard />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/home/discover"
+            element={
+              <RequireAuth>
+                <Discover />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/home/messages"
+            element={
+              <RequireAuth>
+                <Messages />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/home/mytrips"
+            element={
+              <RequireAuth>
+                <Mytrips />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/home/profile"
+            element={
+              <RequireAuth>
+                <Profile />
+              </RequireAuth>
+            }
+          />
 
-        <Route
-          exact
-          path="/home/listings/:listingID"
-          element={
-            <RequireAuth>
-              <SingleListingView />
-            </RequireAuth>
-          }
-        />
+          <Route
+            exact
+            path="/home/listings/:listingID"
+            element={
+              <RequireAuth>
+                <SingleListingView />
+              </RequireAuth>
+            }
+          />
 
-        <Route exact path="/logout" element={
-          <RequireAuth>
-            <Logout />
-          </RequireAuth>
-        } />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
+          <Route
+            exact
+            path="/logout"
+            element={
+              <RequireAuth>
+                <Logout />
+              </RequireAuth>
+            }
+          />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+        </Routes>
       </div>
     </>
   );
