@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useLayoutEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import ListingCard from "../searchlistings/listings/ListingCard";
 import { usePagination } from "../../../utils/hooks/usePagination.js";
 
@@ -7,7 +7,7 @@ export default function SuggestedListings({
   listings,
   styleOBJ_suggested_listings,
 }) {
-  const history = useHistory();
+  const navigate = useNavigate();
   // const cardWidth=Math.floor(innerWidth / 275);
   const [width, setWidth] = useState();
   const [windowSize, setWindowSize] = useState({
@@ -39,7 +39,7 @@ export default function SuggestedListings({
   function routeToSingleListing(event, listing) {
     event.preventDefault();
     console.log({ listing });
-    history.push(`/home/listings/${listing.id}`, { listing: listing });
+    navigate(`/home/listings/${listing.id}`, { listing: listing });
   }
 
   const styleOBJ_card = { display: "flex", flexDirection: "column" };

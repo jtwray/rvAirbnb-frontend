@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Avatar } from "@material-ui/core";
@@ -18,7 +18,7 @@ export default function SignupForm(props) {
   const [submitting, setSubmitting] = useState(false);
   const { dirtyFields } = formState;
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const classes = useStyles();
   const authFormSTYLE = {
     fontSize: "4rem",
@@ -43,7 +43,7 @@ export default function SignupForm(props) {
           try {
             let { username, password, email } = formData;
 
-            props.signup(formData, history);
+            props.signup(formData, navigate);
             setSubmitting(false);
           } catch (error) {
             alert(error.userMessage || error.message);

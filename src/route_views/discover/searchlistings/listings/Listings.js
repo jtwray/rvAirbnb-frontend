@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ListingCard from "./ListingCard";
 import { usePagination } from "../../../../utils/hooks/usePagination.js";
 
 export default function Listings({ listings }) {
-  const history = useHistory();
+  const navigate = useNavigate();
 
 
 
@@ -37,8 +37,8 @@ useEffect(() => {
 
   function routeToSingleListing(event, listing) {
     event.preventDefault();
-    console.log("p.history", history, "listings", listings);
-    history.push(`listings/${listing.id}`, { listing: listing });
+    console.log("p.navigate", navigate, "listings", listings);
+    navigate.push(`listings/${listing.id}`, { listing: listing });
   }
 
   return (

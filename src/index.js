@@ -1,5 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from "react-router-dom";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
@@ -20,13 +21,25 @@ const theStore = createStore(
   composeEnhancers(applyMiddleware(thunk, logger))
 );
 
-ReactDOM.render(
-  <Provider store={theStore}>
-    <BrowserRouter>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById("root")
-);
+const domNode = document.getElementById('root');
+const root = createRoot(domNode);
+root.render(
+<Provider store={theStore}>
+  <BrowserRouter>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </BrowserRouter>
+</Provider>);
+
+// ReactDOM.createRoot(
+//   <Provider store={theStore}>
+//     <BrowserRouter>
+//       <React.StrictMode>
+//         <App />
+//       </React.StrictMode>
+//     </BrowserRouter>
+//   </Provider>,
+//   document.getElementById("root")
+// );
+// // 

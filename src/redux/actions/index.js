@@ -7,42 +7,50 @@ export const SETADDRESS = "SETADDRESS";
 export const UPDATE_GEOCOORDS = "UPDATE_GEOCOORDS";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
-
-export const login = ({ username, password, email }, history) => (dispatch) => {
+function demoCredentials() {
+  localStorage.setItem("token", "demoToken");
+  localStorage.setItem("currentUser", "demoToken");
+  localStorage.setItem("currentId", 1);
+  dispatch({ type: SIGNUP_SUCCESS, payload: "demoToken" });
+  dispatch({ type: LOGIN_SUCCESS, payload: "demoToken" });
+}
+export const login = ({ username, password, email }, navigate) => (dispatch) => {
   dispatch({ type: START });
+
   setTimeout(() => {
-    axiosWithAuth()
-      .post(`auth/rv/login`, { username, password, email })
-      .then(async (res) => {
-        async function verifyCredentials() {
-          localStorage.setItem("token", res.data.token);
-          localStorage.setItem("currentUser", username);
-          localStorage.setItem("currentId", res.data.id);
-          dispatch({ type: LOGIN_SUCCESS, payload: res.data });
-        }
-        let routeToDashboard = await verifyCredentials().then(
-          () => console.log("pushing to dashboard"),
-          history.push("/home")
-        );
-      })
-      .catch((err) => dispatch({ type: ERROR, payload: err }));
+    process.env.REACT_APP_DEMO === true ? demoCredentials() :
+      axiosWithAuth()
+        .post(`auth/rv/login`, { username, password, email })
+        .then(async (res) => {
+          async function verifyCredentials(res) {
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("currentUser", username);
+            localStorage.setItem("currentId", res.data.id);
+            dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+          } (res).then(
+            () => console.log("pushing to dashboard"),
+            navigate("/home")
+          );
+        })
+        .catch((err) => dispatch({ type: ERROR, payload: err }));
   }, 1500);
 };
 
-export const signup = ({ username, password, email }, history) => (
+export const signup = ({ username, password, email }, navigate) => (
   dispatch
 ) => {
   dispatch({ type: START });
-  axiosWithAuth()
-    .post(`auth/rv/register`, { username, password, email })
-    .then((res) => {
-      dispatch({ type: SIGNUP_SUCCESS, payload: res.data });
-      localStorage.setItem("currentUser", username);
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("currentId", res.data.id);
-      history.push("/home");
-    })
-    .catch((err) => dispatch({ type: ERROR, payload: err }));
+  process.env.REACT_APP_DEMO === true ? demoCredentials() :
+    axiosWithAuth()
+      .post(`auth/rv/register`, { username, password, email })
+      .then((res) => {
+        dispatch({ type: SIGNUP_SUCCESS, payload: res.data });
+        localStorage.setItem("currentUser", username);
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("currentId", res.data.id);
+        navigate("/home");
+      })
+      .catch((err) => dispatch({ type: ERROR, payload: err }));
 };
 
 export const getCoords = () => (dispatch) => {
@@ -96,7 +104,7 @@ export const setAddress = (lat, lon) => (dispatch) => {
       dispatch({ type: SETADDRESS, payload: res.data });
     })
     .catch((err) => {
-      console.error(`error in the seAddress action||${err}`);
+      console.error(`error in the setAddress action||${err}`);
       dispatch({ type: ERROR, payload: err });
     });
 };
