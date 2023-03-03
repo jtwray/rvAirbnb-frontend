@@ -21,6 +21,7 @@ import "./styles.css";
 
 function App(props) {
   const [latitude, longitude, accuracy] = usePosition();
+  console.log({latitude,longitude,accuracy})
   useEffect(() => {
     props.updateCoords({ latitude, longitude });
   }, [latitude, longitude]);
