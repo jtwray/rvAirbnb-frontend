@@ -3,7 +3,7 @@ ________________________________________
 | build    | status  |
 |----------|---------|
 | frontend |   [![Netlify Status](https://api.netlify.com/api/v1/badges/bd488fb9-adc8-47a8-be7f-4f6d9b76e638/deploy-status)](https://app.netlify.com/sites/rvadventures/deploys) |
-| backend | [![Heroku App Status](http://heroku-shields.herokuapp.com/rvadventures)](https://rvadventures.herokuapp.com/api) |
+| backend | [![Heroku App Status](http://heroku-shields.herokuapp.com/rventure)](https://rventure.herokuapp.com/api) |
 | analysis| scores|
 | test coverage   |   [![Test Coverage](https://api.codeclimate.com/v1/badges/5a502ca580cc32e02669/test_coverage)](https://codeclimate.com/github/jtwray/rvAirbnb-frontend/test_coverage) |
 | maintainability| [![Maintainability](https://api.codeclimate.com/v1/badges/5a502ca580cc32e02669/maintainability)](https://codeclimate.com/github/jtwray/rvAirbnb-frontend/maintainability)|
